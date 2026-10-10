@@ -114,7 +114,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-12">
+        <div className="htb-glass-panel max-w-3xl mb-12 rounded-2xl p-5 sm:p-7">
           <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#B45309] mb-3">
             <span className="w-5 h-[2px] bg-[#FFB81C]" />
             <span>Contact HTB Consult</span>
@@ -735,7 +735,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
         {/* FAQs Accordion Section matching Reference P13 */}
         <div className="mt-20 pt-16 border-t border-slate-200">
-          <div className="max-w-3xl mb-8">
+          <div className="htb-glass-panel max-w-3xl mb-8 rounded-2xl p-5 sm:p-7">
             <div className="text-xs font-bold uppercase tracking-wider text-[#B45309]">
               Common Questions
             </div>

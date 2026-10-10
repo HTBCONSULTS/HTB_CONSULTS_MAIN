@@ -20,7 +20,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
 
     <section id="home-about" className="relative overflow-hidden bg-white bg-blueprint-subtle bg-blueprint-mobile-soft py-14 sm:py-16 lg:py-28">
       <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 sm:gap-10 sm:px-6 lg:grid-cols-12 lg:gap-14 lg:px-8" data-reveal>
-        <div className="lg:col-span-6">
+        <div className="htb-glass-panel rounded-2xl p-5 sm:p-7 lg:col-span-6">
           <p className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#9A5B00]">
             <span className="h-px w-7 bg-[#FFB81C]" />
             A practical partner
@@ -56,7 +56,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
 
     <section id="home-services" className="bg-[#F6F8FB] bg-blueprint-subtle bg-blueprint-mobile-soft py-14 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" data-reveal>
-        <div className="mb-7 flex flex-col gap-3 sm:mb-10 sm:flex-row sm:items-end sm:justify-between sm:gap-5">
+        <div className="htb-glass-panel mb-7 flex flex-col gap-3 rounded-2xl p-5 sm:mb-10 sm:flex-row sm:items-end sm:justify-between sm:gap-5 sm:p-7">
           <div className="max-w-3xl">
             <p className="mb-2 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-[#9A5B00] sm:mb-3 sm:text-xs">
               <span className="h-px w-7 bg-[#FFB81C]" />
@@ -122,7 +122,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
     </section>
 
     <section className="bg-[#FFF8E7] bg-blueprint-subtle py-14 sm:py-16">
-      <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8" data-reveal>
+      <div className="htb-glass-panel mx-auto flex max-w-7xl flex-col gap-5 rounded-2xl p-5 sm:px-7 sm:py-6 md:flex-row md:items-center md:justify-between lg:px-8" data-reveal>
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#8A5100]">Ready for the next step?</p>
           <h2 className="mt-2 font-editorial text-2xl font-semibold text-[#001F3F] sm:text-3xl">Let’s make progress together.</h2>
