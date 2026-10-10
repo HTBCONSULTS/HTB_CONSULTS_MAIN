@@ -44,6 +44,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenConsultation
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOverHeroOrVideo, setIsOverHeroOrVideo] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLElement>(null);
+  const mobileMenuTriggerRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuCloseRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -94,6 +97,44 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenConsultation
     setIsServicesOpen(false);
     setIsMobileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const animationFrame = window.requestAnimationFrame(() => mobileMenuCloseRef.current?.focus());
+    const getFocusableItems = () => Array.from(mobileMenuRef.current?.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled])'
+    ) ?? []).filter((item) => item.getClientRects().length > 0 && !item.closest('[hidden]'));
+    const handleMenuKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Tab') return;
+      const items = getFocusableItems();
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    const handleDesktopResize = () => {
+      if (window.matchMedia('(min-width: 1280px)').matches) setIsMobileMenuOpen(false);
+    };
+
+    document.addEventListener('keydown', handleMenuKeyDown);
+    window.addEventListener('resize', handleDesktopResize);
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', handleMenuKeyDown);
+      window.removeEventListener('resize', handleDesktopResize);
+      mobileMenuTriggerRef.current?.focus();
+    };
+  }, [isMobileMenuOpen]);
 
   const isRoute = (path: string) => location.pathname === path;
 
@@ -190,7 +231,15 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenConsultation
           </button>
           <button
             type="button"
-            onClick={() => setIsMobileMenuOpen((open) => !open)}
+            ref={mobileMenuTriggerRef}
+            onClick={() => {
+              if (isMobileMenuOpen) {
+                setIsMobileMenuOpen(false);
+              } else {
+                setIsServicesOpen(false);
+                setIsMobileMenuOpen(true);
+              }
+            }}
             aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-navigation"
@@ -202,55 +251,160 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenConsultation
       </div>
 
       {isMobileMenuOpen && (
-        <nav id="mobile-navigation" aria-label="Mobile navigation" className="absolute inset-x-0 top-full max-h-[calc(100dvh-4.25rem)] overflow-y-auto border-b border-white/10 bg-[#001429] px-4 pb-6 pt-4 shadow-2xl xl:hidden sm:px-6">
-          <div className="mx-auto flex max-w-3xl flex-col gap-1.5">
-            {[
-              ['Home', '/'],
-              ['About', '/about'],
-            ].map(([label, path]) => (
-              <Link key={path} to={path} onClick={closeMenus} aria-current={isRoute(path) ? 'page' : undefined} className={`focus-visible-brand rounded-lg px-3 py-3 text-sm font-semibold ${isRoute(path) ? 'bg-white/10 text-[#FFB81C]' : 'text-white hover:bg-white/5'}`}>
-                {label}
+        <div className="fixed inset-0 z-[60] xl:hidden">
+          <button
+            type="button"
+            tabIndex={-1}
+            aria-label="Close navigation menu"
+            onClick={closeMenus}
+            className="mobile-nav-backdrop absolute inset-0 bg-[#000814]/70 backdrop-blur-[2px]"
+          />
+          <section
+            id="mobile-navigation"
+            ref={mobileMenuRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="mobile-navigation-title"
+            className="mobile-nav-drawer-enter relative ml-auto flex h-[100dvh] w-[min(88vw,420px)] max-w-[420px] flex-col overflow-hidden rounded-l-2xl border-l border-white/10 bg-[linear-gradient(160deg,#0A2B4E_0%,#001F3F_46%,#001429_100%)] text-white shadow-2xl"
+          >
+            <div className="flex shrink-0 items-center justify-between border-b border-white/10 px-5 pb-4 pt-5">
+              <Link to="/" onClick={closeMenus} aria-label="HTB Consult homepage" className="focus-visible-brand rounded-sm">
+                <Logo />
               </Link>
-            ))}
-
-            <div className="rounded-xl border border-white/10 bg-white/[0.04] p-3">
-              <div className="flex items-center justify-between gap-3">
-                <Link to="/services" onClick={closeMenus} className="focus-visible-brand rounded-sm text-sm font-bold text-[#FFB81C]">Services</Link>
-                <button type="button" onClick={() => setIsServicesOpen((open) => !open)} aria-expanded={isServicesOpen} aria-controls="mobile-services" className="focus-visible-brand flex h-10 w-10 items-center justify-center rounded-md text-white hover:bg-white/10">
-                  <ChevronDown className={`h-4 w-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
-                </button>
-              </div>
-              {isServicesOpen && (
-                <div id="mobile-services" className="mt-2 grid gap-1 border-t border-white/10 pt-2">
-                  <Link to="/services" onClick={closeMenus} className="focus-visible-brand rounded-md px-3 py-2 text-xs font-bold text-white hover:bg-white/10">All Services</Link>
-                  {SERVICES.map((service) => (
-                    <Link key={service.id} to={`/services#${service.id}`} onClick={closeMenus} aria-current={activeServiceId === service.id && isRoute('/services') ? 'location' : undefined} className="focus-visible-brand rounded-md px-3 py-2 text-sm text-slate-200 transition-colors hover:bg-white/10 hover:text-[#FFB81C]">
-                      <span className="block font-semibold">{service.name}</span>
-                      <span className="mt-0.5 block text-xs text-slate-400">{service.shortTagline}</span>
-                    </Link>
-                  ))}
-                </div>
-              )}
+              <button
+                ref={mobileMenuCloseRef}
+                type="button"
+                onClick={closeMenus}
+                aria-label="Close navigation menu"
+                className="focus-visible-brand flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-slate-200 transition-colors hover:border-[#FFB81C]/50 hover:bg-white/10 hover:text-white"
+              >
+                <X className="h-5 w-5" aria-hidden="true" />
+              </button>
             </div>
 
-            {[
-              ['Case Studies', '/case-studies'],
-              ['Insights', '/insights'],
-              ['Contact', '/contact'],
-            ].map(([label, path]) => (
-              <Link key={path} to={path} onClick={closeMenus} aria-current={isRoute(path) ? 'page' : undefined} className={`focus-visible-brand rounded-lg px-3 py-3 text-sm font-semibold ${isRoute(path) ? 'bg-white/10 text-[#FFB81C]' : 'text-white hover:bg-white/5'}`}>
-                {label}
+            <div className="shrink-0 px-5 pb-4 pt-5">
+              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#FFB81C]">Business &amp; Digital Solutions</p>
+              <h2 id="mobile-navigation-title" className="mt-1 font-editorial text-2xl font-medium text-white">Explore HTB Consult</h2>
+              <p className="mt-1 text-xs leading-relaxed text-slate-300">Practical expertise for your next step.</p>
+            </div>
+
+            <nav aria-label="Mobile navigation" className="min-h-0 flex-1 space-y-1 overflow-y-auto overscroll-contain px-4 pb-5">
+              {[
+                ['01', 'Home', '/'],
+                ['02', 'About', '/about'],
+              ].map(([number, label, path]) => {
+                const active = isRoute(path);
+                return (
+                  <Link
+                    key={path}
+                    to={path}
+                    onClick={closeMenus}
+                    aria-current={active ? 'page' : undefined}
+                    className={`focus-visible-brand group flex min-h-12 items-center gap-3 rounded-xl border px-3 transition-colors ${active ? 'border-[#FFB81C]/30 bg-[#FFB81C]/[0.08] text-white' : 'border-transparent text-slate-200 hover:border-white/10 hover:bg-white/[0.05]'}`}
+                  >
+                    <span className={`w-7 font-mono text-[10px] ${active ? 'text-[#FFB81C]' : 'text-slate-500'}`}>{number}</span>
+                    <span className="flex-1 text-sm font-semibold">{label}</span>
+                    <ArrowRight className={`h-4 w-4 transition-transform group-hover:translate-x-0.5 ${active ? 'text-[#FFB81C]' : 'text-slate-500'}`} aria-hidden="true" />
+                  </Link>
+                );
+              })}
+
+              <div className={`overflow-hidden rounded-xl border transition-colors ${isRoute('/services') ? 'border-[#FFB81C]/35 bg-[#FFB81C]/[0.07]' : 'border-white/10 bg-white/[0.035]'}`}>
+                <div className="flex items-center gap-1 p-1.5">
+                  <Link
+                    to="/services"
+                    onClick={closeMenus}
+                    aria-current={isRoute('/services') ? 'page' : undefined}
+                    className="focus-visible-brand group flex min-h-11 min-w-0 flex-1 items-center gap-3 rounded-lg px-1.5 text-white"
+                  >
+                    <span className="w-7 font-mono text-[10px] text-[#FFB81C]">03</span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-bold">Services</span>
+                      <span className="mt-0.5 block text-[10px] text-slate-400">Six areas of expertise</span>
+                    </span>
+                    <ArrowRight className="mr-1 h-4 w-4 text-slate-500 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => setIsServicesOpen((open) => !open)}
+                    aria-label={isServicesOpen ? 'Collapse service links' : 'Expand service links'}
+                    aria-expanded={isServicesOpen}
+                    aria-controls="mobile-services"
+                    className="focus-visible-brand flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-slate-300 transition-colors hover:border-[#FFB81C]/40 hover:text-[#FFB81C]"
+                  >
+                    <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${isServicesOpen ? 'rotate-180 text-[#FFB81C]' : ''}`} aria-hidden="true" />
+                  </button>
+                </div>
+
+                <div id="mobile-services" hidden={!isServicesOpen} className="mx-3 mb-3 space-y-1 border-l border-white/15 pl-2">
+                    <Link to="/services" onClick={closeMenus} className="focus-visible-brand flex min-h-9 items-center rounded-lg px-3 text-xs font-bold text-[#FFB81C] transition-colors hover:bg-white/[0.06]">
+                      Browse all services <ArrowRight className="ml-auto h-3.5 w-3.5" aria-hidden="true" />
+                    </Link>
+                    {SERVICES.map((service, index) => {
+                      const active = activeServiceId === service.id && isRoute('/services');
+                      return (
+                        <Link
+                          key={service.id}
+                          to={`/services#${service.id}`}
+                          onClick={closeMenus}
+                          aria-current={active ? 'location' : undefined}
+                          className={`focus-visible-brand flex min-h-10 items-center gap-3 rounded-lg border px-3 py-2 transition-colors ${active ? 'border-[#FFB81C]/25 bg-white/[0.08] text-white' : 'border-transparent text-slate-300 hover:border-white/10 hover:bg-white/[0.05] hover:text-white'}`}
+                        >
+                          <span className={`font-mono text-[10px] ${active ? 'text-[#FFB81C]' : 'text-slate-500'}`}>0{index + 1}</span>
+                          <span className="min-w-0 flex-1 text-xs font-medium leading-snug">{service.name}</span>
+                          {active && <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#FFB81C]" aria-hidden="true" />}
+                        </Link>
+                      );
+                    })}
+                </div>
+              </div>
+
+              {[
+                ['04', 'Case Studies', '/case-studies'],
+                ['05', 'Insights', '/insights'],
+              ].map(([number, label, path]) => {
+                const active = isRoute(path);
+                return (
+                  <Link
+                    key={path}
+                    to={path}
+                    onClick={closeMenus}
+                    aria-current={active ? 'page' : undefined}
+                    className={`focus-visible-brand group flex min-h-12 items-center gap-3 rounded-xl border px-3 transition-colors ${active ? 'border-[#FFB81C]/30 bg-[#FFB81C]/[0.08] text-white' : 'border-transparent text-slate-200 hover:border-white/10 hover:bg-white/[0.05]'}`}
+                  >
+                    <span className={`w-7 font-mono text-[10px] ${active ? 'text-[#FFB81C]' : 'text-slate-500'}`}>{number}</span>
+                    <span className="flex-1 text-sm font-semibold">{label}</span>
+                    <ArrowRight className={`h-4 w-4 transition-transform group-hover:translate-x-0.5 ${active ? 'text-[#FFB81C]' : 'text-slate-500'}`} aria-hidden="true" />
+                  </Link>
+                );
+              })}
+
+              <a href={ACADEMY_SITE_URL} target="_blank" rel="noopener noreferrer" onClick={closeMenus} className="focus-visible-brand group flex min-h-12 items-center gap-3 rounded-xl border border-transparent px-3 text-slate-200 transition-colors hover:border-white/10 hover:bg-white/[0.05]">
+                <span className="w-7 font-mono text-[10px] text-slate-500">06</span>
+                <span className="flex-1 text-sm font-semibold">Academy</span>
+                <ExternalLink className="h-4 w-4 text-slate-500 transition-colors group-hover:text-[#FFB81C]" aria-hidden="true" />
+              </a>
+
+              <Link
+                to="/contact"
+                onClick={closeMenus}
+                aria-current={isRoute('/contact') ? 'page' : undefined}
+                className={`focus-visible-brand group flex min-h-12 items-center gap-3 rounded-xl border px-3 transition-colors ${isRoute('/contact') ? 'border-[#FFB81C]/30 bg-[#FFB81C]/[0.08] text-white' : 'border-transparent text-slate-200 hover:border-white/10 hover:bg-white/[0.05]'}`}
+              >
+                <span className={`w-7 font-mono text-[10px] ${isRoute('/contact') ? 'text-[#FFB81C]' : 'text-slate-500'}`}>07</span>
+                <span className="flex-1 text-sm font-semibold">Contact</span>
+                <ArrowRight className={`h-4 w-4 transition-transform group-hover:translate-x-0.5 ${isRoute('/contact') ? 'text-[#FFB81C]' : 'text-slate-500'}`} aria-hidden="true" />
               </Link>
-            ))}
-            <a href={ACADEMY_SITE_URL} target="_blank" rel="noopener noreferrer" onClick={closeMenus} className="focus-visible-brand inline-flex items-center justify-between rounded-lg px-3 py-3 text-sm font-semibold text-white hover:bg-white/5">
-              <span>Academy</span>
-              <ExternalLink className="h-4 w-4 text-slate-400" aria-hidden="true" />
-            </a>
-            <button type="button" onClick={() => { closeMenus(); onOpenConsultation(); }} className="focus-visible-brand mt-3 inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-[#FFB81C] px-4 py-3 text-sm font-bold text-[#001F3F] sm:hidden">
-              Let’s Talk <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </button>
-          </div>
-        </nav>
+            </nav>
+
+            <div className="shrink-0 border-t border-white/10 bg-[#001020]/55 px-5 pt-4" style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom))' }}>
+              <p className="mb-3 text-xs text-slate-400">Have a project in mind? Let’s make progress together.</p>
+              <button type="button" onClick={() => { closeMenus(); onOpenConsultation(); }} className="focus-visible-brand inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#FFB81C] px-4 py-3 text-sm font-bold text-[#001F3F] shadow-lg shadow-black/20 transition-colors hover:bg-[#FFD166]">
+                Let’s Talk <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </button>
+            </div>
+          </section>
+        </div>
       )}
     </header>
   );
