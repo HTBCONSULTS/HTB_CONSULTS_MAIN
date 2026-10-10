@@ -27,7 +27,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
         
         {/* Section Header */}
         {showIntro && (
-        <div className="max-w-3xl" data-reveal>
+        <div className="htb-glass-panel max-w-3xl rounded-2xl p-5 sm:p-8" data-reveal>
           <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#B45309] mb-3">
             <span className="w-5 h-[2px] bg-[#FFB81C]" />
             <span>About HTB Consult</span>
