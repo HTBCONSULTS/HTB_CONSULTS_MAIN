@@ -42,14 +42,28 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenConsultation
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isOverVideoBackground, setIsOverVideoBackground] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 18);
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 18;
+      const headerBottom = 92;
+      const overVideo = Array.from(document.querySelectorAll<HTMLElement>('[data-nav-glass]')).some((section) => {
+        const bounds = section.getBoundingClientRect();
+        return bounds.top <= headerBottom && bounds.bottom > 0;
+      });
+      setIsScrolled(scrolled);
+      setIsOverVideoBackground(scrolled && overVideo);
+    };
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('resize', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [location.pathname]);
 
   useEffect(() => {
     const handlePointerDown = (event: MouseEvent) => {
@@ -84,7 +98,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenConsultation
   const isRoute = (path: string) => location.pathname === path;
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 border-b border-white/10 text-white transition-[background-color,box-shadow,padding] duration-300 ${isScrolled ? 'bg-[#001429]/95 py-2 shadow-lg shadow-black/20 backdrop-blur-xl' : 'bg-[#001F3F]/95 py-3 backdrop-blur-md'}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 border-b text-white transition-[background-color,border-color,box-shadow,padding,backdrop-filter] duration-300 ${isOverVideoBackground ? 'border-white/15 bg-[#001F3F]/60 py-2 shadow-lg shadow-black/15 backdrop-blur-xl' : isScrolled ? 'border-white/10 bg-[#001429]/95 py-2 shadow-lg shadow-black/20 backdrop-blur-xl' : 'border-white/15 bg-[#001F3F]/60 py-3 shadow-sm shadow-black/10 backdrop-blur-md'}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
         <Link to="/" onClick={closeMenus} aria-label="HTB Consult homepage" className="focus-visible-brand shrink-0 rounded-sm py-1 transition-opacity hover:opacity-90">
           <Logo />

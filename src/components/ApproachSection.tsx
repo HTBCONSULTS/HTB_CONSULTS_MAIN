@@ -16,7 +16,7 @@ export const ApproachSection: React.FC<ApproachSectionProps> = ({ onBookConsulta
   const currentStep = APPROACH_STEPS[activeStepIndex];
 
   return (
-    <section id="approach" className="relative isolate overflow-hidden bg-[#001F3F] py-20 text-white lg:py-28">
+    <section id="approach" data-nav-glass className="relative isolate overflow-hidden bg-[#001F3F] py-20 text-white lg:py-28">
       <BackgroundVideo
         src={COLLABORATION_VIDEO_SOURCE}
         poster={VISUAL_ASSETS.aboutHero}
