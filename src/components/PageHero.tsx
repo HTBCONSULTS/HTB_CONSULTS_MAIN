@@ -25,7 +25,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
   brandLogo,
   brandLogoAlt = 'HTB Academy',
 }) => (
-  <section className="relative isolate flex min-h-[22rem] items-end overflow-hidden bg-[#001F3F] pb-12 pt-32 text-white sm:min-h-[26rem] sm:pb-16 lg:min-h-[30rem] lg:pb-20">
+  <section data-nav-glass className="relative isolate flex min-h-[22rem] items-end overflow-hidden bg-[#001F3F] pb-12 pt-32 text-white sm:min-h-[26rem] sm:pb-16 lg:min-h-[30rem] lg:pb-20">
     <div
       aria-hidden="true"
       className="absolute inset-0 -z-20 bg-cover bg-center"

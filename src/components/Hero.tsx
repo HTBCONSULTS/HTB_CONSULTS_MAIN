@@ -11,6 +11,7 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ onExploreServices, onDiscussProject }) => (
   <section
     id="hero"
+    data-nav-glass
     aria-labelledby="hero-heading"
     className="relative isolate flex min-h-[90vh] items-center justify-center overflow-hidden bg-[#001F3F] pb-16 pt-24 text-white md:min-h-[88vh]"
   >
