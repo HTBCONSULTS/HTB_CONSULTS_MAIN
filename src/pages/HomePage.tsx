@@ -100,7 +100,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
       </div>
     </section>
 
-    <section className="relative isolate overflow-hidden bg-[#001F3F] py-20 text-white lg:py-24">
+    <section data-nav-glass className="relative isolate overflow-hidden bg-[#001F3F] py-20 text-white lg:py-24">
       <BackgroundVideo
         src={COLLABORATION_VIDEO_SOURCE}
         poster={VISUAL_ASSETS.crmHealthcare}
