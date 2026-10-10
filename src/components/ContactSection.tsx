@@ -4,6 +4,7 @@ import { ContactFormData } from '../types';
 import {
   Phone,
   Mail,
+  MessageCircle,
   MapPin,
   Clock,
   Calendar,
@@ -208,6 +209,23 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       className="text-sm font-semibold text-[#001F3F] hover:text-[#B45309] transition-colors"
                     >
                       {SITE_METADATA.email}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-[#FFF8E7] flex items-center justify-center text-[#B45309] shrink-0">
+                    <MessageCircle className="w-4 h-4" aria-hidden="true" />
+                  </div>
+                  <div>
+                    <div className="text-xs text-slate-400 font-medium uppercase tracking-wider">WhatsApp</div>
+                    <a
+                      href={SITE_METADATA.whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-semibold text-[#001F3F] hover:text-[#B45309] transition-colors"
+                    >
+                      Chat with us · {SITE_METADATA.phone}
                     </a>
                   </div>
                 </div>
@@ -495,7 +513,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     </div>
 
                     <div className="flex items-center justify-between text-xs text-slate-500 pt-2">
-                      <span>Urgent enquiry? Email us directly at <a href="mailto:info@htbconsults.com" className="text-[#001F3F] font-bold underline">info@htbconsults.com</a></span>
+                      <span>Urgent enquiry? Email us directly at <a href={`mailto:${SITE_METADATA.email}`} className="text-[#001F3F] font-bold underline">{SITE_METADATA.email}</a></span>
                       <button
                         type="button"
                         onClick={() => {

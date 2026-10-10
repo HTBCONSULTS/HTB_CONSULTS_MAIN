@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUp, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowUp, Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import { Logo } from './Logo';
 import { ACADEMY_SITE_URL, SERVICES, SITE_METADATA } from '../config/siteData';
 
@@ -51,6 +51,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPolicy }) => {
             <address className="space-y-2 border-t border-white/10 pt-4 text-sm not-italic text-slate-300">
               <div className="flex items-center gap-2"><Phone className="h-4 w-4 text-[#FFB81C]" aria-hidden="true" /><a href={`tel:${SITE_METADATA.phone.replace(/\s+/g, '')}`} className="focus-visible-brand rounded-sm hover:text-white">{SITE_METADATA.phone}</a></div>
               <div className="flex items-center gap-2"><Mail className="h-4 w-4 text-[#FFB81C]" aria-hidden="true" /><a href={`mailto:${SITE_METADATA.email}`} className="focus-visible-brand rounded-sm hover:text-white">{SITE_METADATA.email}</a></div>
+              <div className="flex items-center gap-2"><MessageCircle className="h-4 w-4 text-[#FFB81C]" aria-hidden="true" /><a href={SITE_METADATA.whatsappUrl} target="_blank" rel="noopener noreferrer" className="focus-visible-brand rounded-sm hover:text-white">WhatsApp: {SITE_METADATA.phone}</a></div>
               <div className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[#FFB81C]" aria-hidden="true" /><span>{SITE_METADATA.location}</span></div>
             </address>
           </div>
