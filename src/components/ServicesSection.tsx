@@ -3,6 +3,7 @@ import {
   SERVICES 
 } from '../config/siteData';
 import { ServiceItem } from '../types';
+import { VISUAL_ASSETS } from '../config/visualAssets';
 import {
   ArrowRight,
   TrendingUp,
@@ -99,6 +100,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
       
       {/* 1. SINGLE SERVICES INTRODUCTION (ONLY ONE HERO FOR ALL SERVICES) */}
       <div className="bg-[#001F3F] text-white pt-20 pb-16 border-t border-b border-white/10 relative overflow-hidden">
+        <div aria-hidden="true" className="absolute inset-0 bg-cover bg-center opacity-45" style={{ backgroundImage: `url(\"${VISUAL_ASSETS.servicesHero}\")` }} />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#001429]/95 via-[#001F3F]/90 to-[#001F3F]/65" />
         {/* Subtle grid signature */}
         <div className="absolute inset-0 bg-nodes-subtle opacity-10 pointer-events-none" />
         
@@ -108,10 +111,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               <span className="w-5 h-[2px] bg-[#FFB81C]" />
               <span>Our Services</span>
             </div>
-            <h2 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-white leading-tight">
+            <h1 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-white leading-tight">
               Integrated expertise for{' '}
               <span className="text-[#FFB81C] italic">lasting results.</span>
-            </h2>
+            </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-200 leading-relaxed max-w-2xl">
               Six core services, designed to help organisations plan, improve, transform and deliver with confidence.
             </p>
@@ -154,6 +157,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
             <article
               key={service.id}
               id={service.id}
+              data-reveal
               className={`scroll-mt-24 py-20 lg:py-28 relative ${
                 isEven ? 'bg-white' : 'bg-[#F8FAFC] bg-blueprint-subtle'
               }`}

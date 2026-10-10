@@ -1,186 +1,73 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowUp, Mail, MapPin, Phone } from 'lucide-react';
 import { Logo } from './Logo';
 import { SERVICES, SITE_METADATA } from '../config/siteData';
-import { Phone, Mail, MapPin, ArrowUp } from 'lucide-react';
 
 interface FooterProps {
   onOpenPolicy: (type: 'privacy' | 'terms' | 'cookie') => void;
-  onNavigateAnchor: (id: string) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenPolicy, onNavigateAnchor }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenPolicy }) => {
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   };
 
   return (
-    <footer className="bg-[#001429] text-white pt-16 pb-12 border-t border-white/10 relative overflow-hidden">
-      {/* Decorative fine pattern */}
-      <div className="absolute inset-0 bg-nodes-subtle opacity-5 pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
-          
-          {/* Brand & Mission column */}
-          <div className="lg:col-span-4 space-y-4">
-            <Logo variant="light" />
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-sm">
-              We are a UK-based digital transformation consultancy helping organisations turn complex challenges into clear, practical and measurable solutions.
-            </p>
-            <div className="pt-2 font-script text-[#FFB81C] text-xl">
-              “Clarity in Strategy. Confidence in Delivery.”
-            </div>
+    <footer className="relative overflow-hidden border-t border-white/10 bg-[#001429] pb-10 pt-16 text-white">
+      <div aria-hidden="true" className="absolute inset-0 bg-nodes-subtle opacity-10" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-2 lg:grid-cols-12">
+          <div className="space-y-4 lg:col-span-4">
+            <Link to="/" aria-label="HTB Consult homepage" className="focus-visible-brand inline-flex rounded-sm"><Logo variant="light" /></Link>
+            <p className="max-w-sm text-sm leading-relaxed text-slate-300">A UK-based consultancy helping organisations turn complex challenges into clear, practical and measurable solutions.</p>
+            <div className="font-script text-2xl text-[#FFB81C]">“Clarity in Strategy. Confidence in Delivery.”</div>
           </div>
 
-          {/* Core Services Column */}
-          <div className="lg:col-span-4 space-y-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#FFB81C]">
-              Our Core Services
-            </h4>
-            <ul className="space-y-2 text-xs text-slate-300">
-              {SERVICES.map((s) => (
-                <li key={s.id}>
-                  <button
-                    type="button"
-                    onClick={() => onNavigateAnchor(s.id)}
-                    className="hover:text-white hover:underline transition-colors text-left focus-visible-brand cursor-pointer"
-                  >
-                    {s.name}
-                  </button>
-                </li>
+          <div className="space-y-3 lg:col-span-4">
+            <h2 className="text-xs font-bold uppercase tracking-[0.16em] text-[#FFB81C]">Our Core Services</h2>
+            <ul className="grid gap-2 text-sm text-slate-300 sm:grid-cols-2 lg:grid-cols-1">
+              {SERVICES.map((service) => (
+                <li key={service.id}><Link to={`/services#${service.id}`} className="focus-visible-brand rounded-sm hover:text-white hover:underline">{service.name}</Link></li>
               ))}
             </ul>
           </div>
 
-          {/* Quick Navigation & Direct Contact Column */}
-          <div className="lg:col-span-4 space-y-5">
+          <div className="space-y-6 lg:col-span-4">
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#FFB81C] mb-3">
-                Quick Navigation
-              </h4>
-              <div className="grid grid-cols-2 gap-2 text-xs text-slate-300">
-                <button
-                  type="button"
-                  onClick={() => onNavigateAnchor('hero')}
-                  className="hover:text-white text-left cursor-pointer"
-                >
-                  Home
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigateAnchor('about')}
-                  className="hover:text-white text-left cursor-pointer"
-                >
-                  About Us
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigateAnchor('services')}
-                  className="hover:text-white text-left cursor-pointer"
-                >
-                  All Services
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigateAnchor('approach')}
-                  className="hover:text-white text-left cursor-pointer"
-                >
-                  Our Approach
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigateAnchor('case-studies')}
-                  className="hover:text-white text-left cursor-pointer"
-                >
-                  Case Studies
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigateAnchor('insights')}
-                  className="hover:text-white text-left cursor-pointer"
-                >
-                  Insights & Articles
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigateAnchor('academy')}
-                  className="hover:text-white text-left cursor-pointer"
-                >
-                  Academy Courses ↗
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigateAnchor('contact')}
-                  className="hover:text-white text-left cursor-pointer"
-                >
-                  Contact & Bookings
-                </button>
+              <h2 className="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-[#FFB81C]">Explore HTB Consult</h2>
+              <div className="grid grid-cols-2 gap-x-5 gap-y-2 text-sm text-slate-300">
+                <Link to="/" className="focus-visible-brand rounded-sm hover:text-white">Home</Link>
+                <Link to="/about" className="focus-visible-brand rounded-sm hover:text-white">About Us</Link>
+                <Link to="/services" className="focus-visible-brand rounded-sm hover:text-white">All Services</Link>
+                <Link to="/about#approach" className="focus-visible-brand rounded-sm hover:text-white">Our Approach</Link>
+                <Link to="/case-studies" className="focus-visible-brand rounded-sm hover:text-white">Case Studies</Link>
+                <Link to="/insights" className="focus-visible-brand rounded-sm hover:text-white">Insights & Articles</Link>
+                <Link to="/academy" className="focus-visible-brand rounded-sm hover:text-white">Academy</Link>
+                <Link to="/contact" className="focus-visible-brand rounded-sm hover:text-white">Contact</Link>
               </div>
             </div>
 
-            <div className="pt-3 border-t border-white/10 space-y-2 text-xs text-slate-300">
-              <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-[#FFB81C]" />
-                <a href={`tel:${SITE_METADATA.phone.replace(/\s+/g, '')}`} className="hover:text-white">
-                  {SITE_METADATA.phone}
-                </a>
-              </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-[#FFB81C]" />
-                <a href={`mailto:${SITE_METADATA.email}`} className="hover:text-white">
-                  {SITE_METADATA.email}
-                </a>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-[#FFB81C]" />
-                <span>{SITE_METADATA.location}</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Bottom Legal & Copyright Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <div>
-            &copy; {new Date().getFullYear()} HTB Consult Ltd. All rights reserved. Registered in the United Kingdom.
-          </div>
-
-          <div className="flex items-center gap-6">
-            <button
-              type="button"
-              onClick={() => onOpenPolicy('privacy')}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Privacy Policy
-            </button>
-            <button
-              type="button"
-              onClick={() => onOpenPolicy('terms')}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Terms & Conditions
-            </button>
-            <button
-              type="button"
-              onClick={() => onOpenPolicy('cookie')}
-              className="hover:text-white transition-colors cursor-pointer"
-            >
-              Cookie Policy
-            </button>
-            <button
-              type="button"
-              onClick={scrollToTop}
-              className="p-1.5 rounded-md bg-white/10 hover:bg-white/20 text-white transition-colors focus-visible-brand"
-              aria-label="Back to top"
-            >
-              <ArrowUp className="w-3.5 h-3.5" />
-            </button>
+            <address className="space-y-2 border-t border-white/10 pt-4 text-sm not-italic text-slate-300">
+              <div className="flex items-center gap-2"><Phone className="h-4 w-4 text-[#FFB81C]" aria-hidden="true" /><a href={`tel:${SITE_METADATA.phone.replace(/\s+/g, '')}`} className="focus-visible-brand rounded-sm hover:text-white">{SITE_METADATA.phone}</a></div>
+              <div className="flex items-center gap-2"><Mail className="h-4 w-4 text-[#FFB81C]" aria-hidden="true" /><a href={`mailto:${SITE_METADATA.email}`} className="focus-visible-brand rounded-sm hover:text-white">{SITE_METADATA.email}</a></div>
+              <div className="flex items-center gap-2"><MapPin className="h-4 w-4 text-[#FFB81C]" aria-hidden="true" /><span>{SITE_METADATA.location}</span></div>
+            </address>
           </div>
         </div>
 
+        <div className="flex flex-col items-start justify-between gap-5 pt-7 text-xs text-slate-400 sm:flex-row sm:items-center">
+          <p>© {new Date().getFullYear()} HTB Consult Ltd. All rights reserved.</p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+            <button type="button" onClick={() => onOpenPolicy('privacy')} className="focus-visible-brand rounded-sm hover:text-white">Privacy Policy</button>
+            <button type="button" onClick={() => onOpenPolicy('terms')} className="focus-visible-brand rounded-sm hover:text-white">Terms & Conditions</button>
+            <button type="button" onClick={() => onOpenPolicy('cookie')} className="focus-visible-brand rounded-sm hover:text-white">Cookie Policy</button>
+            <button type="button" onClick={scrollToTop} aria-label="Back to top" className="focus-visible-brand flex h-10 w-10 items-center justify-center rounded-md bg-white/10 text-white transition-colors hover:bg-[#FFB81C] hover:text-[#001F3F]">
+              <ArrowUp className="h-4 w-4" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
       </div>
     </footer>
   );

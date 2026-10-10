@@ -1,10 +1,12 @@
 import React from 'react';
 import { ArrowRight, CheckCircle2, Star, Award, Handshake, BarChart2 } from 'lucide-react';
 import { CORE_VALUES } from '../config/siteData';
+import { VISUAL_ASSETS } from '../config/visualAssets';
 
 interface AboutSectionProps {
   onLearnMoreServices: () => void;
   onBookConsultation: () => void;
+  showIntro?: boolean;
 }
 
 const VALUE_ICONS: Record<string, React.ElementType> = {
@@ -17,13 +19,15 @@ const VALUE_ICONS: Record<string, React.ElementType> = {
 export const AboutSection: React.FC<AboutSectionProps> = ({
   onLearnMoreServices,
   onBookConsultation,
+  showIntro = true,
 }) => {
   return (
     <section id="about" className="py-20 lg:py-28 bg-[#F8FAFC] bg-blueprint-subtle relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl">
+        {showIntro && (
+        <div className="max-w-3xl" data-reveal>
           <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#B45309] mb-3">
             <span className="w-5 h-[2px] bg-[#FFB81C]" />
             <span>About HTB Consult</span>
@@ -36,6 +40,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             We are a UK-based digital transformation and business strategy consultancy helping organisations turn complex challenges into clear, practical and measurable solutions.
           </p>
         </div>
+        )}
 
         {/* Story & Visual Split */}
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
@@ -99,7 +104,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div className="relative h-full min-h-[320px] rounded-2xl overflow-hidden border border-slate-200/80 shadow-md group">
               <img
-                src="/src/assets/images/strategy_workshop_mapping_1791639380530.jpg"
+                src={VISUAL_ASSETS.strategyWorkshop}
                 alt="HTB Consult team collaborating on business strategy and workflow mapping"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-500"

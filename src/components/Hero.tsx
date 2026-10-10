@@ -36,9 +36,9 @@ export const Hero: React.FC<HeroProps> = ({ onExploreServices, onDiscussProject 
             src={HERO_VIDEO_CONFIG.videoSource}
             poster={HERO_VIDEO_CONFIG.posterImage}
             autoPlay
-            muted
-            loop
-            playsInline
+            muted={HERO_VIDEO_CONFIG.muted}
+            loop={HERO_VIDEO_CONFIG.loop}
+            playsInline={HERO_VIDEO_CONFIG.playsInline}
             preload={HERO_VIDEO_CONFIG.preload}
             onError={() => setVideoError(true)}
             className="w-full h-full object-cover object-center scale-105 transition-transform duration-1000"

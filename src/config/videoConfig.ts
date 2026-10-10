@@ -1,3 +1,5 @@
+import { VISUAL_ASSETS } from './visualAssets';
+
 // Configuration for hero background video
 // To provide a real background video file:
 // 1. Place your video file at /public/media/hero-loop.mp4
@@ -10,7 +12,7 @@ export const HERO_VIDEO_CONFIG = {
   videoSource: '/media/hero-loop.mp4',
   
   // High-resolution photography fallback (generated from references)
-  posterImage: '/src/assets/images/hero_consultant_executive_1791639368097.jpg',
+  posterImage: VISUAL_ASSETS.homeHero,
   
   // Settings for background video behavior
   muted: true,
