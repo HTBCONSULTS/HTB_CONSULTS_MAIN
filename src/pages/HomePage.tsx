@@ -16,8 +16,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
     <Hero onExploreServices={onExploreServices} onDiscussProject={onDiscussProject} />
     <TrustPillarsStrip />
 
-    <section className="relative overflow-hidden bg-white py-20 lg:py-28">
-      <div aria-hidden="true" className="absolute inset-0 bg-blueprint-subtle opacity-60" />
+    <section className="relative overflow-hidden bg-white bg-blueprint-subtle py-20 lg:py-28">
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:gap-14 lg:px-8" data-reveal>
         <div className="lg:col-span-6">
           <p className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#9A5B00]">
@@ -44,7 +43,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
         </div>
         <div className="relative lg:col-span-6">
           <div className="absolute -right-3 -top-3 h-28 w-28 rounded-full border border-[#FFB81C]/60" aria-hidden="true" />
-          <div className="relative overflow-hidden rounded-2xl border border-slate-200 shadow-xl shadow-[#001F3F]/10">
+          <div className="htb-card relative overflow-hidden rounded-2xl border border-slate-200 shadow-xl shadow-[#001F3F]/10">
             <img src={VISUAL_ASSETS.strategyWorkshop} alt="A team mapping strategy and processes in a collaborative workshop" className="aspect-[4/3] w-full object-cover" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#001F3F]/70 via-transparent to-transparent" />
             <p className="font-script absolute bottom-5 left-6 right-6 text-3xl text-[#FFD166] sm:text-4xl">“Ideas. Strategy. Solutions. Results.”</p>
@@ -53,7 +52,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
       </div>
     </section>
 
-    <section className="bg-[#F6F8FB] py-20 lg:py-24">
+    <section className="bg-[#F6F8FB] bg-blueprint-subtle py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" data-reveal>
         <div className="mb-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-3xl">
@@ -78,7 +77,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
             <Link
               key={service.id}
               to={`/services#${service.id}`}
-              className="group focus-visible-brand relative overflow-hidden rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#EAB54F] hover:shadow-lg hover:shadow-[#001F3F]/8"
+              className="htb-card group focus-visible-brand relative overflow-hidden rounded-xl border border-slate-200 bg-white p-6 transition-colors duration-300"
             >
               <span className="font-mono text-xs font-bold tracking-widest text-[#A96500]">0{index + 1}</span>
               <h3 className="mt-3 font-editorial text-xl font-semibold leading-snug text-[#001F3F]">{service.name}</h3>
@@ -96,6 +95,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
     <section className="relative isolate overflow-hidden bg-[#001F3F] py-20 text-white lg:py-24">
       <div aria-hidden="true" className="absolute inset-0 -z-20 bg-cover bg-center opacity-35" style={{ backgroundImage: `url("${VISUAL_ASSETS.crmHealthcare}")` }} />
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-[#001429]/95 via-[#001F3F]/90 to-[#001F3F]/75" />
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-nodes-subtle opacity-20 pointer-events-none" />
       <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8" data-reveal>
         <div className="max-w-3xl">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-[#FFB81C]">Evidence in practice</p>
@@ -108,7 +108,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
       </div>
     </section>
 
-    <section className="bg-[#FFF8E7] py-14 sm:py-16">
+    <section className="bg-[#FFF8E7] bg-blueprint-subtle py-14 sm:py-16">
       <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8" data-reveal>
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#8A5100]">Ready for the next step?</p>

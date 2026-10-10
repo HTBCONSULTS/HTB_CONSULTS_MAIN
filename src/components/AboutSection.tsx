@@ -46,7 +46,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
           
           {/* Story & Mission Content */}
-          <div className="lg:col-span-7 flex flex-col justify-between space-y-8 bg-white p-8 sm:p-10 rounded-2xl border border-slate-200/80 shadow-sm">
+          <div className="htb-card lg:col-span-7 flex flex-col justify-between space-y-8 bg-white p-8 sm:p-10 rounded-2xl border border-slate-200/80 shadow-sm">
             <div>
               <div className="text-xs font-bold uppercase tracking-wider text-[#B45309]">Our Story</div>
               <h3 className="font-editorial text-2xl sm:text-3xl font-semibold text-[#001F3F] mt-1">
@@ -59,7 +59,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
             {/* Mission & Vision Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-100">
-              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-slate-200/60">
+              <div className="htb-card p-4 rounded-xl bg-[#F8FAFC] border border-slate-200/60">
                 <div className="flex items-center gap-2 text-xs font-bold text-[#001F3F] uppercase tracking-wider">
                   <CheckCircle2 className="w-4 h-4 text-[#FFB81C]" />
                   <span>Our Mission</span>
@@ -69,7 +69,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                 </p>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-slate-200/60">
+              <div className="htb-card p-4 rounded-xl bg-[#F8FAFC] border border-slate-200/60">
                 <div className="flex items-center gap-2 text-xs font-bold text-[#001F3F] uppercase tracking-wider">
                   <CheckCircle2 className="w-4 h-4 text-[#FFB81C]" />
                   <span>Our Vision</span>
@@ -102,7 +102,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
           {/* Visual Side: Strategy Workshop Image & Handwritten Tag */}
           <div className="lg:col-span-5 flex flex-col justify-between">
-            <div className="relative h-full min-h-[320px] rounded-2xl overflow-hidden border border-slate-200/80 shadow-md group">
+            <div className="htb-card relative h-full min-h-[320px] rounded-2xl overflow-hidden border border-slate-200/80 shadow-md group">
               <img
                 src={VISUAL_ASSETS.strategyWorkshop}
                 alt="HTB Consult team collaborating on business strategy and workflow mapping"
@@ -124,7 +124,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
         </div>
 
         {/* Why Choose HTB Consult - 4 Values Grid */}
-        <div className="mt-16 bg-[#001F3F] text-white rounded-2xl p-8 sm:p-12 shadow-xl border border-white/10">
+        <div className="htb-card htb-card--dark bg-nodes-subtle mt-16 bg-[#001F3F] text-white rounded-2xl p-8 sm:p-12 shadow-xl border border-white/10">
           <div className="max-w-2xl mb-8">
             <div className="text-xs font-semibold tracking-wider uppercase text-[#FFB81C]">
               Why Choose HTB Consult
@@ -143,7 +143,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               return (
                 <div
                   key={val.title}
-                  className="p-5 rounded-xl bg-white/5 border border-white/10 hover:border-[#FFB81C]/40 transition-colors"
+                  className="htb-card htb-card--dark p-5 rounded-xl bg-white/5 border border-white/10 transition-colors"
                 >
                   <div className="w-10 h-10 rounded-full bg-[#FFB81C]/20 border border-[#FFB81C]/30 flex items-center justify-center text-[#FFB81C] mb-3">
                     <IconComp className="w-5 h-5" />

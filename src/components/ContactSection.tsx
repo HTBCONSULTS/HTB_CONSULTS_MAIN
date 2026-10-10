@@ -130,7 +130,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
         {/* 4 Trust Commitment Cards matching Reference P13 */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-          <div className="p-4 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center gap-3">
+          <div className="htb-card p-4 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-[#FFF8E7] flex items-center justify-center text-[#B45309] shrink-0">
               <Clock className="w-5 h-5" />
             </div>
@@ -140,7 +140,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center gap-3">
+          <div className="htb-card p-4 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-[#FFF8E7] flex items-center justify-center text-[#B45309] shrink-0">
               <Users className="w-5 h-5" />
             </div>
@@ -150,7 +150,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center gap-3">
+          <div className="htb-card p-4 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-[#FFF8E7] flex items-center justify-center text-[#B45309] shrink-0">
               <FileText className="w-5 h-5" />
             </div>
@@ -160,7 +160,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center gap-3">
+          <div className="htb-card p-4 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-[#FFF8E7] flex items-center justify-center text-[#B45309] shrink-0">
               <CheckCircle2 className="w-5 h-5" />
             </div>
@@ -176,7 +176,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           
           {/* Left Column: Direct Contact Details */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-7 shadow-xs">
+            <div className="htb-card bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-7 shadow-xs">
               <h3 className="font-editorial text-xl font-semibold text-[#001F3F] mb-6">
                 Contact Details
               </h3>
@@ -242,7 +242,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
               {/* Consultation Highlight Box */}
               <div className="mt-8 pt-6 border-t border-slate-100">
-                <div className="bg-[#001F3F] text-white p-5 rounded-xl">
+                <div className="htb-card htb-card--dark bg-nodes-subtle bg-[#001F3F] text-white p-5 rounded-xl">
                   <div className="flex items-center gap-2 text-xs font-bold text-[#FFB81C] uppercase tracking-wider mb-1">
                     <Video className="w-4 h-4" />
                     <span>Free Initial Consultation</span>
@@ -263,7 +263,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           </div>
 
           {/* Right Column: Interactive Tabs for Message Form vs Calendar Booking */}
-          <div className="lg:col-span-8 bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-9 shadow-xs">
+          <div className="htb-card lg:col-span-8 bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-9 shadow-xs">
             
             {/* Segmented Control Tabs */}
             <div className="flex items-center gap-2 p-1.5 bg-slate-100 rounded-xl mb-8 max-w-md">
@@ -750,7 +750,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               return (
                 <div
                   key={faq.question}
-                  className="bg-white rounded-xl border border-slate-200/80 overflow-hidden shadow-xs"
+                  className="htb-card bg-white rounded-xl border border-slate-200/80 overflow-hidden shadow-xs"
                 >
                   <button
                     type="button"

@@ -45,7 +45,7 @@ export const ApproachSection: React.FC<ApproachSectionProps> = ({ onBookConsulta
                 key={step.number}
                 type="button"
                 onClick={() => setActiveStepIndex(idx)}
-                className={`p-5 rounded-xl text-left transition-all border cursor-pointer focus-visible-brand relative group ${
+                className={`htb-card htb-card--dark p-5 rounded-xl text-left transition-all border cursor-pointer focus-visible-brand relative group ${
                   isSelected
                     ? 'bg-white/15 border-[#FFB81C] shadow-lg'
                     : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
@@ -80,7 +80,7 @@ export const ApproachSection: React.FC<ApproachSectionProps> = ({ onBookConsulta
         </div>
 
         {/* Selected Step Expanded Details Card */}
-        <div className="mt-8 bg-white/10 backdrop-blur-md rounded-2xl border border-white/15 p-6 sm:p-10 shadow-xl">
+        <div className="htb-card htb-card--dark bg-nodes-subtle mt-8 bg-white/10 backdrop-blur-md rounded-2xl border border-white/15 p-6 sm:p-10 shadow-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <div className="lg:col-span-7 space-y-4">
@@ -115,7 +115,7 @@ export const ApproachSection: React.FC<ApproachSectionProps> = ({ onBookConsulta
             </div>
 
             {/* Deliverables List */}
-            <div className="lg:col-span-5 bg-black/25 rounded-xl p-6 border border-white/10">
+            <div className="htb-card htb-card--dark lg:col-span-5 bg-black/25 rounded-xl p-6 border border-white/10">
               <div className="text-xs font-bold uppercase tracking-wider text-[#FFB81C] mb-4">
                 Typical Deliverables
               </div>

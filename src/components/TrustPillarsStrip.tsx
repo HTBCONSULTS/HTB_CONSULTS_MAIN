@@ -13,7 +13,7 @@ export const TrustPillarsStrip: React.FC = () => {
   return (
     <div className="relative z-20 -mt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* 4 Pillars Card Row */}
-      <div className="bg-white rounded-xl shadow-xl shadow-slate-900/5 border border-slate-200/80 p-6 sm:p-8">
+      <div className="htb-card bg-white rounded-xl shadow-xl shadow-slate-900/5 border border-slate-200/80 p-6 sm:p-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 divide-y sm:divide-y-0 lg:divide-x divide-slate-100">
           {FOUR_PILLARS.map((pillar, index) => {
             const Icon = ICON_MAP[pillar.icon] || TrendingUp;
@@ -43,7 +43,7 @@ export const TrustPillarsStrip: React.FC = () => {
       </div>
 
       {/* Metrics Row */}
-      <div className="mt-8 bg-[#001F3F] text-white rounded-xl p-6 sm:p-8 shadow-lg border border-white/10">
+      <div className="htb-card htb-card--dark bg-nodes-subtle mt-8 bg-[#001F3F] text-white rounded-xl p-6 sm:p-8 shadow-lg border border-white/10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center divide-x-0 sm:divide-x divide-white/10">
           {TRUST_METRICS.map((metric) => (
             <div key={metric.label} className="px-2 sm:px-4 py-2">

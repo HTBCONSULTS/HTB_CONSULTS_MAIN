@@ -159,7 +159,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               id={service.id}
               data-reveal
               className={`scroll-mt-24 py-20 lg:py-28 relative ${
-                isEven ? 'bg-white' : 'bg-[#F8FAFC] bg-blueprint-subtle'
+                isEven ? 'bg-white bg-blueprint-subtle' : 'bg-[#F8FAFC] bg-blueprint-subtle'
               }`}
             >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -209,7 +209,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                     return (
                       <div
                         key={b.title}
-                        className="p-4 rounded-xl bg-white border border-slate-200/80 shadow-xs hover:border-[#FFB81C]/60 transition-colors"
+                        className="htb-card p-4 rounded-xl bg-white border border-slate-200/80 shadow-xs"
                       >
                         <div className="w-8 h-8 rounded-full bg-[#FFF8E7] flex items-center justify-center text-[#B45309] mb-2.5">
                           <BIcon className="w-4 h-4" strokeWidth={1.8} />
@@ -228,7 +228,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   
                   {/* Left Column: What We Do & Approach */}
                   <div className="lg:col-span-5 space-y-8">
-                    <div className="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
+                    <div className="htb-card p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
                       <div className="text-xs font-bold tracking-wider uppercase text-[#B45309] mb-2">
                         What We Do
                       </div>
@@ -241,7 +241,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                     </div>
 
                     {/* Service Approach Step Flow */}
-                    <div className="p-6 rounded-2xl bg-[#001F3F] text-white shadow-md">
+                    <div className="htb-card htb-card--dark bg-nodes-subtle p-6 rounded-2xl bg-[#001F3F] text-white shadow-md">
                       <div className="text-xs font-bold tracking-wider uppercase text-[#FFB81C] mb-4">
                         Structured Approach
                       </div>
@@ -261,7 +261,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 
                     {/* Related Case Study snippet if present */}
                     {service.caseStudySnippet && (
-                      <div className="p-5 rounded-xl bg-[#FFF8E7] border border-[#FFB81C]/40">
+                      <div className="htb-card p-5 rounded-xl bg-[#FFF8E7] border border-[#FFB81C]/40">
                         <div className="text-[11px] font-bold uppercase tracking-wider text-[#B45309]">
                           Related Impact
                         </div>
@@ -287,7 +287,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 
                   {/* Right Column: Our Service Includes 6 Distinct Areas */}
                   <div className="lg:col-span-7">
-                    <div className="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
+                    <div className="htb-card p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/80 shadow-xs">
                       <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
                         <div className="text-xs font-bold tracking-wider uppercase text-[#B45309]">
                           Our Service Includes
@@ -303,7 +303,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                           return (
                             <div
                               key={inc.title}
-                              className="p-4 rounded-xl bg-[#F8FAFC] border border-slate-200/60 hover:bg-[#FFF8E7]/40 hover:border-[#FFB81C]/40 transition-colors"
+                              className="htb-card p-4 rounded-xl bg-[#F8FAFC] border border-slate-200/60 hover:bg-[#FFF8E7]/40 transition-colors"
                             >
                               <div className="flex items-start gap-3">
                                 <div className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center shrink-0 text-[#001F3F]">
