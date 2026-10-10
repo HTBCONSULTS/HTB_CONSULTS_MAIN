@@ -87,7 +87,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenConsultation
     <header className={`fixed inset-x-0 top-0 z-50 border-b border-white/10 text-white transition-[background-color,box-shadow,padding] duration-300 ${isScrolled ? 'bg-[#001429]/95 py-2 shadow-lg shadow-black/20 backdrop-blur-xl' : 'bg-[#001F3F]/95 py-3 backdrop-blur-md'}`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
         <Link to="/" onClick={closeMenus} aria-label="HTB Consult homepage" className="focus-visible-brand shrink-0 rounded-sm py-1 transition-opacity hover:opacity-90">
-          <Logo variant="light" />
+          <Logo />
         </Link>
 
         <nav aria-label="Main navigation" className="hidden items-center gap-1 xl:flex">

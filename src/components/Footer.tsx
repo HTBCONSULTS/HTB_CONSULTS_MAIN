@@ -19,7 +19,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPolicy }) => {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-2 lg:grid-cols-12">
           <div className="space-y-4 lg:col-span-4">
-            <Link to="/" aria-label="HTB Consult homepage" className="focus-visible-brand inline-flex rounded-sm"><Logo variant="light" /></Link>
+            <Link to="/" aria-label="HTB Consult homepage" className="focus-visible-brand inline-flex rounded-sm"><Logo /></Link>
             <p className="max-w-sm text-sm leading-relaxed text-slate-300">A UK-based consultancy helping organisations turn complex challenges into clear, practical and measurable solutions.</p>
             <div className="font-script text-2xl text-[#FFB81C]">“Clarity in Strategy. Confidence in Delivery.”</div>
           </div>
