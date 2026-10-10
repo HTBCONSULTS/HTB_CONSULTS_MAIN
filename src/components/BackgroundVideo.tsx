@@ -3,7 +3,9 @@ import { Pause, Play } from 'lucide-react';
 
 interface BackgroundVideoProps {
   src: string;
-  poster: string;
+  poster?: string;
+  showPoster?: boolean;
+  eager?: boolean;
   videoClassName?: string;
   controlPositionClassName?: string;
 }
@@ -12,13 +14,17 @@ interface BackgroundVideoProps {
 export const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
   src,
   poster,
+  showPoster = true,
+  eager = false,
   videoClassName = '',
   controlPositionClassName = 'bottom-4 right-4',
 }) => {
   const layerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isNearViewport, setIsNearViewport] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  );
   const [playbackOverride, setPlaybackOverride] = useState<boolean | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isReady, setIsReady] = useState(false);
@@ -35,6 +41,10 @@ export const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
   useEffect(() => {
     const layer = layerRef.current;
     if (!layer) return;
+    if (eager) {
+      setIsNearViewport(true);
+      return;
+    }
     if (!('IntersectionObserver' in window)) {
       setIsNearViewport(true);
       return;
@@ -46,10 +56,10 @@ export const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
     );
     observer.observe(layer);
     return () => observer.disconnect();
-  }, []);
+  }, [eager]);
 
   const shouldRenderVideo = !videoError && (!prefersReducedMotion || playbackOverride === true);
-  const shouldPlay = shouldRenderVideo && isNearViewport && (playbackOverride ?? !prefersReducedMotion);
+  const shouldPlay = shouldRenderVideo && (eager || isNearViewport) && (playbackOverride ?? !prefersReducedMotion);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -68,21 +78,23 @@ export const BackgroundVideo: React.FC<BackgroundVideoProps> = ({
   return (
     <>
       <div ref={layerRef} aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-        <img
-          src={poster}
-          alt=""
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${isReady && !videoError ? 'opacity-0' : 'opacity-100'}`}
-        />
+        {showPoster && poster && (
+          <img
+            src={poster}
+            alt=""
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${isReady && !videoError ? 'opacity-0' : 'opacity-100'}`}
+          />
+        )}
         {shouldRenderVideo && (
           <video
             ref={videoRef}
             src={src}
-            poster={poster}
+            poster={showPoster ? poster : undefined}
             autoPlay={shouldPlay}
             muted
             loop
             playsInline
-            preload={isNearViewport ? 'metadata' : 'none'}
+            preload={eager ? 'auto' : isNearViewport ? 'metadata' : 'none'}
             onCanPlay={() => setIsReady(true)}
             onPlaying={() => setIsPlaying(true)}
             onPause={() => setIsPlaying(false)}

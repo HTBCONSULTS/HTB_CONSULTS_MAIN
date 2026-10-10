@@ -16,7 +16,8 @@ export const Hero: React.FC<HeroProps> = ({ onExploreServices, onDiscussProject 
   >
     <BackgroundVideo
       src={HERO_VIDEO_CONFIG.videoSource}
-      poster={HERO_VIDEO_CONFIG.posterImage}
+      showPoster={false}
+      eager
       videoClassName="brightness-110 contrast-105"
     />
     <div aria-hidden="true" className="absolute inset-0 z-[1] bg-gradient-to-r from-[#001429]/70 via-[#001F3F]/48 to-[#001F3F]/30" />
