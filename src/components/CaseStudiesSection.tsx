@@ -88,7 +88,7 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({
                 <div className="relative h-48 overflow-hidden bg-slate-100">
                   <img
                     src={study.image}
-                    alt={study.title}
+                    alt={`Illustrative stock photography for a ${study.sector} project`}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                   />

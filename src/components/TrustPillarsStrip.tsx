@@ -43,7 +43,7 @@ export const TrustPillarsStrip: React.FC = () => {
       </div>
 
       {/* Metrics Row */}
-      <div className="htb-card htb-card--dark bg-nodes-subtle mt-8 bg-[#001F3F] text-white rounded-xl p-6 sm:p-8 shadow-lg border border-white/10">
+      <div className="htb-card htb-card--dark mt-8 bg-[#001F3F] text-white rounded-xl p-6 sm:p-8 shadow-lg border border-white/10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center divide-x-0 sm:divide-x divide-white/10">
           {TRUST_METRICS.map((metric) => (
             <div key={metric.label} className="px-2 sm:px-4 py-2">

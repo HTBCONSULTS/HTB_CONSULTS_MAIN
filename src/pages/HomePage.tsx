@@ -2,9 +2,11 @@ import React from 'react';
 import { ArrowRight, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Hero } from '../components/Hero';
+import { BackgroundVideo } from '../components/BackgroundVideo';
 import { TrustPillarsStrip } from '../components/TrustPillarsStrip';
 import { SERVICES } from '../config/siteData';
 import { VISUAL_ASSETS } from '../config/visualAssets';
+import { COLLABORATION_VIDEO_SOURCE } from '../config/videoConfig';
 
 interface HomePageProps {
   onExploreServices: () => void;
@@ -93,10 +95,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
     </section>
 
     <section className="relative isolate overflow-hidden bg-[#001F3F] py-20 text-white lg:py-24">
-      <div aria-hidden="true" className="absolute inset-0 -z-20 bg-cover bg-center opacity-35" style={{ backgroundImage: `url("${VISUAL_ASSETS.crmHealthcare}")` }} />
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-[#001429]/95 via-[#001F3F]/90 to-[#001F3F]/75" />
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-nodes-subtle opacity-20 pointer-events-none" />
-      <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8" data-reveal>
+      <BackgroundVideo
+        src={COLLABORATION_VIDEO_SOURCE}
+        poster={VISUAL_ASSETS.crmHealthcare}
+        videoClassName="brightness-105 contrast-105"
+        controlPositionClassName="bottom-4 left-4"
+      />
+      <div aria-hidden="true" className="absolute inset-0 z-[1] bg-gradient-to-r from-[#001429]/80 via-[#001F3F]/66 to-[#001F3F]/54" />
+      <div aria-hidden="true" className="htb-ambient-glow absolute inset-0 z-[2]" />
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8" data-reveal>
         <div className="max-w-3xl">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-[#FFB81C]">Evidence in practice</p>
           <h2 className="font-editorial text-balance text-3xl font-medium leading-tight sm:text-4xl lg:text-5xl">Real challenges. Practical solutions.</h2>

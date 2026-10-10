@@ -16,7 +16,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPolicy }) => {
 
   return (
     <footer className="relative overflow-hidden border-t border-white/10 bg-[#001429] pb-10 pt-16 text-white">
-      <div aria-hidden="true" className="absolute inset-0 bg-nodes-subtle opacity-10" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 border-b border-white/10 pb-12 md:grid-cols-2 lg:grid-cols-12">
           <div className="space-y-4 lg:col-span-4">

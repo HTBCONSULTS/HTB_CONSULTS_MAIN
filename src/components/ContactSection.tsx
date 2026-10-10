@@ -242,7 +242,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
               {/* Consultation Highlight Box */}
               <div className="mt-8 pt-6 border-t border-slate-100">
-                <div className="htb-card htb-card--dark bg-nodes-subtle bg-[#001F3F] text-white p-5 rounded-xl">
+                <div className="htb-card htb-card--dark bg-[#001F3F] text-white p-5 rounded-xl">
                   <div className="flex items-center gap-2 text-xs font-bold text-[#FFB81C] uppercase tracking-wider mb-1">
                     <Video className="w-4 h-4" />
                     <span>Free Initial Consultation</span>

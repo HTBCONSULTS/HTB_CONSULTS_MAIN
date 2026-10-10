@@ -77,7 +77,7 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ onEnquireTrainin
         </div>
 
         {/* 3 Pillars Strip */}
-        <div className="htb-card htb-card--dark bg-nodes-subtle mt-12 bg-[#001F3F] text-white rounded-xl p-6 sm:p-8 grid grid-cols-1 md:grid-cols-3 gap-6 border border-white/10">
+        <div className="htb-card htb-card--dark mt-12 bg-[#001F3F] text-white rounded-xl p-6 sm:p-8 grid grid-cols-1 md:grid-cols-3 gap-6 border border-white/10">
           <div className="flex items-start gap-3.5">
             <CheckCircle2 className="w-5 h-5 text-[#FFB81C] shrink-0 mt-0.5" />
             <div>

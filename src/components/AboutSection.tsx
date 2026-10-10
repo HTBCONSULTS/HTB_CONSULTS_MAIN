@@ -105,7 +105,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             <div className="htb-card relative h-full min-h-[320px] rounded-2xl overflow-hidden border border-slate-200/80 shadow-md group">
               <img
                 src={VISUAL_ASSETS.strategyWorkshop}
-                alt="HTB Consult team collaborating on business strategy and workflow mapping"
+                alt="Professionals collaborating during a business strategy workshop"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-500"
               />
@@ -124,7 +124,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
         </div>
 
         {/* Why Choose HTB Consult - 4 Values Grid */}
-        <div className="htb-card htb-card--dark bg-nodes-subtle mt-16 bg-[#001F3F] text-white rounded-2xl p-8 sm:p-12 shadow-xl border border-white/10">
+        <div className="htb-card htb-card--dark mt-16 bg-[#001F3F] text-white rounded-2xl p-8 sm:p-12 shadow-xl border border-white/10">
           <div className="max-w-2xl mb-8">
             <div className="text-xs font-semibold tracking-wider uppercase text-[#FFB81C]">
               Why Choose HTB Consult

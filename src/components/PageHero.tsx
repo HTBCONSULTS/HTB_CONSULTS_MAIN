@@ -25,9 +25,8 @@ export const PageHero: React.FC<PageHeroProps> = ({
       className="absolute inset-0 -z-20 bg-cover bg-center"
       style={{ backgroundImage: `url("${image}")` }}
     />
-    <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-[#001429]/95 via-[#001F3F]/80 to-[#001F3F]/40" />
-    <div aria-hidden="true" className="absolute inset-0 -z-10 bg-nodes-subtle opacity-25" />
-    <div aria-hidden="true" className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#001429]/60 to-transparent" />
+    <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-r from-[#001429]/78 via-[#001F3F]/60 to-[#001F3F]/34" />
+    <div aria-hidden="true" className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#001429]/42 to-transparent" />
 
     <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <nav aria-label="Breadcrumb" className="mb-7 flex items-center gap-2 text-xs text-white/70">

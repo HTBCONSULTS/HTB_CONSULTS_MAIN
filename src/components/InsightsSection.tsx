@@ -35,7 +35,7 @@ export const InsightsSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           {/* Marquee Featured: Working MVP by Founder Oluwasegun Ajibola */}
-          <article className="htb-card htb-card--dark bg-nodes-subtle lg:col-span-6 bg-[#001F3F] text-white rounded-2xl p-7 sm:p-9 shadow-lg border border-white/10 flex flex-col justify-between">
+          <article className="htb-card htb-card--dark lg:col-span-6 bg-[#001F3F] text-white rounded-2xl p-7 sm:p-9 shadow-lg border border-white/10 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 text-xs text-[#FFB81C] font-semibold uppercase tracking-wider mb-2">
                 <span>Featured Guide</span>

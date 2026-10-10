@@ -100,10 +100,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
       
       {/* 1. SINGLE SERVICES INTRODUCTION (ONLY ONE HERO FOR ALL SERVICES) */}
       <div className="bg-[#001F3F] text-white pt-20 pb-16 border-t border-b border-white/10 relative overflow-hidden">
-        <div aria-hidden="true" className="absolute inset-0 bg-cover bg-center opacity-45" style={{ backgroundImage: `url(\"${VISUAL_ASSETS.servicesHero}\")` }} />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#001429]/95 via-[#001F3F]/90 to-[#001F3F]/65" />
-        {/* Subtle grid signature */}
-        <div className="absolute inset-0 bg-nodes-subtle opacity-10 pointer-events-none" />
+        <div aria-hidden="true" className="absolute inset-0 bg-cover bg-center opacity-75" style={{ backgroundImage: `url(\"${VISUAL_ASSETS.servicesHero}\")` }} />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-[#001429]/82 via-[#001F3F]/66 to-[#001F3F]/46" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
@@ -241,7 +239,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                     </div>
 
                     {/* Service Approach Step Flow */}
-                    <div className="htb-card htb-card--dark bg-nodes-subtle p-6 rounded-2xl bg-[#001F3F] text-white shadow-md">
+                    <div className="htb-card htb-card--dark p-6 rounded-2xl bg-[#001F3F] text-white shadow-md">
                       <div className="text-xs font-bold tracking-wider uppercase text-[#FFB81C] mb-4">
                         Structured Approach
                       </div>
