@@ -41,6 +41,18 @@
   background-position: center top;
 }
 
+@media (max-width: 639px) {
+  .bg-blueprint-mobile-soft {
+    background-image:
+      linear-gradient(to right, rgba(0, 31, 63, 0.038) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 31, 63, 0.038) 1px, transparent 1px),
+      linear-gradient(to right, rgba(0, 31, 63, 0.014) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 31, 63, 0.014) 1px, transparent 1px),
+      radial-gradient(circle at 1px 1px, rgba(255, 184, 28, 0.16) 1px, transparent 1.6px);
+    background-size: 80px 80px, 80px 80px, 256px 256px, 256px 256px, 256px 256px;
+  }
+}
+
 .htb-ambient-glow {
   overflow: hidden;
   pointer-events: none;

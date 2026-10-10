@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Logo } from './Logo';
-import { SERVICES } from '../config/siteData';
+import { ACADEMY_SITE_URL, SERVICES } from '../config/siteData';
 import {
   ArrowRight,
   ChevronDown,
   Cpu,
+  ExternalLink,
   FileCheck,
   GraduationCap,
   Kanban,
@@ -160,7 +161,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenConsultation
 
           <Link to="/case-studies" aria-current={isRoute('/case-studies') ? 'page' : undefined} className={routeClass(isRoute('/case-studies'))}>Case Studies</Link>
           <Link to="/insights" aria-current={isRoute('/insights') ? 'page' : undefined} className={routeClass(isRoute('/insights'))}>Insights</Link>
-          <Link to="/academy" aria-current={isRoute('/academy') ? 'page' : undefined} className={routeClass(isRoute('/academy'))}>Academy</Link>
+          <a href={ACADEMY_SITE_URL} target="_blank" rel="noopener noreferrer" className={`${routeClass(false)} inline-flex items-center gap-1.5`}>
+            Academy <ExternalLink className="h-3 w-3 text-slate-400" aria-hidden="true" />
+          </a>
           <Link to="/contact" aria-current={isRoute('/contact') ? 'page' : undefined} className={routeClass(isRoute('/contact'))}>Contact</Link>
         </nav>
 
@@ -219,13 +222,16 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenConsultation
             {[
               ['Case Studies', '/case-studies'],
               ['Insights', '/insights'],
-              ['Academy', '/academy'],
               ['Contact', '/contact'],
             ].map(([label, path]) => (
               <Link key={path} to={path} onClick={closeMenus} aria-current={isRoute(path) ? 'page' : undefined} className={`focus-visible-brand rounded-lg px-3 py-3 text-sm font-semibold ${isRoute(path) ? 'bg-white/10 text-[#FFB81C]' : 'text-white hover:bg-white/5'}`}>
                 {label}
               </Link>
             ))}
+            <a href={ACADEMY_SITE_URL} target="_blank" rel="noopener noreferrer" onClick={closeMenus} className="focus-visible-brand inline-flex items-center justify-between rounded-lg px-3 py-3 text-sm font-semibold text-white hover:bg-white/5">
+              <span>Academy</span>
+              <ExternalLink className="h-4 w-4 text-slate-400" aria-hidden="true" />
+            </a>
             <button type="button" onClick={() => { closeMenus(); onOpenConsultation(); }} className="focus-visible-brand mt-3 inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-[#FFB81C] px-4 py-3 text-sm font-bold text-[#001F3F] sm:hidden">
               Let’s Talk <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </button>

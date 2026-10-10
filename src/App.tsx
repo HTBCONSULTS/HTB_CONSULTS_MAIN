@@ -22,7 +22,7 @@ const PAGE_TITLES: Record<string, string> = {
   '/services': 'Services | HTB Consult',
   '/case-studies': 'Case Studies | HTB Consult',
   '/insights': 'Insights & Articles | HTB Consult',
-  '/academy': 'HTB Consult Academy | Learn. Apply. Grow.',
+  '/academy': 'HTB Consult Academy | Build Capability for the Future of Work',
   '/contact': 'Contact HTB Consult | Let’s talk about your next step.',
 };
 

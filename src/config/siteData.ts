@@ -1,6 +1,8 @@
 import { ServiceItem, CaseStudy, InsightArticle, AcademyCourse } from '../types';
 import { VISUAL_ASSETS } from './visualAssets';
 
+export const ACADEMY_SITE_URL = 'https://academy.htbconsults.com/';
+
 export const SITE_METADATA = {
   brandName: 'HTB Consult',
   tagline: 'Clarity in Strategy. Confidence in Delivery.',

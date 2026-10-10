@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronRight, ExternalLink } from 'lucide-react';
 
 interface PageHeroProps {
   eyebrow: string;
@@ -9,6 +9,9 @@ interface PageHeroProps {
   image: string;
   ctaLabel?: string;
   ctaTo?: string;
+  ctaExternal?: boolean;
+  brandLogo?: string;
+  brandLogoAlt?: string;
 }
 
 export const PageHero: React.FC<PageHeroProps> = ({
@@ -18,6 +21,9 @@ export const PageHero: React.FC<PageHeroProps> = ({
   image,
   ctaLabel,
   ctaTo,
+  ctaExternal = false,
+  brandLogo,
+  brandLogoAlt = 'HTB Academy',
 }) => (
   <section className="relative isolate flex min-h-[22rem] items-end overflow-hidden bg-[#001F3F] pb-12 pt-32 text-white sm:min-h-[26rem] sm:pb-16 lg:min-h-[30rem] lg:pb-20">
     <div
@@ -36,6 +42,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
       </nav>
 
       <div className="max-w-3xl" data-reveal>
+        {brandLogo && <img src={brandLogo} alt={brandLogoAlt} className="mb-5 h-14 w-auto object-contain object-left sm:h-16" />}
         <div className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#FFB81C]">
           <span className="h-px w-7 bg-[#FFB81C]" />
           <span>{eyebrow}</span>
@@ -47,13 +54,17 @@ export const PageHero: React.FC<PageHeroProps> = ({
           {description}
         </p>
         {ctaLabel && ctaTo && (
-          <Link
-            to={ctaTo}
-            className="focus-visible-brand mt-7 inline-flex min-h-12 items-center gap-2 rounded-md bg-[#FFB81C] px-5 py-3 text-sm font-bold text-[#001F3F] shadow-lg shadow-black/20 transition-colors hover:bg-[#FFD166]"
-          >
-            {ctaLabel}
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          ctaExternal ? (
+            <a href={ctaTo} target="_blank" rel="noopener noreferrer" className="focus-visible-brand mt-7 inline-flex min-h-12 items-center gap-2 rounded-md bg-[#FFB81C] px-5 py-3 text-sm font-bold text-[#001F3F] shadow-lg shadow-black/20 transition-colors hover:bg-[#FFD166]">
+              {ctaLabel}
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+            </a>
+          ) : (
+            <Link to={ctaTo} className="focus-visible-brand mt-7 inline-flex min-h-12 items-center gap-2 rounded-md bg-[#FFB81C] px-5 py-3 text-sm font-bold text-[#001F3F] shadow-lg shadow-black/20 transition-colors hover:bg-[#FFD166]">
+              {ctaLabel}
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          )
         )}
       </div>
     </div>

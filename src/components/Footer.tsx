@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUp, Mail, MapPin, Phone } from 'lucide-react';
 import { Logo } from './Logo';
-import { SERVICES, SITE_METADATA } from '../config/siteData';
+import { ACADEMY_SITE_URL, SERVICES, SITE_METADATA } from '../config/siteData';
 
 interface FooterProps {
   onOpenPolicy: (type: 'privacy' | 'terms' | 'cookie') => void;
@@ -43,7 +43,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPolicy }) => {
                 <Link to="/about#approach" className="focus-visible-brand rounded-sm hover:text-white">Our Approach</Link>
                 <Link to="/case-studies" className="focus-visible-brand rounded-sm hover:text-white">Case Studies</Link>
                 <Link to="/insights" className="focus-visible-brand rounded-sm hover:text-white">Insights & Articles</Link>
-                <Link to="/academy" className="focus-visible-brand rounded-sm hover:text-white">Academy</Link>
+                <a href={ACADEMY_SITE_URL} target="_blank" rel="noopener noreferrer" className="focus-visible-brand rounded-sm hover:text-white">Academy</a>
                 <Link to="/contact" className="focus-visible-brand rounded-sm hover:text-white">Contact</Link>
               </div>
             </div>

@@ -21,3 +21,9 @@ The six WebP photographs below were selected from free Unsplash search results a
 - `src/assets/images/stock/meeting-room.webp` — “Meeting Room With People Pictures”: https://unsplash.com/s/photos/meeting-room-with-people
 
 Unsplash license: https://unsplash.com/license. Free Unsplash images may be used commercially; attribution is appreciated but not required. Unsplash+ images were excluded.
+
+## Academy branding
+
+- The Academy GitHub repository (`Phantom2006-dot/HTB-Consult`) does not contain a standalone logo image; its `src/components/Navbar.tsx` builds the parent HTB CONSULTS wordmark from styled text. The main site's shared `Logo` component follows that exact wordmark and gold-gradient treatment.
+- The Academy-specific `HTB ACADEMY` graphic used on the Academy page is copied from the asset referenced by the live Academy site's header: https://academy.htbconsults.com/assets/htb-logo-5fFzMpNU.webp. It is stored locally as `src/assets/images/brand/htb-academy-logo.webp`.
+- Official live Academy destination: https://academy.htbconsults.com/.
