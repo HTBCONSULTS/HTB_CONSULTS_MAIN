@@ -8,8 +8,9 @@ export const SITE_METADATA = {
   tagline: 'Clarity in Strategy. Confidence in Delivery.',
   secondaryPhrase: 'Ideas. Strategy. Solutions. Results.',
   location: 'Chesterfield, Derbyshire, United Kingdom',
-  phone: '+44 7435 964309',
-  email: 'info@htbconsults.com',
+  phone: '+44 7862 056300',
+  email: 'training@htbconsults.com',
+  whatsappUrl: 'https://wa.me/447862056300?text=Hi%2C%20I%27d%20like%20to%20get%20some%20support%20from%20HTB%20Consults.',
   businessHours: 'Monday – Friday, 9:00am – 5:00pm (UK time)',
   extendedHoursNotice: 'We also offer online consultations outside these hours by arrangement.',
 };

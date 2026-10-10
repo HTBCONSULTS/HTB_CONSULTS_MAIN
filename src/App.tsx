@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { WhatsAppButton } from './components/WhatsAppButton';
 import { CaseStudyModal } from './components/CaseStudyModal';
 import { SearchModal } from './components/SearchModal';
 import { PolicyModal } from './components/PolicyModal';
@@ -169,6 +170,7 @@ const SiteApp: React.FC = () => {
       </main>
 
       <Footer onOpenPolicy={setActivePolicy} />
+      <WhatsAppButton />
 
       <CaseStudyModal
         caseStudy={selectedCaseStudy}

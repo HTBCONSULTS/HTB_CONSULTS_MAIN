@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { X } from 'lucide-react';
+import { SITE_METADATA } from '../config/siteData';
 
 interface PolicyModalProps {
   policyType: 'privacy' | 'terms' | 'cookie' | null;
@@ -42,7 +43,7 @@ We use your information solely to:
 We do not sell, rent, or lease your personal information to third parties. All personal data is stored securely and processed with industry-standard administrative and technical safeguards.
 
 4. Contact
-For data privacy enquiries, please contact info@htbconsults.com.`,
+For data privacy enquiries, please contact ${SITE_METADATA.email}.`,
     },
     terms: {
       title: 'Terms & Conditions',
