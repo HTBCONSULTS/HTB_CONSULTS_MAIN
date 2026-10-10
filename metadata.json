@@ -1,0 +1,6 @@
+{
+  "name": "HTB Consult - Digital Transformation & Business Strategy",
+  "description": "Clarity in Strategy. Confidence in Delivery. UK-based consultancy helping organisations turn business ideas into measurable outcomes through business analysis, digital transformation, and strategic delivery.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
