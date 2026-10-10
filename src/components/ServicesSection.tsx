@@ -163,7 +163,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
                 {/* Service Header & Tagline */}
-                <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-10 border-b border-slate-200">
+                <div className="htb-glass-panel flex flex-col lg:flex-row lg:items-end justify-between gap-6 rounded-2xl p-5 sm:p-8">
                   <div className="max-w-3xl">
                     <div className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#B45309] mb-2">
                       <span>Service 0{index + 1} of 06</span>

@@ -23,7 +23,7 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="htb-glass-panel flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 rounded-2xl p-5 sm:p-7">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#B45309] mb-3">
               <span className="w-5 h-[2px] bg-[#FFB81C]" />
