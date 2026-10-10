@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { ACADEMY_COURSES } from '../config/siteData';
+import { ACADEMY_COURSES, ACADEMY_SITE_URL } from '../config/siteData';
 import { AcademyCourse } from '../types';
-import { ArrowRight, BookOpen, Layers, Award, Sparkles, Check, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, BookOpen, Layers, Award, Sparkles, Check, CheckCircle2 } from 'lucide-react';
 
 interface AcademySectionProps {
   onEnquireTraining: (courseName: string) => void;
@@ -30,6 +30,10 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ onEnquireTrainin
             </p>
           </div>
 
+          <a href={ACADEMY_SITE_URL} target="_blank" rel="noopener noreferrer" className="focus-visible-brand inline-flex min-h-11 shrink-0 items-center justify-center gap-2 self-start rounded-md bg-[#FFB81C] px-4 py-2.5 text-sm font-bold text-[#001F3F] shadow-sm transition-colors hover:bg-[#FFD166] md:self-auto">
+            Visit the Academy <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+
           <div className="font-script text-[#B45309] text-2xl hidden md:block">
             “Learn. Apply. Grow. Create Opportunities.”
           </div>
@@ -40,7 +44,7 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ onEnquireTrainin
           {ACADEMY_COURSES.map((course) => (
             <div
               key={course.id}
-              className="bg-white rounded-xl border border-slate-200/80 p-6 flex flex-col justify-between shadow-xs hover:border-[#FFB81C]/60 hover:shadow-md transition-all group"
+              className="htb-card bg-white rounded-xl border border-slate-200/80 p-6 flex flex-col justify-between shadow-xs transition-colors group"
             >
               <div>
                 <div className="w-10 h-10 rounded-full bg-[#FFF8E7] flex items-center justify-center text-[#B45309] mb-4 group-hover:bg-[#FFB81C] group-hover:text-[#001F3F] transition-colors">
@@ -77,7 +81,7 @@ export const AcademySection: React.FC<AcademySectionProps> = ({ onEnquireTrainin
         </div>
 
         {/* 3 Pillars Strip */}
-        <div className="mt-12 bg-[#001F3F] text-white rounded-xl p-6 sm:p-8 grid grid-cols-1 md:grid-cols-3 gap-6 border border-white/10">
+        <div className="htb-card htb-card--dark mt-12 bg-[#001F3F] text-white rounded-xl p-6 sm:p-8 grid grid-cols-1 md:grid-cols-3 gap-6 border border-white/10">
           <div className="flex items-start gap-3.5">
             <CheckCircle2 className="w-5 h-5 text-[#FFB81C] shrink-0 mt-0.5" />
             <div>

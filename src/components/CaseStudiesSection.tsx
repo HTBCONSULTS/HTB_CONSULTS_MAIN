@@ -81,14 +81,14 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({
           {filteredStudies.map((study) => (
             <article
               key={study.id}
-              className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col group"
+              className="htb-card bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xs flex flex-col group"
             >
               {/* Optional Visual Banner */}
               {study.image && (
                 <div className="relative h-48 overflow-hidden bg-slate-100">
                   <img
                     src={study.image}
-                    alt={study.title}
+                    alt={`Illustrative stock photography for a ${study.sector} project`}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
                   />
@@ -145,7 +145,7 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({
         </div>
 
         {/* Informational Callout: More Case Studies Coming Soon */}
-        <div className="mt-12 bg-white rounded-xl border border-dashed border-slate-300 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="htb-card mt-12 bg-white rounded-xl border border-dashed border-slate-300 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-[#FFF8E7] flex items-center justify-center text-[#B45309] shrink-0">
               <Sparkles className="w-5 h-5" />

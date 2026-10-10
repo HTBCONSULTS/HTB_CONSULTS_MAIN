@@ -7,7 +7,7 @@ export const InsightsSection: React.FC = () => {
   const [selectedArticle, setSelectedArticle] = useState<InsightArticle | null>(null);
 
   return (
-    <section id="insights" className="py-20 lg:py-24 bg-white relative">
+    <section id="insights" className="py-20 lg:py-24 bg-white bg-blueprint-subtle relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -35,7 +35,7 @@ export const InsightsSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           {/* Marquee Featured: Working MVP by Founder Oluwasegun Ajibola */}
-          <article className="lg:col-span-6 bg-[#001F3F] text-white rounded-2xl p-7 sm:p-9 shadow-lg border border-white/10 flex flex-col justify-between">
+          <article className="htb-card htb-card--dark lg:col-span-6 bg-[#001F3F] text-white rounded-2xl p-7 sm:p-9 shadow-lg border border-white/10 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 text-xs text-[#FFB81C] font-semibold uppercase tracking-wider mb-2">
                 <span>Featured Guide</span>
@@ -92,7 +92,7 @@ export const InsightsSection: React.FC = () => {
             {INSIGHTS_ARTICLES.slice(1).map((article) => (
               <article
                 key={article.id}
-                className="p-5 sm:p-6 rounded-xl bg-[#F8FAFC] border border-slate-200/80 hover:border-[#FFB81C]/60 hover:bg-white transition-all shadow-xs group"
+                className="htb-card p-5 sm:p-6 rounded-xl bg-[#F8FAFC] border border-slate-200/80 hover:bg-white transition-colors shadow-xs group"
               >
                 <div className="flex items-center justify-between text-xs text-slate-500 mb-1.5">
                   <span className="font-semibold text-[#B45309] text-[11px] uppercase tracking-wider">

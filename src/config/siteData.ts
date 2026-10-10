@@ -1,4 +1,7 @@
 import { ServiceItem, CaseStudy, InsightArticle, AcademyCourse } from '../types';
+import { VISUAL_ASSETS } from './visualAssets';
+
+export const ACADEMY_SITE_URL = 'https://academy.htbconsults.com/';
 
 export const SITE_METADATA = {
   brandName: 'HTB Consult',
@@ -301,7 +304,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       author: 'Client Representative, Community Healthcare Provider',
     },
     technologies: ['Microsoft Dynamics 365', 'Power Platform', 'Data Integration'],
-    image: '/src/assets/images/crm_healthcare_case_study_1791639411605.jpg',
+    image: VISUAL_ASSETS.crmHealthcare,
   },
   {
     id: 'case-salesforce-chatbot',
@@ -330,7 +333,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       author: 'Operations Director, Construction Group',
     },
     technologies: ['Salesforce CRM', 'Conversational AI Chatbot', 'Webhooks API'],
-    image: '/src/assets/images/digital_cloud_solutions_1791639391098.jpg',
+    image: VISUAL_ASSETS.digitalCloud,
   },
   {
     id: 'case-hr-cloud',
@@ -359,7 +362,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       author: 'Head of People Operations',
     },
     technologies: ['Cloud HRIS', 'Automated ETL Pipelines', 'SSO Security'],
-    image: '/src/assets/images/project_roadmap_delivery_1791639401733.jpg',
+    image: VISUAL_ASSETS.projectRoadmap,
   },
 ];
 

@@ -5,7 +5,7 @@ import { Search, X, ArrowRight, TrendingUp } from 'lucide-react';
 interface SearchModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelectResult: (anchorId: string) => void;
+  onSelectResult: (destination: string) => void;
 }
 
 export const SearchModal: React.FC<SearchModalProps> = ({
@@ -116,7 +116,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                         key={s.id}
                         type="button"
                         onClick={() => {
-                          onSelectResult(s.id);
+                          onSelectResult(`/services#${s.id}`);
                           onClose();
                         }}
                         className="w-full p-2.5 rounded-lg text-left hover:bg-slate-100 flex items-center justify-between group transition-colors cursor-pointer"
@@ -148,7 +148,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                         key={c.id}
                         type="button"
                         onClick={() => {
-                          onSelectResult('case-studies');
+                          onSelectResult('/case-studies');
                           onClose();
                         }}
                         className="w-full p-2.5 rounded-lg text-left hover:bg-slate-100 flex items-center justify-between group transition-colors cursor-pointer"
@@ -180,7 +180,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                         key={i.id}
                         type="button"
                         onClick={() => {
-                          onSelectResult('insights');
+                          onSelectResult('/insights');
                           onClose();
                         }}
                         className="w-full p-2.5 rounded-lg text-left hover:bg-slate-100 flex items-center justify-between group transition-colors cursor-pointer"

@@ -1,10 +1,12 @@
 import React from 'react';
 import { ArrowRight, CheckCircle2, Star, Award, Handshake, BarChart2 } from 'lucide-react';
 import { CORE_VALUES } from '../config/siteData';
+import { VISUAL_ASSETS } from '../config/visualAssets';
 
 interface AboutSectionProps {
   onLearnMoreServices: () => void;
   onBookConsultation: () => void;
+  showIntro?: boolean;
 }
 
 const VALUE_ICONS: Record<string, React.ElementType> = {
@@ -17,44 +19,47 @@ const VALUE_ICONS: Record<string, React.ElementType> = {
 export const AboutSection: React.FC<AboutSectionProps> = ({
   onLearnMoreServices,
   onBookConsultation,
+  showIntro = true,
 }) => {
   return (
-    <section id="about" className="py-20 lg:py-28 bg-[#F8FAFC] bg-blueprint-subtle relative">
+    <section id="about" className="relative bg-[#F8FAFC] bg-blueprint-subtle bg-blueprint-mobile-soft py-14 sm:py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl">
+        {showIntro && (
+        <div className="max-w-3xl" data-reveal>
           <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#B45309] mb-3">
             <span className="w-5 h-[2px] bg-[#FFB81C]" />
             <span>About HTB Consult</span>
           </div>
-          <h2 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-medium text-[#001F3F] leading-tight text-balance">
+          <h2 className="font-editorial text-[clamp(1.875rem,7.8vw,3rem)] font-medium leading-[1.12] text-[#001F3F] text-balance sm:text-4xl lg:text-5xl">
             People. Insight.{' '}
             <span className="text-[#0A2E5C] italic">Practical Solutions.</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
+          <p className="mt-4 text-[15px] leading-7 text-slate-600 sm:text-lg sm:leading-relaxed">
             We are a UK-based digital transformation and business strategy consultancy helping organisations turn complex challenges into clear, practical and measurable solutions.
           </p>
         </div>
+        )}
 
         {/* Story & Visual Split */}
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+        <div className="mt-8 grid grid-cols-1 items-stretch gap-7 sm:mt-12 sm:gap-10 lg:grid-cols-12">
           
           {/* Story & Mission Content */}
-          <div className="lg:col-span-7 flex flex-col justify-between space-y-8 bg-white p-8 sm:p-10 rounded-2xl border border-slate-200/80 shadow-sm">
+          <div className="htb-card flex flex-col justify-between space-y-6 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm sm:space-y-8 sm:p-10 lg:col-span-7">
             <div>
               <div className="text-xs font-bold uppercase tracking-wider text-[#B45309]">Our Story</div>
-              <h3 className="font-editorial text-2xl sm:text-3xl font-semibold text-[#001F3F] mt-1">
+              <h3 className="font-editorial mt-1 text-[21px] font-semibold leading-snug text-[#001F3F] sm:text-3xl">
                 A consultancy built on real-world experience.
               </h3>
-              <p className="mt-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p className="mt-3 text-[13px] leading-6 text-slate-600 sm:mt-4 sm:text-base sm:leading-relaxed">
                 HTB Consult was founded to bridge the gap between strategy and delivery, helping organisations turn ideas into practical solutions that work in the real world. We combine business analysis, digital capability and hands-on support to deliver solutions that create measurable value.
               </p>
             </div>
 
             {/* Mission & Vision Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-100">
-              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-slate-200/60">
+            <div className="grid grid-cols-1 gap-3 border-t border-slate-100 pt-4 sm:grid-cols-2 sm:gap-4">
+              <div className="htb-card rounded-xl border border-slate-200/60 bg-[#F8FAFC] p-3.5 sm:p-4">
                 <div className="flex items-center gap-2 text-xs font-bold text-[#001F3F] uppercase tracking-wider">
                   <CheckCircle2 className="w-4 h-4 text-[#FFB81C]" />
                   <span>Our Mission</span>
@@ -64,7 +69,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                 </p>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#F8FAFC] border border-slate-200/60">
+              <div className="htb-card rounded-xl border border-slate-200/60 bg-[#F8FAFC] p-3.5 sm:p-4">
                 <div className="flex items-center gap-2 text-xs font-bold text-[#001F3F] uppercase tracking-wider">
                   <CheckCircle2 className="w-4 h-4 text-[#FFB81C]" />
                   <span>Our Vision</span>
@@ -76,7 +81,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             </div>
 
             {/* CTA Buttons */}
-            <div className="pt-2 flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap items-center gap-3 pt-1 sm:gap-4 sm:pt-2">
               <button
                 type="button"
                 onClick={onLearnMoreServices}
@@ -96,11 +101,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           </div>
 
           {/* Visual Side: Strategy Workshop Image & Handwritten Tag */}
-          <div className="lg:col-span-5 flex flex-col justify-between">
-            <div className="relative h-full min-h-[320px] rounded-2xl overflow-hidden border border-slate-200/80 shadow-md group">
+          <div className="flex flex-col justify-between lg:col-span-5">
+            <div className="htb-card group relative aspect-[4/3] min-h-[260px] overflow-hidden rounded-2xl border border-slate-200/80 shadow-md sm:aspect-[16/10] sm:min-h-[320px] lg:aspect-auto lg:h-full">
               <img
-                src="/src/assets/images/strategy_workshop_mapping_1791639380530.jpg"
-                alt="HTB Consult team collaborating on business strategy and workflow mapping"
+                src={VISUAL_ASSETS.strategyWorkshop}
+                alt="Professionals collaborating during a business strategy workshop"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-500"
               />
@@ -119,7 +124,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
         </div>
 
         {/* Why Choose HTB Consult - 4 Values Grid */}
-        <div className="mt-16 bg-[#001F3F] text-white rounded-2xl p-8 sm:p-12 shadow-xl border border-white/10">
+        <div className="htb-card htb-card--dark mt-12 rounded-2xl border border-white/10 bg-[#001F3F] p-5 text-white shadow-xl sm:mt-16 sm:p-12">
           <div className="max-w-2xl mb-8">
             <div className="text-xs font-semibold tracking-wider uppercase text-[#FFB81C]">
               Why Choose HTB Consult
@@ -138,7 +143,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               return (
                 <div
                   key={val.title}
-                  className="p-5 rounded-xl bg-white/5 border border-white/10 hover:border-[#FFB81C]/40 transition-colors"
+                  className="htb-card htb-card--dark p-5 rounded-xl bg-white/5 border border-white/10 transition-colors"
                 >
                   <div className="w-10 h-10 rounded-full bg-[#FFB81C]/20 border border-[#FFB81C]/30 flex items-center justify-center text-[#FFB81C] mb-3">
                     <IconComp className="w-5 h-5" />
