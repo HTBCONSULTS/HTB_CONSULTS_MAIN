@@ -85,7 +85,7 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({
             >
               {/* Optional Visual Banner */}
               {study.image && (
-                <div className="relative h-48 overflow-hidden bg-slate-100">
+                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
                   <img
                     src={study.image}
                     alt={`Illustrative stock photography for a ${study.sector} project`}
