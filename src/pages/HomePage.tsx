@@ -46,7 +46,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
         <div className="relative lg:col-span-6">
           <div className="absolute -right-3 -top-3 h-28 w-28 rounded-full border border-[#FFB81C]/60" aria-hidden="true" />
           <div className="htb-card relative overflow-hidden rounded-2xl border border-slate-200 shadow-xl shadow-[#001F3F]/10">
-            <img src={VISUAL_ASSETS.strategyWorkshop} alt="Professionals collaborating during a business strategy workshop" className="aspect-[4/3] w-full object-cover sm:aspect-[16/10]" loading="lazy" />
+            <img src={VISUAL_ASSETS.practicalPartnerTeam} alt="Colleagues sharing ideas around a conference table in a bright office" className="aspect-[16/10] w-full object-cover object-center" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#001F3F]/70 via-transparent to-transparent" />
             <p className="font-script absolute bottom-5 left-6 right-6 text-3xl text-[#FFD166] sm:text-4xl">“Ideas. Strategy. Solutions. Results.”</p>
           </div>
