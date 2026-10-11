@@ -3,7 +3,7 @@ import { PageHero } from '../components/PageHero';
 import { AcademySection } from '../components/AcademySection';
 import { VISUAL_ASSETS } from '../config/visualAssets';
 import { ACADEMY_SITE_URL } from '../config/siteData';
-import academyLogo from '../assets/images/brand/htb-academy-logo.webp';
+import academyLogo from '../assets/images/brand/htb-academy-logo-gold.webp';
 
 interface AcademyPageProps {
   onEnquireTraining: (courseTitle: string) => void;

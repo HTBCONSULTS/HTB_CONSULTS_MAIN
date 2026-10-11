@@ -1,5 +1,5 @@
 import React from 'react';
-import consultLogo from '../assets/images/brand/htb-consult-logo-web.webp';
+import consultLogo from '../assets/images/brand/htb-consult-logo-web-gold.webp';
 
 interface LogoProps {
   className?: string;
