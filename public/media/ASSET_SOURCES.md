@@ -40,3 +40,7 @@ These user-supplied photographs are used as illustrative business imagery, not a
 - Both gold derivatives shift only the orange mark toward the shared `#FFB81C` golden-yellow hue while preserving alpha, shading and the white lower wordmark.
 - The Academy GitHub repository is `Phantom2006-dot/HTB-Consult`. The public Academy site is https://academy.htbconsults.com/, and the main site is https://htbconsults.com/.
 - Official live Academy destination: https://academy.htbconsults.com/.
+
+## Founder portrait
+
+- `src/assets/images/leadership/oluwasegun-ajibola-portrait.webp` — portrait of Oluwasegun Ajibola supplied by the site owner; converted from the supplied JPEG to WebP at its original 1122×1402 dimensions without cropping or retouching.

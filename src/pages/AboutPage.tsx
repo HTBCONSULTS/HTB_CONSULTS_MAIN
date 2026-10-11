@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageHero } from '../components/PageHero';
 import { AboutSection } from '../components/AboutSection';
+import { FounderProfileSection } from '../components/FounderProfileSection';
 import { ApproachSection } from '../components/ApproachSection';
 import { VISUAL_ASSETS } from '../config/visualAssets';
 
@@ -20,6 +21,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onLearnMoreServices, onBoo
       ctaTo="/services"
     />
     <AboutSection showIntro={false} onLearnMoreServices={onLearnMoreServices} onBookConsultation={onBookConsultation} />
+    <FounderProfileSection />
     <ApproachSection onBookConsultation={onBookConsultation} />
   </>
 );
