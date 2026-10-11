@@ -11,17 +11,27 @@ Pexels license: https://www.pexels.com/license/. The license permits free commer
 
 ## Photographs
 
-The six WebP photographs below were selected from free Unsplash search results and are used as illustrative business imagery. The search-result titles identify the depicted setting; the images were locally optimized without cropping.
+The four remaining WebP photographs below were selected from Unsplash search results and are used as illustrative business imagery. They were locally optimized without cropping. The former `training-classroom.webp` and `office-team.webp` files showed repeated Unsplash+ watermarks, so they have been removed from the site and replaced with user-supplied images.
 
 - `src/assets/images/stock/strategy-meeting.webp` — “Strategy Meeting Pictures”: https://unsplash.com/s/photos/strategy-meeting
-- `src/assets/images/stock/training-classroom.webp` — “Classroom Training Pictures”: https://unsplash.com/s/photos/classroom-training
 - `src/assets/images/stock/corporate-meeting-room.webp` — “Corporate Meeting Room Pictures”: https://unsplash.com/s/photos/corporate-meeting-room
-- `src/assets/images/stock/office-team.webp` — “Office Meeting Pictures”: https://unsplash.com/s/photos/office-meeting
 - `src/assets/images/stock/business-workshop.webp` — “Strategy Meeting Pictures”: https://unsplash.com/s/photos/strategy-meeting
 - `src/assets/images/stock/meeting-room.webp` — “Meeting Room With People Pictures”: https://unsplash.com/s/photos/meeting-room-with-people
-- `src/assets/images/stock/practical-partner-team.webp` — user-supplied `Unknown.png`, converted to optimized WebP without cropping or changing its aspect ratio. Used in the Home page’s “People. Insight. Practical Solutions.” section.
 
-Unsplash license: https://unsplash.com/license. Free Unsplash images may be used commercially; attribution is appreciated but not required. Unsplash+ images were excluded.
+Unsplash license: https://unsplash.com/license. The four listed stock images were visually checked for watermarks; this note is not a separate license verification.
+
+## User-supplied images
+
+The source PNGs were preserved outside the repository and converted to optimized WebP without cropping. The five new 1448×1086 images were visually checked for watermarks before use:
+
+- `src/assets/images/stock/practical-partner-team.webp` — `Unknown.png`; Home page’s “People. Insight. Practical Solutions.” section.
+- `src/assets/images/user-provided/unknown-2-case-study-crm.webp` — `Unknown-2.png`; CRM Dynamics case-study card.
+- `src/assets/images/user-provided/unknown-3-case-study-salesforce.webp` — `Unknown-3.png`; Salesforce/chatbot case-study card.
+- `src/assets/images/user-provided/unknown-4-case-study-hr-cloud.webp` — `Unknown-4.png`; HR Cloud case-study card.
+- `src/assets/images/user-provided/unknown-5-academy-hero.webp` — `Unknown-5.png`; internal Academy-route hero.
+- `src/assets/images/user-provided/unknown-6-case-studies-hero.webp` — `Unknown-6.png`; Case Studies page hero.
+
+These user-supplied photographs are used as illustrative business imagery, not as depictions or endorsements of HTB Consult clients or staff.
 
 ## Brand and Academy logos
 
