@@ -68,7 +68,7 @@ const vite = await createServer({
 });
 
 try {
-  const [{ SiteApp }, { INSIGHTS_ARTICLES, INSIGHTS_PAGE_SEO, SITE_SEO }] = await Promise.all([
+  const [{ SiteApp }, { CASE_STUDIES, INSIGHTS_ARTICLES, INSIGHTS_PAGE_SEO, SITE_SEO }] = await Promise.all([
     vite.ssrLoadModule('/src/App.tsx'),
     vite.ssrLoadModule('/src/config/siteData.ts'),
   ]);
@@ -138,8 +138,26 @@ try {
     console.log(`Prerendered ${route} (${result.markup.length.toLocaleString()} HTML characters)`);
   }
 
+  for (const study of CASE_STUDIES) {
+    const route = `/case-studies/${study.id}`;
+    const title = `${study.title} | Case Study | HTB Consult`;
+    const result = await createPage({
+      route,
+      title,
+      description: study.subtitle,
+      keywords: [study.sector, study.serviceArea, 'HTB Consult case study'].join(', '),
+      type: 'article',
+      shareImage: study.image ?? '',
+    });
+    const page = publicOrigin ? upsertCanonical(result.page, `${publicOrigin}${route}`) : result.page;
+    const target = path.join(outputDir, 'case-studies', study.id, 'index.html');
+    await mkdir(path.dirname(target), { recursive: true });
+    await writeFile(target, page, 'utf8');
+    console.log(`Prerendered ${route} (${result.markup.length.toLocaleString()} HTML characters)`);
+  }
+
   if (publicOrigin) {
-    const routes = ['/', '/about', '/services', '/case-studies', '/insights', '/academy', '/contact', ...INSIGHTS_ARTICLES.map((article) => `/insights/${article.slug}`)];
+    const routes = ['/', '/about', '/services', '/case-studies', '/insights', '/academy', '/contact', ...CASE_STUDIES.map((study) => `/case-studies/${study.id}`), ...INSIGHTS_ARTICLES.map((article) => `/insights/${article.slug}`)];
     const urls = routes.map((route) => `  <url><loc>${escapeHtml(`${publicOrigin}${route}`)}</loc></url>`).join('\n');
     await writeFile(path.join(outputDir, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`, 'utf8');
     await writeFile(path.join(outputDir, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /api/*\nSitemap: ${publicOrigin}/sitemap.xml\n`, 'utf8');
