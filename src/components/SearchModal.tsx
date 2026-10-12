@@ -52,7 +52,9 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         (i) =>
           i.title.toLowerCase().includes(cleanQuery) ||
           i.category.toLowerCase().includes(cleanQuery) ||
-          i.excerpt.toLowerCase().includes(cleanQuery)
+          i.excerpt.toLowerCase().includes(cleanQuery) ||
+          i.primaryKeyword.toLowerCase().includes(cleanQuery) ||
+          i.relatedTopics?.some((topic) => topic.toLowerCase().includes(cleanQuery))
       )
     : [];
 
@@ -180,7 +182,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                         key={i.id}
                         type="button"
                         onClick={() => {
-                          onSelectResult('/insights');
+                          onSelectResult(`/insights/${i.slug}`);
                           onClose();
                         }}
                         className="w-full p-2.5 rounded-lg text-left hover:bg-slate-100 flex items-center justify-between group transition-colors cursor-pointer"

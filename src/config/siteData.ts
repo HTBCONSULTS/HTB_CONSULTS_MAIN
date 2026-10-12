@@ -1,7 +1,21 @@
 import { ServiceItem, CaseStudy, InsightArticle, AcademyCourse } from '../types';
 import { VISUAL_ASSETS } from './visualAssets';
+import { INSIGHT_ARTICLE_CONTENT } from './articleContent';
 
 export const ACADEMY_SITE_URL = 'https://academy.htbconsults.com/';
+
+export const SITE_SEO = {
+  title: 'HTB Consult | Clarity in Strategy. Confidence in Delivery.',
+  description: 'UK-based digital transformation & business strategy consultancy helping organisations turn ideas into practical solutions and measurable outcomes.',
+  keywords: 'business strategy, business analysis, digital transformation, process improvement, HTB Consult',
+};
+
+export const INSIGHTS_PAGE_SEO = {
+  title: 'Insights & Articles | HTB Consult',
+  description: 'Practical guidance to help organisations and entrepreneurs make clearer decisions, improve operations and deliver change.',
+  keywords: 'HTB Consult insights, business strategy, business analysis, process improvement, digital transformation',
+  shareImage: VISUAL_ASSETS.insightsHero,
+};
 
 export const SITE_METADATA = {
   brandName: 'HTB Consult',
@@ -371,47 +385,102 @@ export const INSIGHTS_ARTICLES: InsightArticle[] = [
   {
     id: 'insight-working-mvp',
     title: 'From Business Idea to a Working MVP',
-    category: 'Business Analysis & Digital Transformation',
-    readTime: '8 min read',
-    date: '12 Oct 2026',
-    excerpt: 'A practical guide to turning your idea into a functional product, without unnecessary cost, delays or complexity.',
+    slug: 'from-business-idea-to-working-mvp',
+    seoTitle: 'From Business Idea to a Working MVP',
+    metaDescription: 'A practical guide to validating demand, defining MVP scope, writing requirements and testing a working product with real users.',
+    primaryKeyword: 'Building a minimum viable product',
+    shareImage: VISUAL_ASSETS.insightsHero,
+    category: 'Digital Transformation & Software Solutions',
+    readTime: '7 min read',
+    excerpt: 'A practical founder’s guide to validating an idea, defining the right product and delivering a solution people can actually use.',
+    content: INSIGHT_ARTICLE_CONTENT['insight-working-mvp'],
     author: {
       name: 'Oluwasegun Ajibola',
-      role: 'Founder & Senior Business Solutions Consultant',
-      bio: 'Segun supports organisations in turning complex challenges into practical solutions through business analysis, digital transformation and strategic delivery.',
+      role: 'Founder & Managing Director, HTB Consult',
+      bio: 'A business strategy, business analysis and digital transformation professional with multidisciplinary expertise in process improvement, change management, software solutions and digital product development.',
     },
-    keyTakeaway: 'Focus on the problem you are solving, not just the features you want to build. A working MVP gives you real insights, reduces risk and creates a stronger foundation for future growth.',
+    keyTakeaway: 'An MVP is the smallest reliable, usable product that tests a defined value proposition—not a rushed or incomplete version of the idea.',
     relatedTopics: ['Business Analysis', 'MVP', 'Product Development', 'Digital Transformation', 'Agile'],
+    internalLinks: [
+      { label: 'Business Analysis & Requirements', href: '/services#service-analysis' },
+      { label: 'Digital Transformation & Software Solutions', href: '/services#service-transformation' },
+      { label: 'Product, Project & Delivery Management', href: '/services#service-delivery' },
+    ],
   },
   {
     id: 'insight-idea-to-execution',
     title: 'From Idea to Execution: A Practical Framework for Entrepreneurs',
-    category: 'Business Strategy',
-    readTime: '6 min read',
-    date: '28 Sep 2025',
-    excerpt: 'Turn your business idea into a clear plan with practical steps you can actually implement without getting bogged down.',
-    keyTakeaway: 'Clarity comes from structured execution and rapid validation cycles rather than exhaustive theoretical planning.',
+    slug: 'from-idea-to-execution-entrepreneurs',
+    seoTitle: 'From Idea to Execution: A Practical Framework for Entrepreneurs',
+    metaDescription: 'Discover six practical steps to validate your business idea, develop a clear strategy, define requirements and execute for sustainable growth.',
+    primaryKeyword: 'From idea to execution',
+    shareImage: VISUAL_ASSETS.insightsHero,
+    category: 'Business Strategy & Growth',
+    readTime: '8–10 min read',
+    excerpt: 'A six-stage framework to understand the problem, validate an opportunity, set strategy, define requirements and execute for sustainable growth.',
+    content: INSIGHT_ARTICLE_CONTENT['insight-idea-to-execution'],
+    author: {
+      name: 'Oluwasegun Ajibola',
+      role: 'Founder & Managing Director, HTB Consult',
+      bio: 'A business strategy, business analysis and digital transformation professional with multidisciplinary expertise in process improvement, change management, software solutions and digital product development.',
+    },
+    keyTakeaway: 'A viable idea moves from concept to sustainable outcomes through clear problem definition, opportunity validation, strategy, requirements, phased execution and continuous improvement.',
     relatedTopics: ['Strategy', 'Entrepreneurship', 'Execution'],
+    internalLinks: [
+      { label: 'Business Strategy & Growth', href: '/services#service-strategy' },
+      { label: 'Business Analysis & Requirements', href: '/services#service-analysis' },
+      { label: 'Product, Project & Delivery Management', href: '/services#service-delivery' },
+    ],
   },
   {
     id: 'insight-process-mapping',
     title: 'How Process Mapping Helps You Find Real Opportunities for Improvement',
-    category: 'Process Improvement',
-    readTime: '5 min read',
-    date: '22 Sep 2025',
-    excerpt: 'A practical guide to understanding your current processes and identifying changes that create real and lasting value.',
-    keyTakeaway: 'Visualising the end-to-end journey reveals hidden bottlenecks that isolated department reviews miss.',
+    slug: 'how-process-mapping-improves-business-processes',
+    seoTitle: 'How Process Mapping Reveals Opportunities for Business Improvement',
+    metaDescription: 'Learn how process mapping can reveal delays, duplicated work, unclear ownership and practical opportunities to improve business performance.',
+    primaryKeyword: 'Process mapping for business improvement',
+    shareImage: VISUAL_ASSETS.insightsHero,
+    category: 'Process Improvement & Automation',
+    readTime: '8 min read',
+    excerpt: 'A practical guide to making work visible, uncovering process friction and prioritising changes that create measurable value.',
+    content: INSIGHT_ARTICLE_CONTENT['insight-process-mapping'],
+    author: {
+      name: 'Oluwasegun Ajibola',
+      role: 'Founder & Managing Director, HTB Consult',
+      bio: 'A business strategy, business analysis and digital transformation professional with multidisciplinary expertise in process improvement, change management, software solutions and digital product development.',
+    },
+    keyTakeaway: 'Map how work actually happens, then prioritise evidence-led improvements before choosing technology.',
     relatedTopics: ['AS-IS vs TO-BE', 'Workflow Optimisation', 'Efficiency'],
+    internalLinks: [
+      { label: 'Business Analysis & Requirements', href: '/services#service-analysis' },
+      { label: 'Process Improvement & Automation', href: '/services#service-process' },
+      { label: 'Digital Transformation & Software Solutions', href: '/services#service-transformation' },
+    ],
   },
   {
     id: 'insight-digital-transformation-smes',
     title: 'What Digital Transformation Really Means for Small and Growing Businesses',
-    category: 'Digital Transformation',
-    readTime: '6 min read',
-    date: '15 Sep 2025',
-    excerpt: 'A clear and practical look at how digital transformation can help you work smarter, serve better and grow sustainably.',
-    keyTakeaway: 'Digital transformation is fundamentally about improving human outcomes and processes, not buying expensive software for its own sake.',
+    slug: 'digital-transformation-small-growing-businesses',
+    seoTitle: 'Digital Transformation for Small and Growing Businesses',
+    metaDescription: 'Discover what digital transformation really means for small businesses, from process improvement and automation to better customer experiences.',
+    primaryKeyword: 'Digital transformation for small businesses',
+    shareImage: VISUAL_ASSETS.insightsHero,
+    category: 'Digital Transformation & Software Solutions',
+    readTime: '8 min read',
+    excerpt: 'A practical guide to using process improvement and suitable technology to make growing businesses more efficient and responsive.',
+    content: INSIGHT_ARTICLE_CONTENT['insight-digital-transformation-smes'],
+    author: {
+      name: 'Oluwasegun Ajibola',
+      role: 'Founder & Managing Director, HTB Consult',
+      bio: 'A business strategy, business analysis and digital transformation professional with multidisciplinary expertise in process improvement, change management, software solutions and digital product development.',
+    },
+    keyTakeaway: 'Judge digital transformation by business outcomes, not the number of tools introduced.',
     relatedTopics: ['SMEs', 'Cloud Tech', 'Modernisation'],
+    internalLinks: [
+      { label: 'Business Analysis & Requirements', href: '/services#service-analysis' },
+      { label: 'Digital Transformation & Software Solutions', href: '/services#service-transformation' },
+      { label: 'Process Improvement & Automation', href: '/services#service-process' },
+    ],
   },
 ];
 
