@@ -59,6 +59,7 @@ export interface InsightArticle {
   metaDescription: string;
   primaryKeyword: string;
   shareImage: string;
+  shareImageAlt?: string;
   category: string;
   readTime: string;
   excerpt: string;

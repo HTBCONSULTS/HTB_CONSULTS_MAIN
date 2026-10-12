@@ -1,7 +1,6 @@
 import strategyMeeting from '../assets/images/stock/strategy-meeting.webp';
 import corporateMeetingRoom from '../assets/images/stock/corporate-meeting-room.webp';
 import businessWorkshop from '../assets/images/stock/business-workshop.webp';
-import meetingRoom from '../assets/images/stock/meeting-room.webp';
 import practicalPartnerTeam from '../assets/images/stock/practical-partner-team.webp';
 import userCaseStudyCrm from '../assets/images/user-provided/unknown-2-case-study-crm.webp';
 import userCaseStudySalesforce from '../assets/images/user-provided/unknown-3-case-study-salesforce.webp';
@@ -14,7 +13,9 @@ export const VISUAL_ASSETS = {
   aboutHero: businessWorkshop,
   servicesHero: corporateMeetingRoom,
   caseStudiesHero: userCaseStudiesHero,
-  insightsHero: meetingRoom,
+  insightsHero: '/media/insights-team-ai-generated.webp',
+  insightsTeamAiGenerated: '/media/insights-team-ai-generated.webp',
+  insightsConsultationAiGenerated: '/media/insights-consultation-ai-generated.webp',
   academyHero: userAcademyHero,
   contactHero: strategyMeeting,
   practicalPartnerTeam,
