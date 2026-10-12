@@ -53,11 +53,20 @@ export interface CaseStudy {
 
 export interface InsightArticle {
   id: string;
+  slug: string;
   title: string;
+  seoTitle: string;
+  metaDescription: string;
+  primaryKeyword: string;
+  shareImage: string;
   category: string;
   readTime: string;
-  date: string;
   excerpt: string;
+  content: string;
+  internalLinks: {
+    label: string;
+    href: string;
+  }[];
   author?: {
     name: string;
     role: string;

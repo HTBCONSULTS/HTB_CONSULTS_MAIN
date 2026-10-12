@@ -6,13 +6,14 @@ import { WhatsAppButton } from './components/WhatsAppButton';
 import { CaseStudyModal } from './components/CaseStudyModal';
 import { SearchModal } from './components/SearchModal';
 import { PolicyModal } from './components/PolicyModal';
-import { SERVICES, CASE_STUDIES } from './config/siteData';
+import { SERVICES, CASE_STUDIES, INSIGHTS_ARTICLES, INSIGHTS_PAGE_SEO, SITE_SEO } from './config/siteData';
 import { CaseStudy } from './types';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { CaseStudiesPage } from './pages/CaseStudiesPage';
 import { InsightsPage } from './pages/InsightsPage';
+import { InsightArticlePage } from './pages/InsightArticlePage';
 import { AcademyPage } from './pages/AcademyPage';
 import { ContactPage } from './pages/ContactPage';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -25,6 +26,16 @@ const PAGE_TITLES: Record<string, string> = {
   '/insights': 'Insights & Articles | HTB Consult',
   '/academy': 'HTB Consult Academy | Build Capability for the Future of Work',
   '/contact': 'Contact HTB Consult | Let’s talk about your next step.',
+};
+
+const setMetaContent = (selector: string, attributes: Record<string, string>, content: string) => {
+  let element = document.head.querySelector(selector) as HTMLMetaElement | null;
+  if (!element) {
+    element = document.createElement('meta');
+    Object.entries(attributes).forEach(([name, value]) => element?.setAttribute(name, value));
+    document.head.appendChild(element);
+  }
+  element.setAttribute('content', content);
 };
 
 const ScrollManager: React.FC = () => {
@@ -81,7 +92,7 @@ const RouteMotion: React.FC = () => {
   return null;
 };
 
-const SiteApp: React.FC = () => {
+export const SiteApp: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeServiceId, setActiveServiceId] = useState('');
@@ -91,7 +102,52 @@ const SiteApp: React.FC = () => {
   const [initialEnquiryService, setInitialEnquiryService] = useState('');
 
   useEffect(() => {
-    document.title = PAGE_TITLES[location.pathname] ?? 'HTB Consult | Business & Digital Solutions';
+    const pathname = location.pathname.replace(/\/$/, '') || '/';
+    const article = INSIGHTS_ARTICLES.find((item) => pathname === `/insights/${item.slug}`);
+    const title = article?.seoTitle ?? (pathname === '/insights' ? INSIGHTS_PAGE_SEO.title : PAGE_TITLES[pathname] ?? SITE_SEO.title);
+    const description = article?.metaDescription ?? (pathname === '/insights' ? INSIGHTS_PAGE_SEO.description : SITE_SEO.description);
+    const keywords = article
+      ? [article.primaryKeyword, ...(article.relatedTopics ?? [])].slice(0, 8).join(', ')
+      : pathname === '/insights' ? INSIGHTS_PAGE_SEO.keywords : SITE_SEO.keywords;
+    const publicOrigin = import.meta.env.VITE_PUBLIC_SITE_URL ? new URL(import.meta.env.VITE_PUBLIC_SITE_URL).origin : '';
+
+    document.title = title;
+    setMetaContent('meta[name="description"]', { name: 'description' }, description);
+    setMetaContent('meta[name="keywords"]', { name: 'keywords' }, keywords);
+    setMetaContent('meta[property="og:title"]', { property: 'og:title' }, title);
+    setMetaContent('meta[property="og:description"]', { property: 'og:description' }, description);
+    setMetaContent('meta[property="og:type"]', { property: 'og:type' }, article ? 'article' : 'website');
+    setMetaContent('meta[property="og:site_name"]', { property: 'og:site_name' }, 'HTB Consult');
+    setMetaContent('meta[name="twitter:card"]', { name: 'twitter:card' }, article ? 'summary' : 'summary_large_image');
+    setMetaContent('meta[name="twitter:title"]', { name: 'twitter:title' }, title);
+    setMetaContent('meta[name="twitter:description"]', { name: 'twitter:description' }, description);
+
+    const shareImage = article?.shareImage ?? (pathname === '/insights' ? INSIGHTS_PAGE_SEO.shareImage : '');
+    if (publicOrigin && shareImage) {
+      const absoluteImage = shareImage.startsWith('http') ? shareImage : `${publicOrigin}${shareImage.startsWith('/') ? '' : '/'}${shareImage}`;
+      setMetaContent('meta[property="og:image"]', { property: 'og:image' }, absoluteImage);
+      setMetaContent('meta[property="og:image:alt"]', { property: 'og:image:alt' }, 'Colleagues collaborating in a business meeting');
+      setMetaContent('meta[name="twitter:image"]', { name: 'twitter:image' }, absoluteImage);
+    } else {
+      document.head.querySelector('meta[property="og:image"]')?.remove();
+      document.head.querySelector('meta[property="og:image:alt"]')?.remove();
+      document.head.querySelector('meta[name="twitter:image"]')?.remove();
+    }
+
+    if (publicOrigin) {
+      const canonical = `${publicOrigin}${pathname}`;
+      setMetaContent('meta[property="og:url"]', { property: 'og:url' }, canonical);
+      let canonicalElement = document.head.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+      if (!canonicalElement) {
+        canonicalElement = document.createElement('link');
+        canonicalElement.rel = 'canonical';
+        document.head.appendChild(canonicalElement);
+      }
+      canonicalElement.href = canonical;
+    } else {
+      document.head.querySelector('meta[property="og:url"]')?.remove();
+      document.head.querySelector('link[rel="canonical"]')?.remove();
+    }
   }, [location.pathname]);
 
   useEffect(() => {
@@ -163,6 +219,7 @@ const SiteApp: React.FC = () => {
           <Route path="/services" element={<ServicesPage activeServiceId={activeServiceId} onSelectServiceForEnquiry={(name) => goToContact(name)} onOpenConsultation={() => goToContact()} onOpenCaseStudy={openCaseStudy} />} />
           <Route path="/case-studies" element={<CaseStudiesPage onSelectCaseStudy={setSelectedCaseStudy} onBookConsultation={() => goToContact()} />} />
           <Route path="/insights" element={<InsightsPage />} />
+          <Route path="/insights/:slug" element={<InsightArticlePage />} />
           <Route path="/academy" element={<AcademyPage onEnquireTraining={(course) => goToContact(`Academy Training: ${course}`)} />} />
           <Route path="/contact" element={<ContactPage initialEnquiryType={initialEnquiryService} onClearInitialType={() => setInitialEnquiryService('')} />} />
           <Route path="*" element={<NotFoundPage />} />
