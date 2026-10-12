@@ -3,15 +3,14 @@ import { BrowserRouter, Route, Routes, useLocation, useNavigate } from 'react-ro
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { WhatsAppButton } from './components/WhatsAppButton';
-import { CaseStudyModal } from './components/CaseStudyModal';
 import { SearchModal } from './components/SearchModal';
 import { PolicyModal } from './components/PolicyModal';
 import { SERVICES, CASE_STUDIES, INSIGHTS_ARTICLES, INSIGHTS_PAGE_SEO, SITE_SEO } from './config/siteData';
-import { CaseStudy } from './types';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { CaseStudiesPage } from './pages/CaseStudiesPage';
+import { CaseStudyDetailPage } from './pages/CaseStudyDetailPage';
 import { InsightsPage } from './pages/InsightsPage';
 import { InsightArticlePage } from './pages/InsightArticlePage';
 import { AcademyPage } from './pages/AcademyPage';
@@ -96,7 +95,6 @@ export const SiteApp: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeServiceId, setActiveServiceId] = useState('');
-  const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
   const [searchOpen, setSearchOpen] = useState(false);
   const [activePolicy, setActivePolicy] = useState<'privacy' | 'terms' | 'cookie' | null>(null);
   const [initialEnquiryService, setInitialEnquiryService] = useState('');
@@ -104,11 +102,12 @@ export const SiteApp: React.FC = () => {
   useEffect(() => {
     const pathname = location.pathname.replace(/\/$/, '') || '/';
     const article = INSIGHTS_ARTICLES.find((item) => pathname === `/insights/${item.slug}`);
-    const title = article?.seoTitle ?? (pathname === '/insights' ? INSIGHTS_PAGE_SEO.title : PAGE_TITLES[pathname] ?? SITE_SEO.title);
-    const description = article?.metaDescription ?? (pathname === '/insights' ? INSIGHTS_PAGE_SEO.description : SITE_SEO.description);
+    const project = CASE_STUDIES.find((item) => pathname === `/case-studies/${item.id}`);
+    const title = article?.seoTitle ?? (project ? `${project.title} | Case Study | HTB Consult` : pathname === '/insights' ? INSIGHTS_PAGE_SEO.title : PAGE_TITLES[pathname] ?? SITE_SEO.title);
+    const description = article?.metaDescription ?? project?.subtitle ?? (pathname === '/insights' ? INSIGHTS_PAGE_SEO.description : SITE_SEO.description);
     const keywords = article
       ? [article.primaryKeyword, ...(article.relatedTopics ?? [])].slice(0, 8).join(', ')
-      : pathname === '/insights' ? INSIGHTS_PAGE_SEO.keywords : SITE_SEO.keywords;
+      : project ? [project.sector, project.serviceArea, 'HTB Consult case study'].join(', ') : pathname === '/insights' ? INSIGHTS_PAGE_SEO.keywords : SITE_SEO.keywords;
     const publicOrigin = import.meta.env.VITE_PUBLIC_SITE_URL ? new URL(import.meta.env.VITE_PUBLIC_SITE_URL).origin : '';
 
     document.title = title;
@@ -116,13 +115,13 @@ export const SiteApp: React.FC = () => {
     setMetaContent('meta[name="keywords"]', { name: 'keywords' }, keywords);
     setMetaContent('meta[property="og:title"]', { property: 'og:title' }, title);
     setMetaContent('meta[property="og:description"]', { property: 'og:description' }, description);
-    setMetaContent('meta[property="og:type"]', { property: 'og:type' }, article ? 'article' : 'website');
+    setMetaContent('meta[property="og:type"]', { property: 'og:type' }, article || project ? 'article' : 'website');
     setMetaContent('meta[property="og:site_name"]', { property: 'og:site_name' }, 'HTB Consult');
-    setMetaContent('meta[name="twitter:card"]', { name: 'twitter:card' }, article ? 'summary' : 'summary_large_image');
+    setMetaContent('meta[name="twitter:card"]', { name: 'twitter:card' }, article || project ? 'summary' : 'summary_large_image');
     setMetaContent('meta[name="twitter:title"]', { name: 'twitter:title' }, title);
     setMetaContent('meta[name="twitter:description"]', { name: 'twitter:description' }, description);
 
-    const shareImage = article?.shareImage ?? (pathname === '/insights' ? INSIGHTS_PAGE_SEO.shareImage : '');
+    const shareImage = article?.shareImage ?? project?.image ?? (pathname === '/insights' ? INSIGHTS_PAGE_SEO.shareImage : '');
     if (publicOrigin && shareImage) {
       const absoluteImage = shareImage.startsWith('http') ? shareImage : `${publicOrigin}${shareImage.startsWith('/') ? '' : '/'}${shareImage}`;
       setMetaContent('meta[property="og:image"]', { property: 'og:image' }, absoluteImage);
@@ -189,12 +188,6 @@ export const SiteApp: React.FC = () => {
     navigate(serviceName ? '/contact#contact' : '/contact');
   };
 
-  const openCaseStudy = (caseId: string) => {
-    const found = CASE_STUDIES.find((study) => study.id === caseId);
-    if (found) setSelectedCaseStudy(found);
-    else navigate('/case-studies');
-  };
-
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-800 selection:bg-[#FFB81C]/30 selection:text-slate-900">
       <a
@@ -216,8 +209,9 @@ export const SiteApp: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage onExploreServices={() => navigate('/services')} onDiscussProject={() => goToContact()} />} />
           <Route path="/about" element={<AboutPage onLearnMoreServices={() => navigate('/services')} onBookConsultation={() => goToContact()} />} />
-          <Route path="/services" element={<ServicesPage activeServiceId={activeServiceId} onSelectServiceForEnquiry={(name) => goToContact(name)} onOpenConsultation={() => goToContact()} onOpenCaseStudy={openCaseStudy} />} />
-          <Route path="/case-studies" element={<CaseStudiesPage onSelectCaseStudy={setSelectedCaseStudy} onBookConsultation={() => goToContact()} />} />
+          <Route path="/services" element={<ServicesPage activeServiceId={activeServiceId} onSelectServiceForEnquiry={(name) => goToContact(name)} onOpenConsultation={() => goToContact()} />} />
+          <Route path="/case-studies" element={<CaseStudiesPage onBookConsultation={() => goToContact()} />} />
+          <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
           <Route path="/insights" element={<InsightsPage />} />
           <Route path="/insights/:slug" element={<InsightArticlePage />} />
           <Route path="/academy" element={<AcademyPage onEnquireTraining={(course) => goToContact(`Academy Training: ${course}`)} />} />
@@ -229,14 +223,6 @@ export const SiteApp: React.FC = () => {
       <Footer onOpenPolicy={setActivePolicy} />
       <WhatsAppButton />
 
-      <CaseStudyModal
-        caseStudy={selectedCaseStudy}
-        onClose={() => setSelectedCaseStudy(null)}
-        onBookConsultation={() => {
-          setSelectedCaseStudy(null);
-          goToContact();
-        }}
-      />
       <SearchModal
         isOpen={searchOpen}
         onClose={() => setSearchOpen(false)}

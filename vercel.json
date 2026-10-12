@@ -9,6 +9,10 @@
       "destination": "/insights/:slug/index.html"
     },
     {
+      "source": "/case-studies/:slug",
+      "destination": "/case-studies/:slug/index.html"
+    },
+    {
       "source": "/about",
       "destination": "/index.html"
     },

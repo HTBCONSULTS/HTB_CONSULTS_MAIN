@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   SERVICES 
 } from '../config/siteData';
@@ -46,7 +47,6 @@ import {
 interface ServicesSectionProps {
   onSelectServiceForEnquiry: (serviceName: string) => void;
   onOpenConsultation: () => void;
-  onOpenCaseStudy: (caseId: string) => void;
   activeServiceId: string;
 }
 
@@ -92,7 +92,6 @@ const ICON_COMPONENTS: Record<string, React.ElementType> = {
 export const ServicesSection: React.FC<ServicesSectionProps> = ({
   onSelectServiceForEnquiry,
   onOpenConsultation,
-  onOpenCaseStudy,
   activeServiceId,
 }) => {
   return (
@@ -270,14 +269,13 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                           {service.caseStudySnippet.description}
                         </p>
                         {service.caseStudySnippet.linkId && (
-                          <button
-                            type="button"
-                            onClick={() => onOpenCaseStudy(service.caseStudySnippet!.linkId!)}
+                          <Link
+                            to={`/case-studies/${service.caseStudySnippet.linkId}`}
                             className="mt-3 text-xs font-bold text-[#001F3F] hover:text-[#B45309] flex items-center gap-1.5 underline"
                           >
                             <span>Read Case Study</span>
                             <ArrowRight className="w-3.5 h-3.5" />
-                          </button>
+                          </Link>
                         )}
                       </div>
                     )}

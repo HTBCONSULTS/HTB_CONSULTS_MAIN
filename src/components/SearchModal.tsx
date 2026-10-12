@@ -150,7 +150,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                         key={c.id}
                         type="button"
                         onClick={() => {
-                          onSelectResult('/case-studies');
+                          onSelectResult(`/case-studies/${c.id}`);
                           onClose();
                         }}
                         className="w-full p-2.5 rounded-lg text-left hover:bg-slate-100 flex items-center justify-between group transition-colors cursor-pointer"

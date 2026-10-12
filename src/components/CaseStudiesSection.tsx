@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { CASE_STUDIES } from '../config/siteData';
-import { CaseStudy } from '../types';
-import { ArrowRight, Building2, Clock, Layers, Sparkles } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { CASE_STUDIES, INSIGHTS_ARTICLES } from '../config/siteData';
+import { ArrowRight, Clock, Sparkles } from 'lucide-react';
 
 interface CaseStudiesSectionProps {
-  onSelectCaseStudy: (caseStudy: CaseStudy) => void;
   onBookConsultation: () => void;
 }
 
 export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({
-  onSelectCaseStudy,
   onBookConsultation,
 }) => {
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'Healthcare & Social Care' | 'Private Sector'>('all');
@@ -34,7 +32,7 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({
               <span className="text-[#0A2E5C] italic">Practical Solutions.</span>
             </h2>
             <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-              Explore selected examples of how HTB Consult has helped organisations improve processes, implement digital solutions and achieve measurable results.
+              Read the full-length practical guides supplied by HTB Consult, then explore selected project case studies and their outcomes.
             </p>
           </div>
 
@@ -76,7 +74,38 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({
           </div>
         </div>
 
-        {/* Case Studies Grid */}
+        <section aria-labelledby="case-study-articles-heading" className="mb-14">
+          <div className="mb-6 max-w-3xl">
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#8A4B08]">Full-length articles</p>
+            <h3 id="case-study-articles-heading" className="mt-2 font-editorial text-2xl font-semibold text-[#001F3F] sm:text-3xl">Practical guides from HTB Consult</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">Each guide opens as a complete article page, preserving the detail, frameworks and checklists from the supplied Word documents.</p>
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {INSIGHTS_ARTICLES.map((article) => (
+              <article key={article.id} className="htb-card flex flex-col rounded-2xl border border-slate-200/80 bg-white p-5 shadow-xs">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-[#8A4B08]">{article.category}</div>
+                <h4 className="mt-3 font-editorial text-lg font-semibold leading-snug text-[#001F3F]">{article.title}</h4>
+                <p className="mt-2 flex-1 text-xs leading-relaxed text-slate-600">{article.excerpt}</p>
+                <div className="mt-4 flex items-center justify-between gap-2 border-t border-slate-100 pt-3">
+                  <span className="inline-flex items-center gap-1.5 text-[11px] text-slate-500"><Clock className="h-3.5 w-3.5" aria-hidden="true" />{article.readTime}</span>
+                  <Link to={`/insights/${article.slug}`} className="focus-visible-brand inline-flex items-center gap-1 text-xs font-bold text-[#001F3F] hover:text-[#8A4B08]">
+                    Read full article<ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#8A4B08]">Selected projects</p>
+            <h3 className="mt-2 font-editorial text-2xl font-semibold text-[#001F3F] sm:text-3xl">Project case studies</h3>
+          </div>
+          <p className="text-xs text-slate-500">Open a project to read its full case study.</p>
+        </div>
+
+        {/* Project case studies */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredStudies.map((study) => (
             <article
@@ -130,14 +159,13 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({
                     ))}
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => onSelectCaseStudy(study)}
-                    className="mt-4 w-full py-2.5 px-3 text-xs font-bold text-[#001F3F] bg-slate-100 hover:bg-[#FFB81C] rounded-lg transition-colors flex items-center justify-center gap-1.5 focus-visible-brand cursor-pointer"
+                  <Link
+                    to={`/case-studies/${study.id}`}
+                    className="mt-4 w-full py-2.5 px-3 text-xs font-bold text-[#001F3F] bg-slate-100 hover:bg-[#FFB81C] rounded-lg transition-colors flex items-center justify-center gap-1.5 focus-visible-brand"
                   >
                     <span>View Case Study</span>
                     <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </article>

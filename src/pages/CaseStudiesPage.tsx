@@ -1,15 +1,13 @@
 import React from 'react';
 import { PageHero } from '../components/PageHero';
 import { CaseStudiesSection } from '../components/CaseStudiesSection';
-import { CaseStudy } from '../types';
 import { VISUAL_ASSETS } from '../config/visualAssets';
 
 interface CaseStudiesPageProps {
-  onSelectCaseStudy: (caseStudy: CaseStudy) => void;
   onBookConsultation: () => void;
 }
 
-export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({ onSelectCaseStudy, onBookConsultation }) => (
+export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({ onBookConsultation }) => (
   <>
     <PageHero
       eyebrow="Case Studies"
@@ -19,6 +17,6 @@ export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({ onSelectCaseSt
       ctaLabel="Discuss your project"
       ctaTo="/contact"
     />
-    <CaseStudiesSection onSelectCaseStudy={onSelectCaseStudy} onBookConsultation={onBookConsultation} />
+    <CaseStudiesSection onBookConsultation={onBookConsultation} />
   </>
 );
