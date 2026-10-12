@@ -4,10 +4,14 @@ import { Link } from 'react-router-dom';
 import founderPortrait from '../assets/images/leadership/oluwasegun-ajibola-portrait.webp';
 
 const AREAS_OF_EXPERTISE = [
-  'Business strategy',
-  'Business analysis',
-  'Digital transformation',
-  'Platform development',
+  'Business Strategy & Growth',
+  'Business Analysis & Requirements Engineering',
+  'Digital Transformation',
+  'Process Improvement & Automation',
+  'Change Management',
+  'Software Development & Digital Solutions',
+  'Digital Product Development',
+  'Product, Project & Delivery Management',
 ];
 
 export const FounderProfileSection: React.FC = () => (
@@ -56,15 +60,21 @@ export const FounderProfileSection: React.FC = () => (
             Oluwasegun Ajibola
           </h2>
           <p className="mt-3 text-sm font-semibold text-[#7A4A00] sm:text-base">
-            Founder &amp; Managing Director, HTB Consult
+            Founder &amp; Managing Director <span aria-hidden="true">|</span> HTB Consult
           </p>
 
           <div className="mt-5 space-y-4 text-sm leading-7 text-slate-600 sm:text-base sm:leading-relaxed">
             <p>
-              With extensive experience in business strategy, business analysis, digital transformation and platform development, Segun leads HTB Consult with a vision to support organisations through structured growth, innovation and practical digital solutions.
+              Oluwasegun Ajibola is a business strategy, business analysis and digital transformation professional with multidisciplinary expertise in process improvement, change management, software solutions and digital product development.
             </p>
             <p>
-              His leadership reflects the consultancy’s wider purpose: bringing strategic insight and practical delivery together to help organisations improve performance and turn complex challenges into clear next steps.
+              As Founder and Managing Director of HTB Consult, he leads the organisation's strategic direction, business development and digital transformation initiatives, with a clear commitment to helping entrepreneurs, businesses and organisations achieve sustainable growth and operational excellence.
+            </p>
+            <p>
+              His leadership is driven by the belief that successful transformation requires more than innovative ideas or technology. It demands strategic clarity, rigorous analysis, informed decision-making and disciplined execution.
+            </p>
+            <p>
+              Through HTB Consult, he champions a results-oriented consulting approach that bridges business strategy and technology, strengthens organisational capabilities and translates complex challenges into practical, measurable business solutions.
             </p>
           </div>
 
@@ -76,12 +86,21 @@ export const FounderProfileSection: React.FC = () => (
               {AREAS_OF_EXPERTISE.map((area) => (
                 <li
                   key={area}
-                  className="rounded-full border border-[#001F3F]/10 bg-white/55 px-3 py-1.5 text-xs font-medium text-[#001F3F] shadow-sm backdrop-blur-sm sm:text-sm"
+                  className="max-w-full break-words rounded-full border border-[#001F3F]/10 bg-white/55 px-3 py-1.5 text-xs font-medium text-[#001F3F] shadow-sm backdrop-blur-sm sm:text-sm"
                 >
                   {area}
                 </li>
               ))}
             </ul>
+          </div>
+
+          <div className="mt-6 rounded-xl border-l-2 border-[#FFB81C] bg-white/35 px-4 py-3 sm:px-5">
+            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-500">
+              Leadership philosophy
+            </p>
+            <p className="mt-1 font-editorial text-lg font-medium italic text-[#001F3F] sm:text-xl">
+              Think. Analyse. Improve.
+            </p>
           </div>
 
           <Link
