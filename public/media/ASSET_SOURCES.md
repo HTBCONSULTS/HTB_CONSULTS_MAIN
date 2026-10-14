@@ -32,6 +32,10 @@ The source PNGs were preserved outside the repository and converted to optimized
 
 These user-supplied photographs are used as illustrative business imagery, not as depictions or endorsements of HTB Consult clients or staff.
 
+## Trust-pillar artwork
+
+- `public/media/trust-pillars-emailed.webp` — `New.png`, the 2170×725 attachment from Oluwasegun Ajibola's latest relevant email (13 October 2026). The original composition is retained in the asset; the homepage uses it on wide screens and renders the same four messages as readable, accessible cards on narrower screens.
+
 ## Insights imagery
 
 The following two 4:3 images were supplied by the site owner, who identified them as AI-generated. They replace the previous stock photo on the Insights hero, appear on all four article cards, and are assigned to article share previews. The originals are preserved outside the repository; the WebP copies retain the full 1448×1086 composition without cropping.

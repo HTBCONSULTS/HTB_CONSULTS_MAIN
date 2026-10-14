@@ -1,12 +1,31 @@
 import React from 'react';
-import { ArrowRight, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, BarChart3, CheckCircle2, Lightbulb, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Hero } from '../components/Hero';
-import { BackgroundVideo } from '../components/BackgroundVideo';
+import { FeaturedCaseStudyDeviceMockup } from '../components/FeaturedCaseStudyDeviceMockup';
 import { TrustPillarsStrip } from '../components/TrustPillarsStrip';
-import { SERVICES } from '../config/siteData';
+import { CASE_STUDIES, SERVICES } from '../config/siteData';
 import { VISUAL_ASSETS } from '../config/visualAssets';
-import { COLLABORATION_VIDEO_SOURCE } from '../config/videoConfig';
+
+const FEATURED_CASE_STUDY = CASE_STUDIES.find((study) => study.id === 'case-crm-dynamics') ?? CASE_STUDIES[0];
+const MANUAL_WORKLOAD_RESULT = FEATURED_CASE_STUDY.results[0];
+const FEATURED_STORY_STEPS = [
+  {
+    title: 'The challenge',
+    description: 'Manual processes and multiple spreadsheets limited visibility across referrals and day-to-day service-user management.',
+    Icon: Target,
+  },
+  {
+    title: 'Our approach',
+    description: 'Mapped workflows, defined requirements and supported Dynamics 365 implementation, migration, testing and staff training.',
+    Icon: Lightbulb,
+  },
+  {
+    title: 'The outcome',
+    description: `${MANUAL_WORKLOAD_RESULT.metric} ${MANUAL_WORKLOAD_RESULT.label.toLowerCase()}, with improved visibility and reporting.`,
+    Icon: BarChart3,
+  },
+];
 
 interface HomePageProps {
   onExploreServices: () => void;
@@ -100,24 +119,58 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
       </div>
     </section>
 
-    <section data-nav-glass className="relative isolate overflow-hidden bg-[#001F3F] py-20 text-white lg:py-24">
-      <BackgroundVideo
-        src={COLLABORATION_VIDEO_SOURCE}
-        poster={VISUAL_ASSETS.crmHealthcare}
-        videoClassName="brightness-105 contrast-105"
-        controlPositionClassName="bottom-4 left-4"
-      />
-      <div aria-hidden="true" className="absolute inset-0 z-[1] bg-gradient-to-r from-[#001429]/80 via-[#001F3F]/66 to-[#001F3F]/54" />
-      <div aria-hidden="true" className="htb-ambient-glow absolute inset-0 z-[2]" />
-      <div className="relative z-10 mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8" data-reveal>
-        <div className="max-w-3xl">
-          <p className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-[#FFB81C]">Evidence in practice</p>
-          <h2 className="font-editorial text-balance text-3xl font-medium leading-tight sm:text-4xl lg:text-5xl">Real challenges. Practical solutions.</h2>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-200">See how structured analysis, thoughtful technology choices and hands-on delivery support create meaningful improvements.</p>
+    <section id="home-featured-case-study" aria-labelledby="home-featured-case-study-heading" className="bg-white bg-blueprint-subtle bg-blueprint-mobile-soft py-14 sm:py-16 lg:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" data-reveal>
+        <div className="mb-7 max-w-4xl sm:mb-9">
+          <p className="mb-2 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#9A5B00]">
+            <span className="h-px w-7 bg-[#FFB81C]" aria-hidden="true" />
+            Our work
+          </p>
+          <h2 id="home-featured-case-study-heading" className="font-editorial text-balance text-[clamp(1.85rem,7.5vw,3.35rem)] font-medium leading-[1.12] text-[#001F3F]">
+            See how ideas become practical solutions.
+          </h2>
         </div>
-        <Link to="/case-studies" className="focus-visible-brand inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-md bg-[#FFB81C] px-5 py-3 text-sm font-bold text-[#001F3F] transition-colors hover:bg-[#FFD166]">
-          Explore case studies <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </Link>
+
+        <article aria-labelledby="featured-case-study-title" className="htb-card grid overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xl shadow-[#001F3F]/10 lg:grid-cols-2">
+          <FeaturedCaseStudyDeviceMockup />
+
+          <div className="flex flex-col justify-between bg-[#F4F7FB] p-5 sm:p-7 lg:p-8">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#8A4B08]">
+                {FEATURED_CASE_STUDY.sector} <span aria-hidden="true">·</span> {FEATURED_CASE_STUDY.duration}
+              </p>
+              <h3 id="featured-case-study-title" className="mt-2 font-editorial text-[1.55rem] font-semibold leading-tight text-[#001F3F] sm:text-3xl">
+                {FEATURED_CASE_STUDY.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+                {FEATURED_CASE_STUDY.subtitle}
+              </p>
+
+              <div className="mt-6 grid gap-4 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
+                {FEATURED_STORY_STEPS.map(({ title, description, Icon }) => (
+                  <div key={title} className="border-t border-slate-200 pt-3 md:border-t-0 md:pt-0 lg:border-t lg:pt-3 xl:border-t-0 xl:pt-0">
+                    <div className="flex items-center gap-2 text-sm font-bold text-[#001F3F]">
+                      <Icon className="h-5 w-5 shrink-0 text-[#B07818]" aria-hidden="true" />
+                      <h4>{title}</h4>
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                      {description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-7 flex flex-col gap-3 border-t border-slate-200 pt-5 sm:flex-row sm:items-center sm:justify-between">
+              <Link to={`/case-studies/${FEATURED_CASE_STUDY.id}`} className="focus-visible-brand inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-[#FFB81C] px-5 py-3 text-sm font-bold text-[#001F3F] transition-colors hover:bg-[#FFD166]">
+                View this case study <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <Link to="/case-studies" className="focus-visible-brand inline-flex min-h-10 items-center gap-2 text-sm font-bold text-[#001F3F] transition-colors hover:text-[#8A4B08]">
+                All case studies <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
 
