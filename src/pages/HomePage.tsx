@@ -4,25 +4,23 @@ import { Link } from 'react-router-dom';
 import { Hero } from '../components/Hero';
 import { FeaturedCaseStudyDeviceMockup } from '../components/FeaturedCaseStudyDeviceMockup';
 import { TrustPillarsStrip } from '../components/TrustPillarsStrip';
-import { CASE_STUDIES, SERVICES } from '../config/siteData';
+import { SERVICES } from '../config/siteData';
 import { VISUAL_ASSETS } from '../config/visualAssets';
 
-const FEATURED_CASE_STUDY = CASE_STUDIES.find((study) => study.id === 'case-crm-dynamics') ?? CASE_STUDIES[0];
-const MANUAL_WORKLOAD_RESULT = FEATURED_CASE_STUDY.results[0];
-const FEATURED_STORY_STEPS = [
+const ORAPY_STORY_STEPS = [
   {
     title: 'The challenge',
-    description: 'Manual processes and multiple spreadsheets limited visibility across referrals and day-to-day service-user management.',
+    description: 'A clear summary of the key challenges faced by the organisation.',
     Icon: Target,
   },
   {
     title: 'Our approach',
-    description: 'Mapped workflows, defined requirements and supported Dynamics 365 implementation, migration, testing and staff training.',
+    description: 'How HTB worked with the team to design and deliver the solution.',
     Icon: Lightbulb,
   },
   {
     title: 'The outcome',
-    description: `${MANUAL_WORKLOAD_RESULT.metric} ${MANUAL_WORKLOAD_RESULT.label.toLowerCase()}, with improved visibility and reporting.`,
+    description: 'The results and impact achieved through our collaboration.',
     Icon: BarChart3,
   },
 ];
@@ -136,18 +134,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
 
           <div className="flex flex-col justify-between bg-[#F4F7FB] p-5 sm:p-7 lg:p-8">
             <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#8A4B08]">
-                {FEATURED_CASE_STUDY.sector} <span aria-hidden="true">·</span> {FEATURED_CASE_STUDY.duration}
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#8A4B08]">
+                Illustrative case study layout
               </p>
               <h3 id="featured-case-study-title" className="mt-2 font-editorial text-[1.55rem] font-semibold leading-tight text-[#001F3F] sm:text-3xl">
-                {FEATURED_CASE_STUDY.title}
+                Orapy <span className="text-[#B07818]">|</span> Digital transformation
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
-                {FEATURED_CASE_STUDY.subtitle}
+                A dedicated space to show the challenge, HTB’s contribution and verified project outcomes.
               </p>
 
               <div className="mt-6 grid gap-4 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-                {FEATURED_STORY_STEPS.map(({ title, description, Icon }) => (
+                {ORAPY_STORY_STEPS.map(({ title, description, Icon }) => (
                   <div key={title} className="border-t border-slate-200 pt-3 md:border-t-0 md:pt-0 lg:border-t lg:pt-3 xl:border-t-0 xl:pt-0">
                     <div className="flex items-center gap-2 text-sm font-bold text-[#001F3F]">
                       <Icon className="h-5 w-5 shrink-0 text-[#B07818]" aria-hidden="true" />
@@ -162,12 +160,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
             </div>
 
             <div className="mt-7 flex flex-col gap-3 border-t border-slate-200 pt-5 sm:flex-row sm:items-center sm:justify-between">
-              <Link to={`/case-studies/${FEATURED_CASE_STUDY.id}`} className="focus-visible-brand inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-[#FFB81C] px-5 py-3 text-sm font-bold text-[#001F3F] transition-colors hover:bg-[#FFD166]">
-                View this case study <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              <Link to="/case-studies" className="focus-visible-brand inline-flex min-h-11 items-center justify-center gap-2 self-start rounded-md bg-[#FFB81C] px-5 py-3 text-sm font-bold text-[#001F3F] transition-colors hover:bg-[#FFD166]">
+                Explore case studies <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
-              <Link to="/case-studies" className="focus-visible-brand inline-flex min-h-10 items-center gap-2 text-sm font-bold text-[#001F3F] transition-colors hover:text-[#8A4B08]">
-                All case studies <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
+              <p className="max-w-xs text-xs leading-relaxed text-slate-500 sm:text-right">
+                Concept preview. Case study content to be verified before publication.
+              </p>
             </div>
           </div>
         </article>
