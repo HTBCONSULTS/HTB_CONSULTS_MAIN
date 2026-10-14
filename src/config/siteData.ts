@@ -29,33 +29,26 @@ export const SITE_METADATA = {
   extendedHoursNotice: 'We also offer online consultations outside these hours by arrangement.',
 };
 
-export const TRUST_METRICS = [
-  { value: '10+', label: 'Years of Experience', detail: 'Proven track record in strategic transformation' },
-  { value: '50+', label: 'Organisations Supported', detail: 'Public, private and third-sector clients' },
-  { value: '100+', label: 'Projects Delivered', detail: 'On-time, within budget and measurable impact' },
-  { value: '100%', label: 'Client Focused', detail: 'Practical. Collaborative. Results Driven.' },
-];
-
 export const FOUR_PILLARS = [
   {
-    title: 'Strategic Thinking',
-    description: 'Real business impact',
-    icon: 'TrendingUp',
+    title: 'Strategic Clarity',
+    description: 'Clear direction for your next business move.',
+    icon: 'Compass',
   },
   {
-    title: 'Practical Solutions',
-    description: 'Designed for your context',
-    icon: 'Lightbulb',
+    title: 'Business Analysis',
+    description: 'Turning business needs into clear requirements.',
+    icon: 'FileText',
   },
   {
-    title: 'Experienced Partner',
-    description: 'From insight to execution',
+    title: 'Digital Transformation',
+    description: 'Practical technology shaped around your needs.',
+    icon: 'GitBranch',
+  },
+  {
+    title: 'Collaborative Delivery',
+    description: 'Working with you from planning to implementation.',
     icon: 'Users',
-  },
-  {
-    title: 'Measurable Results',
-    description: 'Efficiency, growth and value',
-    icon: 'ShieldCheck',
   },
 ];
 

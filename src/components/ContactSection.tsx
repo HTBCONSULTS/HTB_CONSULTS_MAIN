@@ -27,6 +27,25 @@ const AVAILABLE_SLOTS = [
   '14:00', '14:30', '15:00', '15:30', '16:00', '16:30'
 ];
 
+const submitContactRequest = async (payload: Record<string, string>) => {
+  const response = await fetch('/api/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  const result = await response.json().catch(() => null);
+  if (!response.ok || !result || result.success !== true) {
+    throw new Error(typeof result?.error === 'string' ? result.error : 'Request failed.');
+  }
+};
+
+const getNextWeekday = () => {
+  const date = new Date();
+  date.setHours(0, 0, 0, 0);
+  while (date.getDay() === 0 || date.getDay() === 6) date.setDate(date.getDate() + 1);
+  return date;
+};
+
 export const ContactSection: React.FC<ContactSectionProps> = ({
   initialEnquiryType = '',
   onClearInitialType,
@@ -45,16 +64,30 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formSubmitError, setFormSubmitError] = useState(false);
 
   // Booking State
-  const [selectedDay, setSelectedDay] = useState<number>(14);
+  const [selectedDate, setSelectedDate] = useState<Date>(() => getNextWeekday());
   const [selectedSlot, setSelectedSlot] = useState<string>('09:00');
   const [bookingName, setBookingName] = useState('');
   const [bookingEmail, setBookingEmail] = useState('');
   const [bookingOrg, setBookingOrg] = useState('');
   const [bookingNotes, setBookingNotes] = useState('');
   const [bookingErrors, setBookingErrors] = useState<Record<string, string>>({});
-  const [bookingConfirmed, setBookingConfirmed] = useState(false);
+  const [bookingSubmitting, setBookingSubmitting] = useState(false);
+  const [bookingSubmitError, setBookingSubmitError] = useState(false);
+  const [bookingRequestSent, setBookingRequestSent] = useState(false);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const calendarYear = selectedDate.getFullYear();
+  const calendarMonth = selectedDate.getMonth();
+  const monthStart = new Date(calendarYear, calendarMonth, 1);
+  const monthLabel = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }).format(monthStart);
+  const monthName = new Intl.DateTimeFormat('en-GB', { month: 'long' }).format(selectedDate);
+  const selectedDateLabel = `${selectedDate.getDate()} ${monthName} ${calendarYear}`;
+  const calendarDayCount = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+  const calendarOffset = (monthStart.getDay() + 6) % 7;
 
   // FAQ Accordion State
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
@@ -80,16 +113,22 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmitForm = (e: React.FormEvent) => {
+  const handleSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setFormSubmitError(false);
+    const website = String(new FormData(e.currentTarget).get('website') || '');
+    try {
+      await submitContactRequest({ type: 'enquiry', ...formData, website });
       setFormSubmitted(true);
       if (onClearInitialType) onClearInitialType();
-    }, 600);
+    } catch {
+      setFormSubmitError(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const validateBooking = () => {
@@ -104,10 +143,31 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     return Object.keys(errors).length === 0;
   };
 
-  const handleConfirmBooking = (e: React.FormEvent) => {
+  const handleSubmitBookingRequest = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validateBooking()) return;
-    setBookingConfirmed(true);
+
+    setBookingSubmitting(true);
+    setBookingSubmitError(false);
+    const website = String(new FormData(e.currentTarget).get('website') || '');
+    try {
+      await submitContactRequest({
+        type: 'booking',
+        name: bookingName,
+        email: bookingEmail,
+        organisation: bookingOrg,
+        enquiryType: 'Initial consultation',
+        date: selectedDateLabel,
+        timeSlot: selectedSlot,
+        notes: bookingNotes,
+        website,
+      });
+      setBookingRequestSent(true);
+    } catch {
+      setBookingSubmitError(true);
+    } finally {
+      setBookingSubmitting(false);
+    }
   };
 
   return (
@@ -303,7 +363,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 type="button"
                 onClick={() => {
                   setActiveTab('booking');
-                  setBookingConfirmed(false);
+                  setBookingRequestSent(false);
+                  setBookingSubmitError(false);
                 }}
                 className={`flex-1 py-2.5 px-3 text-xs font-bold rounded-lg transition-all cursor-pointer ${
                   activeTab === 'booking'
@@ -320,11 +381,15 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               <div>
                 {!formSubmitted ? (
                   <form onSubmit={handleSubmitForm} noValidate className="space-y-5">
+                    <div className="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
+                      <label htmlFor="contactWebsite">Leave this field blank</label>
+                      <input id="contactWebsite" name="website" type="text" tabIndex={-1} autoComplete="off" />
+                    </div>
                     <div>
                       <h3 className="font-editorial text-2xl font-semibold text-[#001F3F]">
                         Send Us a Message
                       </h3>
-                      <p className="text-xs text-slate-500 mt-1">
+                      <p className="text-sm text-slate-600 mt-1">
                         Tell us a bit about your enquiry and we’ll get back to you shortly.
                       </p>
                     </div>
@@ -437,8 +502,17 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       )}
                     </div>
 
+                    {formSubmitError && (
+                      <p role="alert" className="flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 p-3 text-sm leading-relaxed text-red-800">
+                        <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                        <span>
+                          We couldn’t send your message just now. Please try again or email{' '}
+                          <a href={`mailto:${SITE_METADATA.email}`} className="font-bold underline">{SITE_METADATA.email}</a>.
+                        </span>
+                      </p>
+                    )}
                     <div className="pt-2 flex items-center justify-between">
-                      <p className="text-[11px] text-slate-500">
+                      <p className="text-xs text-slate-600">
                         Information handled in accordance with UK GDPR.
                       </p>
                       <button
@@ -466,13 +540,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       </div>
                       <div>
                         <div className="text-xs uppercase font-bold tracking-wider text-emerald-700">
-                          Enquiry Received
+                          Enquiry Sent
                         </div>
                         <h4 className="text-lg font-bold text-emerald-950">
                           Thank You, {formData.name || 'there'}!
                         </h4>
                         <p className="text-xs text-emerald-800 mt-0.5">
-                          Your message has been successfully logged with the HTB Consult team.
+                          Your message has been sent to the HTB Consult team. We’ll respond within 1–2 working days.
                         </p>
                       </div>
                     </div>
@@ -539,14 +613,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             {/* TAB 2: INTERACTIVE CONSULTATION CALENDAR & TIME SLOT BOOKING matching Reference P14 */}
             {activeTab === 'booking' && (
               <div>
-                {!bookingConfirmed ? (
-                  <form onSubmit={handleConfirmBooking} noValidate className="space-y-6">
+                {!bookingRequestSent ? (
+                  <form onSubmit={handleSubmitBookingRequest} noValidate className="space-y-6">
+                    <div className="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
+                      <label htmlFor="bookingWebsite">Leave this field blank</label>
+                      <input id="bookingWebsite" name="website" type="text" tabIndex={-1} autoComplete="off" />
+                    </div>
                     <div>
                       <h3 className="font-editorial text-2xl font-semibold text-[#001F3F]">
                         Select a Date & Time
                       </h3>
-                      <p className="text-xs text-slate-500 mt-1">
-                        Choose an available slot for a 30-minute Microsoft Teams discovery call.
+                      <p className="text-sm text-slate-600 mt-1">
+                        Choose your preferred time for a 30-minute Microsoft Teams discovery call. We’ll confirm availability by email.
                       </p>
                     </div>
 
@@ -556,8 +634,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       {/* Left: Date Selector */}
                       <div className="md:col-span-6 space-y-3">
                         <div className="flex items-center justify-between text-xs font-bold text-[#001F3F]">
-                          <span>October 2026</span>
-                          <span className="text-[11px] text-slate-500">UK Time (GMT+1)</span>
+                          <span>{monthLabel}</span>
+                          <span className="text-xs text-slate-600">UK time</span>
                         </div>
 
                         {/* Calendar Day Grid (matching reference P14) */}
@@ -567,16 +645,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                               {d}
                             </span>
                           ))}
-                          {/* Sample days */}
-                          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map((day) => {
-                            const isSelected = selectedDay === day;
-                            const isAvailable = day >= 12 && day <= 28 && day % 7 !== 3 && day % 7 !== 4; // realistic weekdays
+                          {Array.from({ length: calendarOffset }, (_, index) => (
+                            <span key={`offset-${index}`} aria-hidden="true" />
+                          ))}
+                          {Array.from({ length: calendarDayCount }, (_, index) => index + 1).map((day) => {
+                            const date = new Date(calendarYear, calendarMonth, day);
+                            const isSelected = selectedDate.getDate() === day;
+                            const isAvailable = date >= today && date.getDay() !== 0 && date.getDay() !== 6;
                             return (
                               <button
                                 key={day}
                                 type="button"
                                 disabled={!isAvailable}
-                                onClick={() => setSelectedDay(day)}
+                                aria-pressed={isSelected}
+                                aria-label={`Choose ${day} ${monthName} ${calendarYear}`}
+                                onClick={() => setSelectedDate(date)}
                                 className={`py-1.5 rounded-md text-xs font-medium transition-colors ${
                                   isSelected
                                     ? 'bg-[#FFB81C] text-[#001F3F] font-bold shadow-xs'
@@ -592,10 +675,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         </div>
                       </div>
 
-                      {/* Right: Available Times */}
+                      {/* Right: Preferred Times */}
                       <div className="md:col-span-6 space-y-2 border-t md:border-t-0 md:border-l border-slate-200 pt-4 md:pt-0 md:pl-4">
                         <div className="text-xs font-bold text-[#001F3F] mb-1">
-                          Available Times: {selectedDay} October 2026
+                          Preferred times: {selectedDateLabel}
                         </div>
                         <div className="grid grid-cols-2 gap-1.5 max-h-48 overflow-y-auto pr-1">
                           {AVAILABLE_SLOTS.map((slot) => {
@@ -696,48 +779,57 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
                     <div className="pt-2 flex items-center justify-between">
                       <div className="text-xs text-slate-500">
-                        Selected: <strong className="text-slate-800">{selectedDay} October 2026 at {selectedSlot}</strong> (UK Time)
+                        Requested: <strong className="text-slate-800">{selectedDateLabel} at {selectedSlot}</strong> (UK time)
                       </div>
                       <button
                         type="submit"
-                        className="px-6 py-3 text-xs sm:text-sm font-bold text-[#001F3F] bg-[#FFB81C] hover:bg-[#E5A312] rounded-md transition-colors shadow-sm focus-visible-brand cursor-pointer"
+                        disabled={bookingSubmitting}
+                        className="px-6 py-3 text-sm font-bold text-[#001F3F] bg-[#FFB81C] hover:bg-[#E5A312] rounded-md transition-colors shadow-sm focus-visible-brand cursor-pointer disabled:cursor-wait disabled:opacity-60"
                       >
-                        Confirm Teams Consultation
+                        {bookingSubmitting ? 'Sending request…' : 'Send Consultation Request'}
                       </button>
                     </div>
+                    {bookingSubmitError && (
+                      <p role="alert" className="flex items-start gap-2 rounded-lg border border-red-200 bg-red-50 p-3 text-sm leading-relaxed text-red-800">
+                        <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                        <span>
+                          We couldn’t send your request just now. Please try again or email{' '}
+                          <a href={`mailto:${SITE_METADATA.email}`} className="font-bold underline">{SITE_METADATA.email}</a>.
+                        </span>
+                      </p>
+                    )}
                   </form>
                 ) : (
-                  /* Booking Confirmation State */
+                  /* Consultation Request State */
                   <div className="space-y-6 py-4 animate-in fade-in duration-200">
                     <div className="p-5 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800">
                       <div className="flex items-center gap-3">
                         <CheckCircle2 className="w-8 h-8 text-emerald-600 shrink-0" />
                         <div>
                           <div className="text-xs uppercase font-bold tracking-wider text-emerald-700">
-                            Consultation Confirmed
+                            Consultation Request Sent
                           </div>
                           <h4 className="text-lg font-bold text-emerald-950">
-                            Looking forward to speaking, {bookingName}!
+                            Thank you, {bookingName}. We’ll confirm by email.
                           </h4>
                         </div>
                       </div>
 
                       <div className="mt-4 p-4 bg-white rounded-lg border border-emerald-100 text-xs text-slate-700 space-y-1.5">
-                        <div><strong>Date:</strong> {selectedDay} October 2026</div>
-                        <div><strong>Time:</strong> {selectedSlot} (UK Time)</div>
-                        <div><strong>Duration:</strong> 30 minutes</div>
-                        <div><strong>Platform:</strong> Microsoft Teams (online link sent to {bookingEmail})</div>
+                        <div><strong>Preferred date:</strong> {selectedDateLabel}</div>
+                        <div><strong>Preferred time:</strong> {selectedSlot} (UK time)</div>
+                        <div><strong>Call:</strong> 30-minute Microsoft Teams discovery call</div>
                         {bookingOrg && <div><strong>Organisation:</strong> {bookingOrg}</div>}
                       </div>
                     </div>
 
-                    <div className="text-xs text-slate-500">
-                      A calendar placeholder has been prepared. You will receive an email confirmation with the secure video meeting link.
+                    <div className="text-sm leading-relaxed text-slate-600">
+                      This is a request, not a confirmed appointment. Your time is not reserved until the HTB Consult team confirms it. No Teams invitation has been sent yet.
                     </div>
 
                     <button
                       type="button"
-                      onClick={() => setBookingConfirmed(false)}
+                      onClick={() => setBookingRequestSent(false)}
                       className="text-xs font-bold text-[#001F3F] underline"
                     >
                       Book Another Time Slot

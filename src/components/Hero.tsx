@@ -19,10 +19,10 @@ export const Hero: React.FC<HeroProps> = ({ onExploreServices, onDiscussProject 
       src={HERO_VIDEO_CONFIG.videoSource}
       showPoster={false}
       eager
-      videoClassName="brightness-110 contrast-105"
+      videoClassName="brightness-105 contrast-105"
     />
-    <div aria-hidden="true" className="absolute inset-0 z-[1] bg-gradient-to-r from-[#001429]/70 via-[#001F3F]/48 to-[#001F3F]/30" />
-    <div aria-hidden="true" className="absolute inset-0 z-[1] bg-radial-[at_20%_30%] from-transparent via-[#001429]/10 to-[#001429]/38" />
+    <div aria-hidden="true" className="absolute inset-0 z-[1] bg-gradient-to-r from-[#001429]/82 via-[#001F3F]/56 to-[#001F3F]/42" />
+    <div aria-hidden="true" className="absolute inset-0 z-[1] bg-radial-[at_20%_30%] from-transparent via-[#001429]/14 to-[#001429]/45" />
     <div aria-hidden="true" className="htb-ambient-glow absolute inset-0 z-[2]" />
 
     <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-20">
@@ -67,7 +67,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreServices, onDiscussProject 
             </button>
           </div>
 
-          <div className="flex items-center gap-4 pt-4 text-xs text-slate-200">
+          <div className="flex items-center gap-3 pt-4 text-sm leading-relaxed text-slate-100">
             <span className="flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-[#FFB81C]" />
               <span>Chesterfield, Derbyshire, UK</span>
@@ -82,11 +82,11 @@ export const Hero: React.FC<HeroProps> = ({ onExploreServices, onDiscussProject 
             <div className="font-script text-2xl leading-snug text-[#FFB81C] sm:text-3xl">
               “Ideas. Strategy. Solutions. Results.”
             </div>
-            <p className="mt-3 text-xs leading-relaxed text-slate-100">
+            <p className="mt-3 text-sm leading-relaxed text-slate-100 sm:text-base">
               Practical consulting tailored to your operating environment, delivering genuine business clarity and lasting change.
             </p>
 
-            <div className="mt-5 flex items-center justify-between border-t border-white/20 pt-4 text-xs">
+            <div className="mt-5 flex items-center justify-between border-t border-white/20 pt-4 text-sm">
               <span className="text-slate-200">Initial Discovery</span>
               <span className="flex items-center gap-1 font-semibold text-[#FFB81C]">
                 <Sparkles className="h-3.5 w-3.5" /> 30-min Microsoft Teams
