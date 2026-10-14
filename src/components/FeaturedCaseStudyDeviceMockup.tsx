@@ -11,7 +11,7 @@ const scheduleRows = [
 export const FeaturedCaseStudyDeviceMockup: React.FC = () => (
   <div
     role="img"
-    aria-label="Illustrative care appointment dashboard shown on a laptop with a companion mobile booking screen"
+    aria-label="Illustrative Orapy appointments dashboard shown on a laptop with a companion mobile booking screen"
     className="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_48%_40%,#FFFFFF_0%,#F4F7FA_58%,#E7EDF4_100%)] px-4 sm:aspect-[16/10] lg:aspect-auto lg:min-h-[420px]"
   >
     <div aria-hidden="true" className="absolute inset-x-[12%] bottom-[13%] h-7 rounded-full bg-[#17344D]/10 blur-xl" />
@@ -24,13 +24,14 @@ export const FeaturedCaseStudyDeviceMockup: React.FC = () => (
             <div className="flex h-full min-h-0">
               <aside className="flex w-[22%] shrink-0 flex-col gap-2 bg-[#F2F5F9] px-1.5 py-2 sm:gap-3 sm:px-2.5 sm:py-3">
                 <div className="mb-1 flex items-center gap-1 text-[6px] font-extrabold text-[#12385B] sm:text-[9px]">
-                  <span className="grid h-3.5 w-3.5 place-items-center rounded bg-[#0B63CE] text-[7px] text-white sm:h-5 sm:w-5 sm:text-[9px]">C</span>
-                  CareDesk
+                  <span className="grid h-3.5 w-3.5 place-items-center rounded-full border border-[#0B63CE] text-[7px] text-[#0B63CE] sm:h-5 sm:w-5 sm:text-[9px]">O</span>
+                  Orapy
                 </div>
-                <div className="rounded bg-[#DCEBFB] px-1 py-1 text-[5px] font-bold text-[#075CB8] sm:px-1.5 sm:text-[7px]">Appointments</div>
-                <div className="px-1 py-0.5 text-[5px] text-slate-500 sm:px-1.5 sm:text-[7px]">Service users</div>
-                <div className="px-1 py-0.5 text-[5px] text-slate-500 sm:px-1.5 sm:text-[7px]">Referrals</div>
-                <div className="px-1 py-0.5 text-[5px] text-slate-500 sm:px-1.5 sm:text-[7px]">Reports</div>
+                <div className="rounded bg-[#DCEBFB] px-1 py-1 text-[5px] font-bold text-[#075CB8] sm:px-1.5 sm:text-[7px]">Dashboard</div>
+                <div className="px-1 py-0.5 text-[5px] text-slate-500 sm:px-1.5 sm:text-[7px]">Calendar</div>
+                <div className="px-1 py-0.5 text-[5px] text-slate-500 sm:px-1.5 sm:text-[7px]">Patients</div>
+                <div className="px-1 py-0.5 text-[5px] text-slate-500 sm:px-1.5 sm:text-[7px]">Appointments</div>
+                <div className="px-1 py-0.5 text-[5px] text-slate-500 sm:px-1.5 sm:text-[7px]">Messages</div>
                 <div className="mt-auto border-t border-slate-200 px-1 pt-2 text-[5px] text-slate-500 sm:px-1.5 sm:text-[7px]">Settings</div>
               </aside>
 
@@ -87,19 +88,27 @@ export const FeaturedCaseStudyDeviceMockup: React.FC = () => (
         <div className="rounded-[1rem] border-[3px] border-[#1B2936] bg-[#1B2936] p-[2px] shadow-xl shadow-[#001F3F]/25 sm:rounded-[1.2rem] sm:border-4 sm:p-[3px]">
           <div className="relative aspect-[0.53] overflow-hidden rounded-[0.8rem] bg-white px-1.5 pb-2 pt-4 font-sans text-[#24384B] sm:rounded-[1rem] sm:px-2 sm:pt-5">
             <div className="absolute left-1/2 top-1.5 h-1 w-7 -translate-x-1/2 rounded-full bg-[#1B2936] sm:top-2 sm:h-1.5 sm:w-9" />
-            <p className="text-[6px] font-bold sm:text-[8px]">Care appointments</p>
-            <p className="mt-1 text-[5px] text-slate-500 sm:text-[6px]">Book a support visit</p>
+            <div className="flex items-center gap-1 text-[6px] font-bold text-[#12385B] sm:text-[8px]">
+              <span className="grid h-3 w-3 place-items-center rounded-full border border-[#0B63CE] text-[5px] text-[#0B63CE] sm:h-3.5 sm:w-3.5 sm:text-[6px]">O</span>
+              Orapy
+            </div>
+            <p className="mt-2 text-[6px] font-bold sm:text-[8px]">Book your appointment</p>
+            <p className="mt-0.5 text-[5px] text-slate-500 sm:text-[6px]">Choose a time that works</p>
             <div className="mt-2 rounded-md bg-[#EFF5FC] p-1.5 sm:mt-3 sm:p-2">
               <p className="text-[4px] font-semibold uppercase tracking-wide text-[#55718E] sm:text-[5px]">Next available</p>
               <p className="mt-0.5 text-[7px] font-bold text-[#12385B] sm:text-[9px]">Thu, 15 Oct</p>
               <p className="text-[5px] text-slate-600 sm:text-[6px]">09:30 · Community team</p>
             </div>
-            <p className="mt-2 text-[5px] font-semibold sm:mt-3 sm:text-[6px]">Choose a time</p>
+            <div className="mt-2 space-y-1 text-[5px] text-slate-600 sm:mt-3 sm:text-[6px]">
+              <p>✓ Check availability</p>
+              <p>✓ Choose a time</p>
+              <p>✓ Confirm booking</p>
+            </div>
             <div className="mt-1 grid grid-cols-2 gap-1">
               <span className="rounded border border-[#B9D0EA] px-1 py-0.5 text-center text-[4px] text-[#285E97] sm:text-[5px]">09:30</span>
               <span className="rounded border border-slate-200 px-1 py-0.5 text-center text-[4px] text-slate-500 sm:text-[5px]">10:45</span>
             </div>
-            <div className="mt-2 rounded bg-[#0B63CE] py-1 text-center text-[5px] font-bold text-white sm:mt-3 sm:py-1.5 sm:text-[6px]">Request visit</div>
+            <div className="mt-2 rounded bg-[#0B63CE] py-1 text-center text-[5px] font-bold text-white sm:mt-3 sm:py-1.5 sm:text-[6px]">Book now</div>
           </div>
         </div>
         <div className="mx-auto h-1.5 w-1/2 rounded-b-md bg-[#7E8B97]" />
