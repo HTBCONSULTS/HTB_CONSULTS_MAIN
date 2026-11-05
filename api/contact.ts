@@ -1,3 +1,5 @@
+import nodemailer from 'nodemailer';
+
 type ApiRequest = {
   method?: string;
   body?: unknown;
@@ -42,6 +44,28 @@ const getClientAddress = (headers: ApiRequest['headers']): string => {
   const forwarded = headers?.['x-forwarded-for'] ?? headers?.['x-real-ip'];
   const firstAddress = Array.isArray(forwarded) ? forwarded[0] : forwarded;
   return typeof firstAddress === 'string' ? firstAddress.split(',')[0].trim().slice(0, 64) || 'unknown' : 'unknown';
+};
+
+const getSmtpTransport = () => {
+  const host = getText(process.env.SMTP_HOST);
+  const user = getText(process.env.SMTP_USER);
+  const password = process.env.SMTP_PASSWORD || '';
+  const port = Number(process.env.SMTP_PORT || 465);
+  const secure = getText(process.env.SMTP_SECURE).toLowerCase() !== 'false';
+
+  if (!host || !user || !password || !Number.isInteger(port) || port < 1 || port > 65535) {
+    return null;
+  }
+
+  return nodemailer.createTransport({
+    host,
+    port,
+    secure,
+    auth: { user, pass: password },
+    connectionTimeout: 10_000,
+    greetingTimeout: 10_000,
+    socketTimeout: 10_000,
+  });
 };
 
 export default async function handler(request: ApiRequest, response: ApiResponse): Promise<void> {
@@ -118,11 +142,12 @@ export default async function handler(request: ApiRequest, response: ApiResponse
     }
   }
 
-  const apiKey = getText(process.env.RESEND_API_KEY);
-  const from = getText(process.env.CONTACT_FROM_EMAIL);
+  const smtpUser = getText(process.env.SMTP_USER);
+  const from = getText(process.env.CONTACT_FROM_EMAIL) || smtpUser;
   const to = getText(process.env.CONTACT_TO_EMAIL) || DEFAULT_RECIPIENT;
   const fromAddress = from.match(/<([^<>]+)>$/)?.[1] || from;
-  if (!apiKey || !from || from.length > 200 || /[\r\n]/.test(from) || !EMAIL_PATTERN.test(fromAddress) || !EMAIL_PATTERN.test(to)) {
+  const transporter = getSmtpTransport();
+  if (!transporter || !smtpUser || !from || from.length > 200 || /[\r\n]/.test(from) || !EMAIL_PATTERN.test(fromAddress) || !EMAIL_PATTERN.test(to)) {
     response.status(503).json({
       error: `Online email delivery is not configured yet. Please email ${DEFAULT_RECIPIENT} directly.`,
     });
@@ -158,31 +183,18 @@ export default async function handler(request: ApiRequest, response: ApiResponse
   ].join('');
 
   try {
-    const delivery = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        reply_to: email,
-        subject,
-        text,
-        html,
-      }),
-      signal: AbortSignal.timeout(10_000),
+    await transporter.sendMail({
+      from,
+      to,
+      replyTo: email,
+      subject,
+      text,
+      html,
     });
 
-    if (!delivery.ok) {
-      console.error('Contact email provider returned status', delivery.status);
-      response.status(502).json({ error: 'We could not send this just now. Please try again or email HTB Consult directly.' });
-      return;
-    }
-
     response.status(200).json({ success: true });
-  } catch {
+  } catch (error) {
+    console.error('Namecheap SMTP delivery failed', error);
     response.status(502).json({ error: 'We could not send this just now. Please try again or email HTB Consult directly.' });
   }
 }
