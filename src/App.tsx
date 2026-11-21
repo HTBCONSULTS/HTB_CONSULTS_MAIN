@@ -8,6 +8,7 @@ import { PolicyModal } from './components/PolicyModal';
 import { SERVICES, CASE_STUDIES, INSIGHTS_ARTICLES, INSIGHTS_PAGE_SEO, PAGE_SEO, SITE_SEO } from './config/siteData';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
+import { ProcessImprovementPage } from './pages/ProcessImprovementPage';
 import { ServicesPage } from './pages/ServicesPage';
 import { CaseStudiesPage } from './pages/CaseStudiesPage';
 import { CaseStudyDetailPage } from './pages/CaseStudyDetailPage';
@@ -199,6 +200,7 @@ export const SiteApp: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage onExploreServices={() => navigate('/services')} onDiscussProject={() => goToContact()} />} />
           <Route path="/about" element={<AboutPage onLearnMoreServices={() => navigate('/services')} onBookConsultation={() => goToContact()} />} />
+          <Route path="/services/process-improvement" element={<ProcessImprovementPage />} />
           <Route path="/services" element={<ServicesPage activeServiceId={activeServiceId} onSelectServiceForEnquiry={(name) => goToContact(name)} onOpenConsultation={() => goToContact()} />} />
           <Route path="/case-studies" element={<CaseStudiesPage onBookConsultation={() => goToContact()} />} />
           <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
