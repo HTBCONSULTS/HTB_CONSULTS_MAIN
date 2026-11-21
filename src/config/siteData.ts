@@ -12,8 +12,8 @@ export const SITE_SEO = {
 };
 
 export const INSIGHTS_PAGE_SEO = {
-  title: 'Insights & Articles | HTB Consult',
-  description: 'Practical guidance to help organisations and entrepreneurs make clearer decisions, improve operations and deliver change.',
+  title: 'Business Analysis, Process Mapping & Digital Delivery Guides | HTB Consult',
+  description: 'Read HTB Consult guides on testing business ideas, planning a minimum viable product, mapping processes and managing digital change in a growing business.',
   keywords: 'HTB Consult insights, business strategy, business analysis, process improvement, digital transformation',
   shareImage: VISUAL_ASSETS.insightsHero,
 };
@@ -403,9 +403,10 @@ export const INSIGHTS_ARTICLES: InsightArticle[] = [
     keyTakeaway: 'An MVP is the smallest reliable, usable product that tests a defined value proposition—not a rushed or incomplete version of the idea.',
     relatedTopics: ['Business Analysis', 'MVP', 'Product Development', 'Digital Transformation', 'Agile'],
     internalLinks: [
-      { label: 'Business Analysis & Requirements', href: '/services#service-analysis' },
-      { label: 'Digital Transformation & Software Solutions', href: '/services#service-transformation' },
-      { label: 'Product, Project & Delivery Management', href: '/services#service-delivery' },
+      { label: 'Bespoke software development', href: '/services/software-development' },
+      { label: 'Business Analysis & Requirements', href: '/services/business-analysis' },
+      { label: 'Digital Transformation & Software Solutions', href: '/services/digital-transformation' },
+      { label: 'Product, Project & Delivery Management', href: '/services/project-delivery' },
     ],
   },
   {
@@ -429,9 +430,9 @@ export const INSIGHTS_ARTICLES: InsightArticle[] = [
     keyTakeaway: 'A viable idea moves from concept to sustainable outcomes through clear problem definition, opportunity validation, strategy, requirements, phased execution and continuous improvement.',
     relatedTopics: ['Strategy', 'Entrepreneurship', 'Execution'],
     internalLinks: [
-      { label: 'Business Strategy & Growth', href: '/services#service-strategy' },
-      { label: 'Business Analysis & Requirements', href: '/services#service-analysis' },
-      { label: 'Product, Project & Delivery Management', href: '/services#service-delivery' },
+      { label: 'Business Strategy & Growth', href: '/services/business-strategy' },
+      { label: 'Business Analysis & Requirements', href: '/services/business-analysis' },
+      { label: 'Product, Project & Delivery Management', href: '/services/project-delivery' },
     ],
   },
   {
@@ -455,9 +456,9 @@ export const INSIGHTS_ARTICLES: InsightArticle[] = [
     keyTakeaway: 'Map how work actually happens, then prioritise evidence-led improvements before choosing technology.',
     relatedTopics: ['AS-IS vs TO-BE', 'Workflow Optimisation', 'Efficiency'],
     internalLinks: [
-      { label: 'Business Analysis & Requirements', href: '/services#service-analysis' },
+      { label: 'Business Analysis & Requirements', href: '/services/business-analysis' },
       { label: 'Business process improvement consultancy', href: '/services/process-improvement' },
-      { label: 'Digital Transformation & Software Solutions', href: '/services#service-transformation' },
+      { label: 'Digital Transformation & Software Solutions', href: '/services/digital-transformation' },
     ],
   },
   {
@@ -481,8 +482,8 @@ export const INSIGHTS_ARTICLES: InsightArticle[] = [
     keyTakeaway: 'Judge digital transformation by business outcomes, not the number of tools introduced.',
     relatedTopics: ['SMEs', 'Cloud Tech', 'Modernisation'],
     internalLinks: [
-      { label: 'Business Analysis & Requirements', href: '/services#service-analysis' },
-      { label: 'Digital Transformation & Software Solutions', href: '/services#service-transformation' },
+      { label: 'Business Analysis & Requirements', href: '/services/business-analysis' },
+      { label: 'Digital Transformation & Software Solutions', href: '/services/digital-transformation' },
       { label: 'Business process improvement consultancy', href: '/services/process-improvement' },
     ],
   },
@@ -545,7 +546,7 @@ export const PAGE_SEO: Record<string, { title: string; description: string }> = 
   },
   '/about': {
     title: 'About HTB Consult | Business Consultants in Chesterfield',
-    description: 'Meet HTB Consult and discover how our team helps organisations understand business problems, design practical solutions and manage change.',
+    description: 'Meet founder Oluwasegun Ajibola and discover how our Chesterfield consultancy helps UK teams define requirements, improve processes and deliver digital projects.',
   },
   '/services': {
     title: 'Business & Digital Transformation Consulting Services | HTB Consult',
@@ -553,7 +554,7 @@ export const PAGE_SEO: Record<string, { title: string; description: string }> = 
   },
   '/case-studies': {
     title: 'Business Consulting Case Studies | HTB Consult',
-    description: 'Explore consulting projects covering business analysis, digital transformation and delivery. Read about the challenge, approach and outcome of each project.',
+    description: 'Read three HTB Consult case studies covering Microsoft Dynamics 365 in healthcare, Salesforce enquiry handling and HR cloud migration.',
   },
   '/academy': {
     title: 'Professional Training & Business Analysis Courses | HTB Academy',

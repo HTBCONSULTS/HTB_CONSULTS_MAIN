@@ -64,18 +64,8 @@ export const FounderProfileSection: React.FC = () => (
           </p>
 
           <div className="mt-5 space-y-4 text-sm leading-7 text-slate-600 sm:text-base sm:leading-relaxed">
-            <p>
-              Oluwasegun Ajibola is a business strategy, business analysis and digital transformation professional with multidisciplinary expertise in process improvement, change management, software solutions and digital product development.
-            </p>
-            <p>
-              As Founder and Managing Director of HTB Consult, he leads the organisation's strategic direction, business development and digital transformation initiatives, with a clear commitment to helping entrepreneurs, businesses and organisations achieve sustainable growth and operational excellence.
-            </p>
-            <p>
-              His leadership is driven by the belief that successful transformation requires more than innovative ideas or technology. It demands strategic clarity, rigorous analysis, informed decision-making and disciplined execution.
-            </p>
-            <p>
-              Through HTB Consult, he champions a results-oriented consulting approach that bridges business strategy and technology, strengthens organisational capabilities and translates complex challenges into practical, measurable business solutions.
-            </p>
+            <p>Oluwasegun Ajibola founded HTB Consult and leads its consulting work. His background spans business analysis, process improvement and digital product delivery.</p>
+            <p>His approach starts with a question clients can test. What should become easier for the person doing the work? That question guides decisions about requirements, software and how a team measures the result.</p>
           </div>
 
           <div className="mt-6 border-t border-[#001F3F]/10 pt-5">

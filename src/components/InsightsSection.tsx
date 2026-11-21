@@ -12,22 +12,7 @@ export const InsightsSection: React.FC = () => {
   return (
     <section id="insights" className="relative bg-white bg-blueprint-subtle py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="htb-glass-panel mb-12 flex flex-col justify-between gap-6 rounded-2xl p-5 sm:flex-row sm:items-end sm:p-7">
-          <div className="max-w-2xl">
-            <div className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#8A4B08]">
-              <span aria-hidden="true" className="h-[2px] w-5 bg-[#FFB81C]" />
-              <span>Insights &amp; Articles</span>
-            </div>
-            <h2 className="font-editorial text-3xl font-medium leading-tight text-[#001F3F] sm:text-4xl">
-              Practical Insights for <span className="italic text-[#0A2E5C]">Real Progress.</span>
-            </h2>
-            <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
-              Practical guidance to help organisations and entrepreneurs make clearer decisions, improve operations and deliver change.
-            </p>
-          </div>
-          <div className="hidden font-script text-2xl text-[#8A4B08] md:block">“Think. Analyse. Improve. Grow.”</div>
-        </div>
-
+        <h2 className="sr-only">Consulting guides</h2>
         {featuredArticle && (
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
             <article className="htb-card htb-card--dark flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#001F3F] text-white shadow-lg lg:col-span-6">

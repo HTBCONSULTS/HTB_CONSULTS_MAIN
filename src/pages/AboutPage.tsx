@@ -14,11 +14,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onLearnMoreServices, onBoo
   <>
     <PageHero
       eyebrow="About HTB Consult"
-      title="People. Insight. Practical Solutions."
-      description="A collaborative UK consultancy connecting clear thinking with practical delivery for organisations ready to make meaningful progress."
+      title="Meet HTB Consult"
+      description="We’re a business analysis and digital transformation consultancy based in Chesterfield, Derbyshire. We help UK teams understand where work gets stuck, decide what needs to change and put that change into practice."
       image={VISUAL_ASSETS.aboutHero}
-      ctaLabel="Explore our services"
-      ctaTo="/services"
+      ctaLabel="See our project case studies"
+      ctaTo="/case-studies"
     />
     <AboutSection showIntro={false} onLearnMoreServices={onLearnMoreServices} onBookConsultation={onBookConsultation} />
     <FounderProfileSection />
