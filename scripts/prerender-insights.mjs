@@ -68,7 +68,7 @@ const vite = await createServer({
 });
 
 try {
-  const [{ SiteApp }, { CASE_STUDIES, INSIGHTS_ARTICLES, INSIGHTS_PAGE_SEO, SITE_SEO }] = await Promise.all([
+  const [{ SiteApp }, { CASE_STUDIES, INSIGHTS_ARTICLES, INSIGHTS_PAGE_SEO, PAGE_SEO, SITE_SEO }] = await Promise.all([
     vite.ssrLoadModule('/src/App.tsx'),
     vite.ssrLoadModule('/src/config/siteData.ts'),
   ]);
@@ -108,6 +108,13 @@ try {
     }
     return { page, markup };
   };
+
+  for (const [route, metadata] of Object.entries(PAGE_SEO)) {
+    const { page } = await createPage({ route, ...metadata, keywords: SITE_SEO.keywords });
+    const target = path.join(outputDir, route, 'index.html');
+    await mkdir(path.dirname(target), { recursive: true });
+    await writeFile(target, publicOrigin ? upsertCanonical(page, publicOrigin + route) : page);
+  }
 
   const listing = await createPage({
     route: '/insights',
@@ -157,7 +164,7 @@ try {
   }
 
   if (publicOrigin) {
-    const routes = ['/', '/about', '/services', '/case-studies', '/insights', '/academy', '/contact', ...CASE_STUDIES.map((study) => `/case-studies/${study.id}`), ...INSIGHTS_ARTICLES.map((article) => `/insights/${article.slug}`)];
+    const routes = [...Object.keys(PAGE_SEO), '/insights', ...CASE_STUDIES.map((study) => `/case-studies/${study.id}`), ...INSIGHTS_ARTICLES.map((article) => `/insights/${article.slug}`)];
     const urls = routes.map((route) => `  <url><loc>${escapeHtml(`${publicOrigin}${route}`)}</loc></url>`).join('\n');
     await writeFile(path.join(outputDir, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`, 'utf8');
     await writeFile(path.join(outputDir, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /api/*\nSitemap: ${publicOrigin}/sitemap.xml\n`, 'utf8');

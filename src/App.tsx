@@ -5,7 +5,7 @@ import { Footer } from './components/Footer';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { SearchModal } from './components/SearchModal';
 import { PolicyModal } from './components/PolicyModal';
-import { SERVICES, CASE_STUDIES, INSIGHTS_ARTICLES, INSIGHTS_PAGE_SEO, SITE_SEO } from './config/siteData';
+import { SERVICES, CASE_STUDIES, INSIGHTS_ARTICLES, INSIGHTS_PAGE_SEO, PAGE_SEO, SITE_SEO } from './config/siteData';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ServicesPage } from './pages/ServicesPage';
@@ -16,16 +16,6 @@ import { InsightArticlePage } from './pages/InsightArticlePage';
 import { AcademyPage } from './pages/AcademyPage';
 import { ContactPage } from './pages/ContactPage';
 import { NotFoundPage } from './pages/NotFoundPage';
-
-const PAGE_TITLES: Record<string, string> = {
-  '/': 'HTB Consult | Clarity in Strategy. Confidence in Delivery.',
-  '/about': 'About HTB Consult | People. Insight. Practical Solutions.',
-  '/services': 'Services | HTB Consult',
-  '/case-studies': 'Case Studies | HTB Consult',
-  '/insights': 'Insights & Articles | HTB Consult',
-  '/academy': 'HTB Consult Academy | Build Capability for the Future of Work',
-  '/contact': 'Contact HTB Consult | Let’s talk about your next step.',
-};
 
 const setMetaContent = (selector: string, attributes: Record<string, string>, content: string) => {
   let element = document.head.querySelector(selector) as HTMLMetaElement | null;
@@ -103,8 +93,8 @@ export const SiteApp: React.FC = () => {
     const pathname = location.pathname.replace(/\/$/, '') || '/';
     const article = INSIGHTS_ARTICLES.find((item) => pathname === `/insights/${item.slug}`);
     const project = CASE_STUDIES.find((item) => pathname === `/case-studies/${item.id}`);
-    const title = article?.seoTitle ?? (project ? `${project.title} | Case Study | HTB Consult` : pathname === '/insights' ? INSIGHTS_PAGE_SEO.title : PAGE_TITLES[pathname] ?? SITE_SEO.title);
-    const description = article?.metaDescription ?? project?.subtitle ?? (pathname === '/insights' ? INSIGHTS_PAGE_SEO.description : SITE_SEO.description);
+    const title = article?.seoTitle ?? (project ? `${project.title} | Case Study | HTB Consult` : pathname === '/insights' ? INSIGHTS_PAGE_SEO.title : PAGE_SEO[pathname]?.title ?? SITE_SEO.title);
+    const description = article?.metaDescription ?? project?.subtitle ?? (pathname === '/insights' ? INSIGHTS_PAGE_SEO.description : PAGE_SEO[pathname]?.description ?? SITE_SEO.description);
     const keywords = article
       ? [article.primaryKeyword, ...(article.relatedTopics ?? [])].slice(0, 8).join(', ')
       : project ? [project.sector, project.serviceArea, 'HTB Consult case study'].join(', ') : pathname === '/insights' ? INSIGHTS_PAGE_SEO.keywords : SITE_SEO.keywords;

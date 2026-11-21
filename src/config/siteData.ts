@@ -530,3 +530,30 @@ export const FAQS = [
     answer: 'Yes, we provide an initial 30-minute consultation free of charge via Microsoft Teams to discuss your challenge, explore practical options, and see how HTB Consult can best support you.',
   },
 ];
+
+export const PAGE_SEO: Record<string, { title: string; description: string }> = {
+  '/': {
+    title: 'Business Analysis & Process Improvement Consultancy UK | HTB Consult',
+    description: 'HTB Consult helps UK organisations define requirements, improve processes and deliver digital change. Based in Chesterfield, Derbyshire.',
+  },
+  '/about': {
+    title: 'About HTB Consult | Business Consultants in Chesterfield',
+    description: 'Meet HTB Consult and discover how our team helps organisations understand business problems, design practical solutions and manage change.',
+  },
+  '/services': {
+    title: 'Business & Digital Transformation Consulting Services | HTB Consult',
+    description: 'Explore support with business strategy, requirements, digital transformation, process improvement, project delivery and tender writing.',
+  },
+  '/case-studies': {
+    title: 'Business Consulting Case Studies | HTB Consult',
+    description: 'Explore consulting projects covering business analysis, digital transformation and delivery. Read about the challenge, approach and outcome of each project.',
+  },
+  '/academy': {
+    title: 'Professional Training & Business Analysis Courses | HTB Academy',
+    description: 'Explore practical training in business analysis, process improvement, change management and project delivery through HTB Consult Academy.',
+  },
+  '/contact': {
+    title: 'Contact HTB Consult | Business Consultancy in Chesterfield',
+    description: 'Discuss your project with our Chesterfield consultancy. Book a free 30-minute online consultation for business analysis, process improvement or digital change.',
+  },
+};
