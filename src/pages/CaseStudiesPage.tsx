@@ -11,8 +11,8 @@ export const CaseStudiesPage: React.FC<CaseStudiesPageProps> = ({ onBookConsulta
   <>
     <PageHero
       eyebrow="Case Studies"
-      title="Practical work. Measurable impact."
-      description="Explore practical examples of strategy, analysis and digital delivery supporting better ways of working."
+      title="Consulting project case studies"
+      description="Explore how HTB supported a healthcare CRM implementation, a Salesforce enquiry journey and an HR cloud migration. Each project sets out the challenge, our role and the reported outcomes."
       image={VISUAL_ASSETS.caseStudiesHero}
       ctaLabel="Discuss your project"
       ctaTo="/contact"

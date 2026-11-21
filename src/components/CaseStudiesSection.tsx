@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CASE_STUDIES, INSIGHTS_ARTICLES } from '../config/siteData';
-import { ArrowRight, Clock, Sparkles } from 'lucide-react';
+import { CASE_STUDIES } from '../config/siteData';
+import { ArrowRight } from 'lucide-react';
 
 interface CaseStudiesSectionProps {
   onBookConsultation: () => void;
@@ -23,23 +23,14 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({
         {/* Section Header */}
         <div className="htb-glass-panel flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 rounded-2xl p-5 sm:p-7">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-[#B45309] mb-3">
-              <span className="w-5 h-[2px] bg-[#FFB81C]" />
-              <span>Proven Impact</span>
-            </div>
-            <h2 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-medium text-[#001F3F] leading-tight">
-              Real Challenges.{' '}
-              <span className="text-[#0A2E5C] italic">Practical Solutions.</span>
-            </h2>
-            <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
-              Read the full-length practical guides supplied by HTB Consult, then explore selected project case studies and their outcomes.
-            </p>
+            <h2 className="font-editorial text-3xl text-[#001F3F] sm:text-4xl">Explore projects by sector</h2>
           </div>
 
           {/* Interactive Filter Tabs (Functional Buttons) */}
-          <div className="flex items-center gap-1.5 p-1 bg-slate-200/80 rounded-lg shrink-0">
+          <div className="flex flex-wrap items-center gap-1.5 p-1 bg-slate-200/80 rounded-lg shrink-0">
             <button
               type="button"
+              aria-pressed={selectedFilter === 'all'}
               onClick={() => setSelectedFilter('all')}
               className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all cursor-pointer ${
                 selectedFilter === 'all'
@@ -51,6 +42,7 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({
             </button>
             <button
               type="button"
+              aria-pressed={selectedFilter === 'Healthcare & Social Care'}
               onClick={() => setSelectedFilter('Healthcare & Social Care')}
               className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all cursor-pointer ${
                 selectedFilter === 'Healthcare & Social Care'
@@ -62,6 +54,7 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({
             </button>
             <button
               type="button"
+              aria-pressed={selectedFilter === 'Private Sector'}
               onClick={() => setSelectedFilter('Private Sector')}
               className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-all cursor-pointer ${
                 selectedFilter === 'Private Sector'
@@ -72,37 +65,6 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({
               Private Sector
             </button>
           </div>
-        </div>
-
-        <section aria-labelledby="case-study-articles-heading" className="mb-14">
-          <div className="mb-6 max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#8A4B08]">Full-length articles</p>
-            <h3 id="case-study-articles-heading" className="mt-2 font-editorial text-2xl font-semibold text-[#001F3F] sm:text-3xl">Practical guides from HTB Consult</h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">Each guide opens as a complete article page, preserving the detail, frameworks and checklists from the supplied Word documents.</p>
-          </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {INSIGHTS_ARTICLES.map((article) => (
-              <article key={article.id} className="htb-card flex flex-col rounded-2xl border border-slate-200/80 bg-white p-5 shadow-xs">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-[#8A4B08]">{article.category}</div>
-                <h4 className="mt-3 font-editorial text-lg font-semibold leading-snug text-[#001F3F]">{article.title}</h4>
-                <p className="mt-2 flex-1 text-xs leading-relaxed text-slate-600">{article.excerpt}</p>
-                <div className="mt-4 flex items-center justify-between gap-2 border-t border-slate-100 pt-3">
-                  <span className="inline-flex items-center gap-1.5 text-[11px] text-slate-500"><Clock className="h-3.5 w-3.5" aria-hidden="true" />{article.readTime}</span>
-                  <Link to={`/insights/${article.slug}`} className="focus-visible-brand inline-flex items-center gap-1 text-xs font-bold text-[#001F3F] hover:text-[#8A4B08]">
-                    Read full article<ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#8A4B08]">Selected projects</p>
-            <h3 className="mt-2 font-editorial text-2xl font-semibold text-[#001F3F] sm:text-3xl">Project case studies</h3>
-          </div>
-          <p className="text-xs text-slate-500">Open a project to read its full case study.</p>
         </div>
 
         {/* Project case studies */}
@@ -174,19 +136,7 @@ export const CaseStudiesSection: React.FC<CaseStudiesSectionProps> = ({
 
         {/* Informational Callout: More Case Studies Coming Soon */}
         <div className="htb-card mt-12 bg-white rounded-xl border border-dashed border-slate-300 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#FFF8E7] flex items-center justify-center text-[#B45309] shrink-0">
-              <Sparkles className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="text-sm font-bold text-[#001F3F]">
-                More Case Studies Continually Added
-              </h4>
-              <p className="text-xs text-slate-500">
-                We are actively supporting organisations across multiple sectors. Additional project stories will be published as initiatives complete.
-              </p>
-            </div>
-          </div>
+          <Link to="/insights" className="focus-visible-brand font-semibold text-[#001F3F] underline">Read our guides to process mapping and digital delivery</Link>
           <button
             type="button"
             onClick={onBookConsultation}

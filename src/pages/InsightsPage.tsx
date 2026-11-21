@@ -7,8 +7,8 @@ export const InsightsPage: React.FC = () => (
   <>
     <PageHero
       eyebrow="Insights & Articles"
-      title="Ideas for your next step."
-      description="Guidance and perspectives to help organisations understand challenges, improve operations and deliver useful change."
+      title="Business analysis and digital delivery guides"
+      description="Explore how to test a business idea, scope a first software release, map a process or plan a digital change for a growing business."
       image={VISUAL_ASSETS.insightsHero}
     />
     <InsightsSection />

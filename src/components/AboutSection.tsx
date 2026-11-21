@@ -50,10 +50,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             <div>
               <div className="text-xs font-bold uppercase tracking-wider text-[#B45309]">Our Story</div>
               <h3 className="font-editorial mt-1 text-[21px] font-semibold leading-snug text-[#001F3F] sm:text-3xl">
-                A consultancy built on real-world experience.
+                Where our work begins
               </h3>
               <p className="mt-3 text-[13px] leading-6 text-slate-600 sm:mt-4 sm:text-base sm:leading-relaxed">
-                HTB Consult was founded to bridge the gap between strategy and delivery, helping organisations turn ideas into practical solutions that work in the real world. We combine business analysis, digital capability and hands-on support to deliver solutions that create measurable value.
+                A project often starts with a request for a new system. Our first step is to sit down with the people doing the work. Where does a customer enquiry go? Who needs the information next? The answers help us agree whether to change the process, improve the software or do both.
               </p>
             </div>
 
