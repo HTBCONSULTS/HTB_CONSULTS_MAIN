@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  SERVICES 
+  ACADEMY_SITE_URL, SERVICES
 } from '../config/siteData';
 import { ServiceItem } from '../types';
 import { VISUAL_ASSETS } from '../config/visualAssets';
@@ -196,10 +196,11 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                       <span>Discuss Your Requirement</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
-                    {service.id === 'service-process' && (
-                      <Link className="focus-visible-brand mt-3 block text-sm font-semibold text-[#001F3F] underline" to="/services/process-improvement">
-                        Explore process improvement consultancy
-                      </Link>
+                    <Link className="focus-visible-brand mt-3 block text-sm font-semibold text-[#001F3F] underline" to={service.path}>
+                      Explore {service.name.toLowerCase()}
+                    </Link>
+                    {service.id === 'service-transformation' && (
+                      <Link className="focus-visible-brand mt-3 block text-sm font-semibold underline" to="/services/software-development">Bespoke software development</Link>
                     )}
                   </div>
                 </div>
@@ -358,6 +359,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         })}
       </div>
 
+      <p className="mx-auto max-w-7xl px-5 py-8">Looking for training? <a href={ACADEMY_SITE_URL} className="font-semibold underline">Explore business analysis and professional courses at HTB Academy</a>.</p>
     </section>
   );
 };

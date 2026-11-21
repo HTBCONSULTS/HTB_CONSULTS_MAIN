@@ -195,7 +195,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenConsultation
                   return (
                     <Link
                       key={service.id}
-                      to={`/services#${service.id}`}
+                      to={service.path}
                       onClick={closeMenus}
                       aria-current={active ? 'location' : undefined}
                       className={`focus-visible-brand group flex items-start gap-3 rounded-lg border p-2.5 transition-colors ${active ? 'border-[#FFB81C]/50 bg-white/10' : 'border-transparent hover:border-white/10 hover:bg-white/5'}`}
@@ -345,7 +345,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenSearch, onOpenConsultation
                       return (
                         <Link
                           key={service.id}
-                          to={`/services#${service.id}`}
+                          to={service.path}
                           onClick={closeMenus}
                           aria-current={active ? 'location' : undefined}
                           className={`focus-visible-brand flex min-h-10 items-center gap-3 rounded-lg border px-3 py-2 transition-colors ${active ? 'border-[#FFB81C]/25 bg-white/[0.08] text-white' : 'border-transparent text-slate-300 hover:border-white/10 hover:bg-white/[0.05] hover:text-white'}`}

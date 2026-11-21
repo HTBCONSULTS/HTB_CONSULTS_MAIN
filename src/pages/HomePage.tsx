@@ -76,7 +76,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
           {SERVICES.map((service, index) => (
             <Link
               key={service.id}
-              to={`/services#${service.id}`}
+              to={service.path}
               className="htb-card group focus-visible-brand relative flex flex-col justify-between overflow-hidden rounded-xl border border-slate-200 bg-white p-4.5 transition-colors duration-300 sm:p-6"
             >
               <div className="flex items-start gap-3.5 sm:gap-4">

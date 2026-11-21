@@ -28,7 +28,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenPolicy }) => {
             <h2 className="text-xs font-bold uppercase tracking-[0.16em] text-[#FFB81C]">Our Core Services</h2>
             <ul className="grid gap-2 text-xs leading-5 text-slate-300">
               {SERVICES.map((service) => (
-                <li key={service.id}><Link to={`/services#${service.id}`} className="focus-visible-brand rounded-sm hover:text-white hover:underline">{service.name}</Link></li>
+                <li key={service.id}><Link to={service.path} className="focus-visible-brand rounded-sm hover:text-white hover:underline">{service.name}</Link></li>
               ))}
             </ul>
           </div>
