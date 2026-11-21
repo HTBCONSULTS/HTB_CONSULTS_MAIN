@@ -1,4 +1,5 @@
 export interface ServiceItem {
+  path: string;
   id: string;
   name: string;
   shortTagline: string;

@@ -1,3 +1,5 @@
+import { servicePages } from './config/servicePages';
+import { ConsultancyServicePage } from './pages/ConsultancyServicePage';
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { Header } from './components/Header';
@@ -200,6 +202,7 @@ export const SiteApp: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage onExploreServices={() => navigate('/services')} onDiscussProject={() => goToContact()} />} />
           <Route path="/about" element={<AboutPage onLearnMoreServices={() => navigate('/services')} onBookConsultation={() => goToContact()} />} />
+          {servicePages.map(page => <Route key={page.path} path={page.path} element={<ConsultancyServicePage page={page} />} />)}
           <Route path="/services/process-improvement" element={<ProcessImprovementPage />} />
           <Route path="/services" element={<ServicesPage activeServiceId={activeServiceId} onSelectServiceForEnquiry={(name) => goToContact(name)} onOpenConsultation={() => goToContact()} />} />
           <Route path="/case-studies" element={<CaseStudiesPage onBookConsultation={() => goToContact()} />} />

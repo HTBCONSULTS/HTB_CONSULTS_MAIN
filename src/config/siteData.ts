@@ -1,3 +1,4 @@
+import { servicePages } from './servicePages';
 import { ServiceItem, CaseStudy, InsightArticle, AcademyCourse } from '../types';
 import { VISUAL_ASSETS } from './visualAssets';
 import { INSIGHT_ARTICLE_CONTENT } from './articleContent';
@@ -109,6 +110,7 @@ export const APPROACH_STEPS = [
 export const SERVICES: ServiceItem[] = [
   {
     id: 'service-strategy',
+    path: '/services/business-strategy',
     name: 'Business Strategy & Growth',
     shortTagline: 'Strategic support for real business progress.',
     scriptPhrase: 'Ideas. Strategy. Growth. Results.',
@@ -142,6 +144,7 @@ export const SERVICES: ServiceItem[] = [
   },
   {
     id: 'service-analysis',
+    path: '/services/business-analysis',
     name: 'Business Analysis & Requirements',
     shortTagline: 'Turning ideas into clear requirements.',
     scriptPhrase: 'Ideas. Analysis. Solutions. Delivery.',
@@ -170,6 +173,7 @@ export const SERVICES: ServiceItem[] = [
   },
   {
     id: 'service-transformation',
+    path: '/services/digital-transformation',
     name: 'Digital Transformation & Software Solutions',
     shortTagline: 'Turning ideas into practical digital solutions.',
     scriptPhrase: 'Ideas. Technology. People. Real Results.',
@@ -198,6 +202,7 @@ export const SERVICES: ServiceItem[] = [
   },
   {
     id: 'service-process',
+    path: '/services/process-improvement',
     name: 'Process Improvement & Automation',
     shortTagline: 'Turn complex processes into simple, effective solutions.',
     scriptPhrase: 'Simpler Processes. Greater Results.',
@@ -226,6 +231,7 @@ export const SERVICES: ServiceItem[] = [
   },
   {
     id: 'service-delivery',
+    path: '/services/project-delivery',
     name: 'Product, Project & Delivery Management',
     shortTagline: 'From planning to delivery, we make it work.',
     scriptPhrase: 'Plan. Coordinate. Deliver. Create Lasting Value.',
@@ -254,6 +260,7 @@ export const SERVICES: ServiceItem[] = [
   },
   {
     id: 'service-bid',
+    path: '/services/bid-writing',
     name: 'Bid Writing, Tender Support & Training',
     shortTagline: 'Helping you win and deliver more opportunities.',
     scriptPhrase: 'Strategic Bids. Real Opportunities.',
@@ -552,6 +559,10 @@ export const PAGE_SEO: Record<string, { title: string; description: string }> = 
     title: 'Professional Training & Business Analysis Courses | HTB Academy',
     description: 'Explore practical training in business analysis, process improvement, change management and project delivery through HTB Consult Academy.',
   },
+  ...Object.fromEntries(servicePages.map(page => [page.path, {
+    title: page.heading + ' | HTB Consult',
+    description: page.description,
+  }])),
   '/services/process-improvement': {
     title: 'Business Process Improvement Consultancy | HTB Consult',
     description: 'Find where requests get held up, map handovers and test improvements with HTB Consult. Based in Chesterfield, serving Sheffield and organisations across the UK.',

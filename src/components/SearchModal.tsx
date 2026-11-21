@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { SERVICES, CASE_STUDIES, INSIGHTS_ARTICLES } from '../config/siteData';
 import { Search, X, ArrowRight, TrendingUp } from 'lucide-react';
 
+const searchableServices = [
+  ...SERVICES,
+  { id: 'software', name: 'Bespoke software development', path: '/services/software-development', shortTagline: 'Web applications, customer portals and MVP development', whatWeDo: 'Design, build and test custom software' },
+  { id: 'academy', name: 'HTB Academy courses and training', path: '/academy', shortTagline: 'Explore practical training and visit HTB Academy', whatWeDo: 'Business analysis and professional development courses' },
+];
+
 interface SearchModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -30,7 +36,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
   const cleanQuery = query.toLowerCase().trim();
 
   const matchingServices = cleanQuery
-    ? SERVICES.filter(
+    ? searchableServices.filter(
         (s) =>
           s.name.toLowerCase().includes(cleanQuery) ||
           s.shortTagline.toLowerCase().includes(cleanQuery) ||
@@ -118,7 +124,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                         key={s.id}
                         type="button"
                         onClick={() => {
-                          onSelectResult(`/services#${s.id}`);
+                          onSelectResult(s.path);
                           onClose();
                         }}
                         className="w-full p-2.5 rounded-lg text-left hover:bg-slate-100 flex items-center justify-between group transition-colors cursor-pointer"
