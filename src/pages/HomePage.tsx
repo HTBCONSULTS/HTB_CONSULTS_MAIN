@@ -1,29 +1,10 @@
 import React from 'react';
-import { ArrowRight, ArrowUpRight, BarChart3, CheckCircle2, Lightbulb, Target } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Hero } from '../components/Hero';
-import { FeaturedCaseStudyDeviceMockup } from '../components/FeaturedCaseStudyDeviceMockup';
 import { TrustPillarsStrip } from '../components/TrustPillarsStrip';
 import { SERVICES } from '../config/siteData';
 import { VISUAL_ASSETS } from '../config/visualAssets';
-
-const ORAPY_STORY_STEPS = [
-  {
-    title: 'The challenge',
-    description: 'A clear summary of the key challenges faced by the organisation.',
-    Icon: Target,
-  },
-  {
-    title: 'Our approach',
-    description: 'How HTB worked with the team to design and deliver the solution.',
-    Icon: Lightbulb,
-  },
-  {
-    title: 'The outcome',
-    description: 'The results and impact achieved through our collaboration.',
-    Icon: BarChart3,
-  },
-];
 
 interface HomePageProps {
   onExploreServices: () => void;
@@ -129,46 +110,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onExploreServices, onDiscuss
           </h2>
         </div>
 
-        <article aria-labelledby="featured-case-study-title" className="htb-card grid overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-xl shadow-[#001F3F]/10 lg:grid-cols-2">
-          <FeaturedCaseStudyDeviceMockup />
-
-          <div className="flex flex-col justify-between bg-[#F4F7FB] p-5 sm:p-7 lg:p-8">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#8A4B08]">
-                Illustrative case study layout
-              </p>
-              <h3 id="featured-case-study-title" className="mt-2 font-editorial text-[1.55rem] font-semibold leading-tight text-[#001F3F] sm:text-3xl">
-                Orapy <span className="text-[#B07818]">|</span> Digital transformation
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
-                A dedicated space to show the challenge, HTB’s contribution and verified project outcomes.
-              </p>
-
-              <div className="mt-6 grid gap-4 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-                {ORAPY_STORY_STEPS.map(({ title, description, Icon }) => (
-                  <div key={title} className="border-t border-slate-200 pt-3 md:border-t-0 md:pt-0 lg:border-t lg:pt-3 xl:border-t-0 xl:pt-0">
-                    <div className="flex items-center gap-2 text-sm font-bold text-[#001F3F]">
-                      <Icon className="h-5 w-5 shrink-0 text-[#B07818]" aria-hidden="true" />
-                      <h4>{title}</h4>
-                    </div>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                      {description}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-7 flex flex-col gap-3 border-t border-slate-200 pt-5 sm:flex-row sm:items-center sm:justify-between">
-              <Link to="/case-studies" className="focus-visible-brand inline-flex min-h-11 items-center justify-center gap-2 self-start rounded-md bg-[#FFB81C] px-5 py-3 text-sm font-bold text-[#001F3F] transition-colors hover:bg-[#FFD166]">
-                Explore case studies <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-              <p className="max-w-xs text-xs leading-relaxed text-slate-500 sm:text-right">
-                Concept preview. Case study content to be verified before publication.
-              </p>
-            </div>
-          </div>
-        </article>
+        <Link to="/case-studies" className="focus-visible-brand inline-flex min-h-11 items-center gap-2 rounded-md bg-[#FFB81C] px-5 py-3 font-bold text-[#001F3F]">
+          Explore case studies <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        </Link>
       </div>
     </section>
 
