@@ -196,6 +196,11 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                       <span>Discuss Your Requirement</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
+                    {service.id === 'service-process' && (
+                      <Link className="focus-visible-brand mt-3 block text-sm font-semibold text-[#001F3F] underline" to="/services/process-improvement">
+                        Explore process improvement consultancy
+                      </Link>
+                    )}
                   </div>
                 </div>
 

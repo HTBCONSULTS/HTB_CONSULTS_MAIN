@@ -449,7 +449,7 @@ export const INSIGHTS_ARTICLES: InsightArticle[] = [
     relatedTopics: ['AS-IS vs TO-BE', 'Workflow Optimisation', 'Efficiency'],
     internalLinks: [
       { label: 'Business Analysis & Requirements', href: '/services#service-analysis' },
-      { label: 'Process Improvement & Automation', href: '/services#service-process' },
+      { label: 'Business process improvement consultancy', href: '/services/process-improvement' },
       { label: 'Digital Transformation & Software Solutions', href: '/services#service-transformation' },
     ],
   },
@@ -476,7 +476,7 @@ export const INSIGHTS_ARTICLES: InsightArticle[] = [
     internalLinks: [
       { label: 'Business Analysis & Requirements', href: '/services#service-analysis' },
       { label: 'Digital Transformation & Software Solutions', href: '/services#service-transformation' },
-      { label: 'Process Improvement & Automation', href: '/services#service-process' },
+      { label: 'Business process improvement consultancy', href: '/services/process-improvement' },
     ],
   },
 ];
@@ -551,6 +551,10 @@ export const PAGE_SEO: Record<string, { title: string; description: string }> = 
   '/academy': {
     title: 'Professional Training & Business Analysis Courses | HTB Academy',
     description: 'Explore practical training in business analysis, process improvement, change management and project delivery through HTB Consult Academy.',
+  },
+  '/services/process-improvement': {
+    title: 'Business Process Improvement Consultancy | HTB Consult',
+    description: 'Find where requests get held up, map handovers and test improvements with HTB Consult. Based in Chesterfield, serving Sheffield and organisations across the UK.',
   },
   '/contact': {
     title: 'Contact HTB Consult | Business Consultancy in Chesterfield',
