@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes, useLocation, useNavigate } from 'react-ro
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { WhatsAppButton } from './components/WhatsAppButton';
+import { AnniversaryBadge } from './components/AnniversaryBadge';
 import { SearchModal } from './components/SearchModal';
 import { PolicyModal } from './components/PolicyModal';
 import { SERVICES, CASE_STUDIES, INSIGHTS_ARTICLES, INSIGHTS_PAGE_SEO, PAGE_SEO, SITE_SEO } from './config/siteData';
@@ -217,6 +218,7 @@ export const SiteApp: React.FC = () => {
 
       <Footer onOpenPolicy={setActivePolicy} />
       <WhatsAppButton />
+      <AnniversaryBadge />
 
       <SearchModal
         isOpen={searchOpen}
